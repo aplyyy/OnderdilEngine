@@ -11,11 +11,12 @@ import {
   LogOut,
   Menu,
   X,
-  User,
   ChevronRight,
   Clock,
-  Gauge,
-  Store,
+  PlusCircle,
+  HelpCircle,
+  Car,
+  Home,
 } from "lucide-react";
 
 interface UserSession {
@@ -38,14 +39,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       .then((data) => setUser(data.user))
       .catch(() => {});
 
-    // Clock
     const updateTime = () => {
       const now = new Date();
       setCurrentTime(
         now.toLocaleDateString("id-ID", {
-          weekday: "short",
+          weekday: "long",
           day: "numeric",
           month: "short",
+          year: "numeric",
           hour: "2-digit",
           minute: "2-digit",
         })
@@ -62,128 +63,131 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     router.refresh();
   };
 
-  // If on login page, render bare without sidebar
-  if (pathname === "/login") {
+  if (pathname === "/login" || pathname === "/laporan-print") {
     return <>{children}</>;
   }
 
   const navGroups = [
     {
-      title: "OPERASIONAL",
+      title: "Menu Utama",
       items: [
-        { href: "/kasir", label: "Kasir POS", icon: ShoppingCart, desc: "Faktur & Transaksi", roles: ["ADMIN", "KASIR"] },
-        { href: "/mekanik", label: "Antrean Servis", icon: Wrench, desc: "Alur Kerja Mobil", roles: ["ADMIN", "MEKANIK"] },
+        { href: "/", label: "Beranda", icon: Home, desc: "Ringkasan Bengkel", roles: ["ADMIN", "KASIR", "MEKANIK"] },
+        { href: "/kasir", label: "Kasir POS", icon: ShoppingCart, desc: "Transaksi & Cetak Nota", roles: ["ADMIN", "KASIR"] },
+        { href: "/mekanik", label: "Antrean Servis", icon: Wrench, desc: "Alur Perbaikan Mobil", roles: ["ADMIN", "MEKANIK"] },
       ],
     },
     {
-      title: "MANAJEMEN GUDANG",
+      title: "Manajemen & Data",
       items: [
-        { href: "/spareparts", label: "Stok Sparepart", icon: Package, desc: "Katalog & Alert Stok", roles: ["ADMIN", "KASIR"] },
-      ],
-    },
-    {
-      title: "KEUANGAN & ANALITIK",
-      items: [
-        { href: "/laporan", label: "Laporan & Rekap", icon: BarChart3, desc: "Omzet & Ekspor CSV", roles: ["ADMIN", "KASIR"] },
+        { href: "/spareparts", label: "Stok Sparepart", icon: Package, desc: "Inventaris & Suku Cadang", roles: ["ADMIN", "KASIR"] },
+        { href: "/laporan", label: "Laporan Penjualan", icon: BarChart3, desc: "Rekap Omzet & Laba", roles: ["ADMIN", "KASIR"] },
       ],
     },
   ];
 
   const roleBadgeStyle = {
-    ADMIN: "bg-red-500/10 text-red-400 border-red-500/20",
-    KASIR: "bg-amber-500/10 text-amber-400 border-amber-500/20",
-    MEKANIK: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+    ADMIN: "bg-red-500/15 text-red-400 border-red-500/30",
+    KASIR: "bg-amber-500/15 text-amber-400 border-amber-500/30",
+    MEKANIK: "bg-blue-500/15 text-blue-400 border-blue-500/30",
   };
 
-  const currentTitle =
-    pathname === "/"
-      ? "Dashboard Utama"
-      : pathname.startsWith("/kasir")
-      ? "Kasir Point-of-Sale"
-      : pathname.startsWith("/mekanik")
-      ? "Alur Servis Kendaraan"
-      : pathname.startsWith("/spareparts")
-      ? "Inventaris Suku Cadang"
-      : pathname.startsWith("/laporan")
-      ? "Laporan Rekapitulasi"
-      : "Panel Bengkel";
+  const roleLabelMap = {
+    ADMIN: "Administrator (Manajer)",
+    KASIR: "Petugas Kasir",
+    MEKANIK: "Teknisi Mekanik",
+  };
+
+  const pageMeta: Record<string, { title: string; subtitle: string }> = {
+    "/": { title: "Beranda Utama", subtitle: "Selamat datang di Sistem Kasir & Manajemen Bengkel" },
+    "/kasir": { title: "Kasir Point-of-Sale (POS)", subtitle: "Pencatatan suku cadang, jasa servis, dan cetak faktur" },
+    "/mekanik": { title: "Papan Alur Servis Kendaraan", subtitle: "Pantau antrean perbaikan unit mobil dan alokasi part" },
+    "/spareparts": { title: "Inventaris Suku Cadang", subtitle: "Manajemen persediaan barang fisik dan harga jual" },
+    "/laporan": { title: "Laporan & Rekapitulasi", subtitle: "Ringkasan omzet finansial dan ekspor data transaksi" },
+  };
+
+  const currentMeta = pageMeta[pathname] || { title: "Panel Bengkel", subtitle: "OnderdilEngine Management System" };
 
   return (
-    <div className="min-h-screen bg-[#090D16] text-slate-100 flex">
-      {/* Mobile Backdrop */}
+    <div className="min-h-screen bg-[#0B0F19] text-slate-100 flex flex-col lg:flex-row">
+      {/* Mobile Drawer Backdrop */}
       {sidebarOpen && (
         <div
           onClick={() => setSidebarOpen(false)}
-          className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-40 bg-black/75 backdrop-blur-sm lg:hidden transition-opacity"
         />
       )}
 
-      {/* Modern Sidebar */}
+      {/* Modern, User-Friendly Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-[#0B0F19] border-r border-slate-800/80 flex flex-col justify-between transition-transform duration-200 ease-in-out lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 w-72 bg-[#101726] border-r border-slate-800/80 flex flex-col justify-between transition-transform duration-200 ease-in-out lg:translate-x-0 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        } shadow-2xl lg:shadow-none`}
       >
         <div className="flex flex-col h-full">
-          {/* Brand Header */}
-          <div className="h-16 px-5 border-b border-slate-800/80 flex items-center justify-between">
-            <Link href="/" className="flex items-center space-x-3 group">
-              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center font-black text-slate-950 text-xl font-mono shadow-md shadow-amber-500/20 group-hover:scale-105 transition-transform">
+          {/* Logo Brand Header */}
+          <div className="h-20 px-6 border-b border-slate-800/80 flex items-center justify-between bg-[#0e1422]">
+            <Link href="/" className="flex items-center space-x-3.5 group">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center font-black text-slate-950 text-xl font-mono shadow-lg shadow-amber-500/25 group-hover:scale-105 transition-transform">
                 OE
               </div>
               <div>
-                <div className="font-mono font-black text-sm tracking-wider text-slate-100">
-                  ONDERDIL<span className="text-amber-500">ENGINE</span>
+                <div className="font-extrabold text-base tracking-wide text-slate-100 flex items-center space-x-1">
+                  <span>ONDERDIL</span>
+                  <span className="text-amber-400">ENGINE</span>
                 </div>
-                <div className="text-[10px] font-mono text-slate-400 tracking-tight flex items-center space-x-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse" />
-                  <span>SISTEM POS BENGKEL</span>
+                <div className="text-xs text-slate-400 flex items-center space-x-1.5 mt-0.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse" />
+                  <span>Sistem Kasir &amp; Bengkel</span>
                 </div>
               </div>
             </Link>
 
             <button
               onClick={() => setSidebarOpen(false)}
-              className="lg:hidden p-1.5 rounded-md text-slate-400 hover:text-slate-100 hover:bg-slate-800"
+              className="lg:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
-          {/* Nav Links Navigation */}
-          <div className="flex-1 overflow-y-auto px-3 py-4 space-y-6">
+          {/* Navigation Links */}
+          <div className="flex-1 overflow-y-auto px-4 py-6 space-y-6">
             {navGroups.map((group, gIdx) => (
-              <div key={gIdx} className="space-y-1">
-                <div className="px-3 text-[10px] font-mono font-bold tracking-wider text-slate-500 uppercase">
+              <div key={gIdx} className="space-y-1.5">
+                <div className="px-3 text-xs font-semibold tracking-wider text-slate-400 uppercase">
                   {group.title}
                 </div>
-                <div className="space-y-0.5 pt-1">
+                <div className="space-y-1">
                   {group.items.map((item) => {
                     if (user && !item.roles.includes(user.role)) return null;
-                    const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
+                    const isActive = pathname === item.href;
                     const Icon = item.icon;
                     return (
                       <Link
                         key={item.href}
                         href={item.href}
                         onClick={() => setSidebarOpen(false)}
-                        className={`group flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-mono transition-all ${
+                        className={`flex items-center justify-between px-3.5 py-3 rounded-xl transition-all ${
                           isActive
-                            ? "bg-amber-500 text-slate-950 font-bold shadow-md shadow-amber-500/10"
-                            : "text-slate-300 hover:text-slate-100 hover:bg-slate-900/90"
+                            ? "bg-amber-500 text-slate-950 font-bold shadow-md shadow-amber-500/20"
+                            : "text-slate-300 hover:text-white hover:bg-slate-800/60"
                         }`}
                       >
-                        <div className="flex items-center space-x-3">
-                          <Icon
-                            className={`w-4 h-4 shrink-0 transition-colors ${
-                              isActive ? "text-slate-950" : "text-amber-400/80 group-hover:text-amber-400"
+                        <div className="flex items-center space-x-3.5">
+                          <div
+                            className={`w-8 h-8 rounded-lg flex items-center justify-center ${
+                              isActive
+                                ? "bg-slate-950/20 text-slate-950"
+                                : "bg-slate-800/70 text-amber-400"
                             }`}
-                          />
+                          >
+                            <Icon className="w-4 h-4" />
+                          </div>
                           <div>
-                            <div className="leading-tight">{item.label}</div>
+                            <div className="text-sm font-medium leading-snug">{item.label}</div>
                             <div
-                              className={`text-[10px] ${
-                                isActive ? "text-slate-900" : "text-slate-500"
+                              className={`text-[11px] ${
+                                isActive ? "text-slate-900" : "text-slate-400"
                               }`}
                             >
                               {item.desc}
@@ -191,8 +195,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                           </div>
                         </div>
                         <ChevronRight
-                          className={`w-3.5 h-3.5 transition-transform ${
-                            isActive ? "text-slate-950 translate-x-0.5" : "text-slate-600 group-hover:text-slate-400"
+                          className={`w-4 h-4 ${
+                            isActive ? "text-slate-950" : "text-slate-600"
                           }`}
                         />
                       </Link>
@@ -203,30 +207,28 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             ))}
           </div>
 
-          {/* User Profile & Logout Box in Sidebar Footer */}
-          <div className="p-3 border-t border-slate-800/80 bg-slate-950/40">
+          {/* User Profile Card in Sidebar Footer */}
+          <div className="p-4 border-t border-slate-800/80 bg-[#0e1422]">
             {user ? (
-              <div className="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800 flex items-center justify-between">
-                <div className="flex items-center space-x-2.5 overflow-hidden">
-                  <div className="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-amber-400 font-bold font-mono text-xs shrink-0">
+              <div className="p-3 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-between">
+                <div className="flex items-center space-x-3 overflow-hidden">
+                  <div className="w-9 h-9 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-sm shrink-0">
                     {user.name.charAt(0).toUpperCase()}
                   </div>
                   <div className="overflow-hidden">
-                    <div className="text-xs font-semibold text-slate-200 truncate">{user.name}</div>
-                    <span
-                      className={`inline-block px-1.5 py-0.2 rounded text-[9px] font-mono border ${
-                        roleBadgeStyle[user.role]
-                      }`}
-                    >
-                      {user.role}
-                    </span>
+                    <div className="text-xs font-bold text-slate-100 truncate">{user.name}</div>
+                    <div className="text-[11px] text-slate-400 mt-0.5">
+                      <span className={`inline-block px-1.5 py-0.5 rounded text-[10px] border ${roleBadgeStyle[user.role]}`}>
+                        {roleLabelMap[user.role] || user.role}
+                      </span>
+                    </div>
                   </div>
                 </div>
 
                 <button
                   onClick={handleLogout}
-                  title="Keluar / Logout"
-                  className="p-1.5 rounded-md text-slate-400 hover:text-red-400 hover:bg-slate-800 transition-colors shrink-0"
+                  title="Keluar dari Akun"
+                  className="p-2 rounded-lg text-slate-400 hover:text-red-400 hover:bg-slate-800 transition-colors shrink-0"
                 >
                   <LogOut className="w-4 h-4" />
                 </button>
@@ -234,7 +236,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             ) : (
               <Link
                 href="/login"
-                className="w-full py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-lg text-xs font-mono uppercase tracking-wider block text-center shadow-md shadow-amber-500/20"
+                className="w-full py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs uppercase tracking-wider block text-center shadow-md shadow-amber-500/20"
               >
                 Masuk / Login
               </Link>
@@ -244,64 +246,57 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       </aside>
 
       {/* Main Content Area */}
-      <div className="flex-1 lg:pl-64 flex flex-col min-w-0">
-        {/* Top Header Navbar */}
-        <header className="sticky top-0 z-30 h-16 bg-[#0B0F19]/90 border-b border-slate-800/80 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
+      <div className="flex-1 lg:pl-72 flex flex-col min-w-0">
+        {/* Top Header / Bar */}
+        <header className="sticky top-0 z-30 h-20 bg-[#101726]/90 border-b border-slate-800/80 backdrop-blur-md px-6 sm:px-8 flex items-center justify-between">
+          <div className="flex items-center space-x-4">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="lg:hidden p-2 rounded-md text-slate-400 hover:text-slate-100 hover:bg-slate-800"
+              className="lg:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"
             >
-              <Menu className="w-5 h-5" />
+              <Menu className="w-6 h-6" />
             </button>
 
-            {/* Breadcrumb info */}
+            {/* Page Header Title */}
             <div>
-              <div className="flex items-center space-x-1.5 text-[11px] font-mono text-slate-500">
-                <span>Bengkel Utama</span>
-                <span>/</span>
-                <span className="text-amber-500">{currentTitle}</span>
-              </div>
-              <h2 className="text-sm font-bold text-slate-100 font-mono hidden sm:block">
-                {currentTitle}
-              </h2>
+              <h1 className="text-lg font-bold text-slate-100 leading-tight">
+                {currentMeta.title}
+              </h1>
+              <p className="text-xs text-slate-400 mt-0.5 hidden sm:block">
+                {currentMeta.subtitle}
+              </p>
             </div>
           </div>
 
-          {/* Right Status Indicators */}
-          <div className="flex items-center space-x-3 text-xs font-mono">
+          {/* Quick Header Right Actions */}
+          <div className="flex items-center space-x-3">
             {currentTime && (
-              <div className="hidden md:flex items-center space-x-1.5 px-3 py-1.5 rounded-md bg-slate-900 border border-slate-800 text-slate-400 text-[11px]">
+              <div className="hidden md:flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-slate-800/60 border border-slate-700/60 text-slate-300 text-xs">
                 <Clock className="w-3.5 h-3.5 text-amber-400" />
                 <span>{currentTime}</span>
               </div>
             )}
 
-            <div className="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-md bg-emerald-950/40 border border-emerald-800/50 text-emerald-400 text-[11px]">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="hidden sm:inline">Bengkel Online</span>
-            </div>
-
             {user && (
               <Link
                 href="/kasir"
-                className="hidden sm:flex items-center space-x-1.5 px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-md text-xs uppercase tracking-wider transition-colors shadow-sm"
+                className="flex items-center space-x-2 px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-lg text-xs tracking-wide transition-all shadow-md shadow-amber-500/20"
               >
-                <ShoppingCart className="w-3.5 h-3.5" />
-                <span>Buka Kasir</span>
+                <ShoppingCart className="w-4 h-4" />
+                <span>Buka Kasir POS</span>
               </Link>
             )}
           </div>
         </header>
 
-        {/* Page Content Body */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
+        {/* Content Body */}
+        <main className="flex-1 p-6 sm:p-8 max-w-7xl w-full mx-auto space-y-6">
           {children}
         </main>
 
-        {/* Footer */}
-        <footer className="border-t border-slate-900 bg-[#090D16] py-4 px-6 text-center text-xs text-slate-500 font-mono">
-          OnderdilEngine &copy; 2026 &bull; Sistem POS &amp; Manajemen Operasional Bengkel Mobil
+        {/* Friendly Clean Footer */}
+        <footer className="border-t border-slate-800/80 bg-[#0c121e] py-5 px-8 text-center text-xs text-slate-400">
+          OnderdilEngine &copy; 2026 &bull; Aplikasi Point-of-Sale (POS) &amp; Manajemen Bengkel Mobil
         </footer>
       </div>
     </div>

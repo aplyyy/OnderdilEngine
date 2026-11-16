@@ -10,11 +10,13 @@ import {
   Car,
   CheckCircle,
   AlertCircle,
-  Tag,
+  X,
   CreditCard,
   Banknote,
   QrCode,
-  X,
+  ArrowRight,
+  PackageCheck,
+  Receipt,
 } from "lucide-react";
 
 interface Sparepart {
@@ -232,49 +234,50 @@ export default function KasirPOSPage() {
   return (
     <div className="space-y-6">
       {/* Top Banner & Quick Actions */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#101726] border border-slate-800 p-5 rounded-2xl shadow-sm">
         <div>
-          <h1 className="text-2xl font-black text-slate-100 font-mono tracking-tight flex items-center space-x-2">
-            <span>KASIR POINT-OF-SALE</span>
-            <span className="text-xs px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/30">
-              LIVE
+          <h2 className="text-xl font-bold text-white flex items-center space-x-2.5">
+            <span>Kasir &amp; Pembayaran</span>
+            <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 font-semibold border border-emerald-500/25">
+              Siap Transaksi
             </span>
-          </h1>
-          <p className="text-xs text-slate-400 font-mono mt-0.5">
-            Pencatatan suku cadang, kalkulasi tagihan servis, dan cetak faktur kasir.
+          </h2>
+          <p className="text-xs text-slate-400 mt-1">
+            Pilih suku cadang dari katalog atau pilih kendaraan yang sudah selesai servis untuk ditagihkan.
           </p>
         </div>
 
         <button
           onClick={() => setShowNewOrderModal(true)}
-          className="inline-flex items-center space-x-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 font-bold text-xs uppercase tracking-wider rounded transition-colors"
+          className="inline-flex items-center space-x-2 px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md shadow-amber-500/20"
         >
-          <Car className="w-4 h-4 text-amber-400" />
+          <Car className="w-4 h-4" />
           <span>+ Masukkan Kendaraan Servis</span>
         </button>
       </div>
 
       {/* Pending Orders Notice (if any vehicles ready to pay) */}
       {orders.length > 0 && (
-        <div className="p-3 bg-amber-950/40 border border-amber-800/60 rounded-lg flex items-center justify-between text-xs text-amber-200">
-          <div className="flex items-center space-x-2">
-            <Car className="w-4 h-4 text-amber-400 shrink-0" />
-            <span>
-              Ada <strong>{orders.length} kendaraan</strong> berstatus <em>SELESAI</em> yang siap ditagihkan:
-            </span>
+        <div className="p-4 bg-amber-500/10 border border-amber-500/30 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-amber-200">
+          <div className="flex items-center space-x-2.5">
+            <Car className="w-5 h-5 text-amber-400 shrink-0" />
+            <div>
+              <span className="font-bold text-white">Ada {orders.length} Mobil Selesai Diservis!</span>
+              <p className="text-slate-300 text-[11px]">Klik salah satu kendaraan untuk memuat rincian tagihannya ke kasir:</p>
+            </div>
           </div>
           <div className="flex flex-wrap gap-2">
             {orders.map((o) => (
               <button
                 key={o.id}
                 onClick={() => handleSelectOrder(o)}
-                className={`px-2 py-1 rounded font-mono text-xs border transition-colors ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
                   selectedOrder?.id === o.id
-                    ? "bg-amber-500 text-slate-950 border-amber-400 font-bold"
-                    : "bg-slate-900 text-amber-300 border-amber-700/60 hover:bg-slate-800"
+                    ? "bg-amber-500 text-slate-950 border-amber-400 font-bold shadow-sm"
+                    : "bg-slate-900 text-amber-300 border-amber-600/50 hover:bg-slate-800"
                 }`}
               >
-                {o.plateNumber} ({o.customerName})
+                {o.plateNumber} &bull; {o.customerName}
               </button>
             ))}
           </div>
@@ -282,83 +285,85 @@ export default function KasirPOSPage() {
       )}
 
       {error && (
-        <div className="p-3 bg-red-950/70 border border-red-800 rounded-md flex items-center space-x-2 text-xs text-red-200">
+        <div className="p-4 bg-red-950/70 border border-red-800 rounded-xl flex items-center space-x-2.5 text-xs text-red-200">
           <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
           <span>{error}</span>
         </div>
       )}
 
       {/* Main Grid: Catalog (Left) + Cart/Receipt (Right) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left Column: Catalog */}
         <div className="lg:col-span-7 space-y-4">
-          {/* Search & Filter */}
-          <div className="flex flex-col sm:flex-row gap-2">
-            <div className="relative flex-1">
-              <Search className="w-4 h-4 absolute left-3 top-3 text-slate-500" />
+          {/* Search & Category Filter */}
+          <div className="space-y-3 bg-[#101726] border border-slate-800 p-4 rounded-2xl">
+            <div className="relative">
+              <Search className="w-4 h-4 absolute left-3.5 top-3.5 text-slate-400" />
               <input
                 type="text"
-                placeholder="Cari suku cadang (Nama / SKU)..."
+                placeholder="Cari suku cadang (Ketik Nama Barang / Kode SKU)..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-9 pr-3 py-2 bg-slate-900 border border-slate-700 rounded-md text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-500 font-mono"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-900/90 border border-slate-700/80 rounded-xl text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
               />
+            </div>
+
+            {/* Category Chips */}
+            <div className="flex flex-wrap gap-1.5 pt-1">
+              {categories.map((c) => (
+                <button
+                  key={c}
+                  onClick={() => setCategory(c)}
+                  className={`px-3 py-1.5 text-xs rounded-lg transition-all ${
+                    category === c
+                      ? "bg-amber-500 text-slate-950 font-bold shadow-sm"
+                      : "bg-slate-900 text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-800"
+                  }`}
+                >
+                  {c}
+                </button>
+              ))}
             </div>
           </div>
 
-          {/* Category Chips */}
-          <div className="flex flex-wrap gap-1.5">
-            {categories.map((c) => (
-              <button
-                key={c}
-                onClick={() => setCategory(c)}
-                className={`px-2.5 py-1 text-xs rounded-full font-mono transition-colors ${
-                  category === c
-                    ? "bg-amber-500 text-slate-950 font-bold"
-                    : "bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800"
-                }`}
-              >
-                {c}
-              </button>
-            ))}
-          </div>
-
           {/* Part Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[600px] overflow-y-auto pr-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 max-h-[640px] overflow-y-auto pr-1">
             {spareparts.map((part) => {
               const isLowStock = part.stock <= 5;
               const isOut = part.stock <= 0;
               return (
                 <div
                   key={part.id}
-                  className={`p-3 rounded-lg border transition-all flex flex-col justify-between ${
+                  className={`p-4 rounded-2xl border transition-all flex flex-col justify-between ${
                     isOut
-                      ? "bg-slate-900/40 border-slate-800 opacity-60"
-                      : "bg-slate-900/80 border-slate-800 hover:border-slate-700"
+                      ? "bg-[#0f1523]/50 border-slate-800/80 opacity-60"
+                      : "bg-[#101726] border-slate-800 hover:border-slate-700 hover:shadow-md"
                   }`}
                 >
                   <div>
-                    <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 mb-1">
-                      <span>{part.sku}</span>
-                      <span className="text-slate-500">{part.category}</span>
+                    <div className="flex items-center justify-between text-xs text-slate-400 mb-1.5">
+                      <span className="font-mono bg-slate-900 px-2 py-0.5 rounded border border-slate-800 text-[11px] text-amber-400/90 font-semibold">
+                        {part.sku}
+                      </span>
+                      <span className="text-slate-400 text-[11px]">{part.category}</span>
                     </div>
-                    <h3 className="font-semibold text-slate-100 text-sm leading-tight line-clamp-2">
+                    <h4 className="font-bold text-slate-100 text-sm leading-snug line-clamp-2">
                       {part.name}
-                    </h3>
+                    </h4>
                   </div>
 
-                  <div className="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between">
+                  <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between">
                     <div>
-                      <div className="text-amber-400 font-bold font-mono text-sm">
+                      <div className="text-amber-400 font-extrabold text-base">
                         Rp {part.sellPrice.toLocaleString("id-ID")}
                       </div>
-                      <div className="text-[10px] font-mono">
+                      <div className="text-xs mt-0.5">
                         {isOut ? (
                           <span className="text-red-400 font-bold">Stok Habis</span>
                         ) : isLowStock ? (
-                          <span className="text-amber-400">Sisa: {part.stock} {part.unit} (Menipis)</span>
+                          <span className="text-amber-400 font-medium">Sisa {part.stock} {part.unit} (Menipis)</span>
                         ) : (
-                          <span className="text-slate-400">Stok: {part.stock} {part.unit}</span>
+                          <span className="text-emerald-400">Stok: {part.stock} {part.unit}</span>
                         )}
                       </div>
                     </div>
@@ -366,7 +371,7 @@ export default function KasirPOSPage() {
                     <button
                       onClick={() => addToCart(part)}
                       disabled={isOut}
-                      className="px-2.5 py-1.5 bg-amber-500 hover:bg-amber-400 disabled:opacity-30 text-slate-950 font-bold rounded text-xs flex items-center space-x-1 transition-colors"
+                      className="px-3.5 py-2 bg-amber-500 hover:bg-amber-400 disabled:opacity-30 text-slate-950 font-bold rounded-xl text-xs flex items-center space-x-1.5 transition-all shadow-sm"
                     >
                       <Plus className="w-3.5 h-3.5" />
                       <span>Tambah</span>
@@ -379,16 +384,17 @@ export default function KasirPOSPage() {
         </div>
 
         {/* Right Column: Checkout Ticket / POS Bill */}
-        <div className="lg:col-span-5 bg-slate-900 border border-slate-800 rounded-xl p-5 flex flex-col justify-between shadow-xl">
+        <div className="lg:col-span-5 bg-[#101726] border border-slate-800 rounded-2xl p-6 flex flex-col justify-between shadow-xl sticky top-24">
           <div className="space-y-4">
             <div className="border-b border-slate-800 pb-3 flex items-center justify-between">
               <div>
-                <h2 className="text-base font-bold text-slate-100 font-mono flex items-center space-x-2">
-                  <span>TAGIHAN KASIR</span>
-                </h2>
+                <h3 className="text-base font-bold text-white flex items-center space-x-2">
+                  <Receipt className="w-4 h-4 text-amber-400" />
+                  <span>Rincian Tagihan Kasir</span>
+                </h3>
                 {selectedOrder && (
-                  <div className="text-xs font-mono text-amber-400 mt-0.5">
-                    Tiket: {selectedOrder.orderNumber} ({selectedOrder.plateNumber})
+                  <div className="text-xs text-amber-400 mt-1 font-medium">
+                    Tiket: {selectedOrder.orderNumber} ({selectedOrder.plateNumber} - {selectedOrder.customerName})
                   </div>
                 )}
               </div>
@@ -398,7 +404,7 @@ export default function KasirPOSPage() {
                     setSelectedOrder(null);
                     setServiceFee(0);
                   }}
-                  className="text-xs text-slate-400 hover:text-red-400"
+                  className="text-xs text-red-400 hover:text-red-300 font-medium underline"
                 >
                   Lepas Tiket
                 </button>
@@ -408,42 +414,43 @@ export default function KasirPOSPage() {
             {/* Cart Items List */}
             <div className="space-y-2 max-h-[220px] overflow-y-auto pr-1">
               {cart.length === 0 ? (
-                <div className="py-8 text-center text-xs text-slate-500 font-mono">
-                  Belum ada suku cadang di keranjang.
+                <div className="py-10 text-center text-xs text-slate-400 space-y-1">
+                  <p>Keranjang transaksi masih kosong.</p>
+                  <p className="text-[11px] text-slate-500">Klik tombol &ldquo;Tambah&rdquo; pada katalog suku cadang di sebelah kiri.</p>
                 </div>
               ) : (
                 cart.map((item) => (
                   <div
                     key={item.part.id}
-                    className="flex items-center justify-between p-2 rounded bg-slate-950/60 border border-slate-800/80 text-xs"
+                    className="flex items-center justify-between p-3 rounded-xl bg-slate-900/80 border border-slate-800/80 text-xs"
                   >
-                    <div className="flex-1 pr-2">
-                      <div className="font-semibold text-slate-200 line-clamp-1">{item.part.name}</div>
-                      <div className="text-[11px] text-amber-400 font-mono">
+                    <div className="flex-1 pr-3">
+                      <div className="font-semibold text-slate-100 line-clamp-1">{item.part.name}</div>
+                      <div className="text-xs text-amber-400 font-medium mt-0.5">
                         Rp {item.part.sellPrice.toLocaleString("id-ID")} &times; {item.quantity} = Rp{" "}
                         {(item.part.sellPrice * item.quantity).toLocaleString("id-ID")}
                       </div>
                     </div>
 
-                    <div className="flex items-center space-x-1 shrink-0">
+                    <div className="flex items-center space-x-1.5 shrink-0">
                       <button
                         onClick={() => updateQuantity(item.part.id, -1)}
-                        className="w-6 h-6 flex items-center justify-center rounded bg-slate-800 hover:bg-slate-700 text-slate-300"
+                        className="w-7 h-7 flex items-center justify-center rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200"
                       >
-                        <Minus className="w-3 h-3" />
+                        <Minus className="w-3.5 h-3.5" />
                       </button>
-                      <span className="w-6 text-center font-mono font-bold">{item.quantity}</span>
+                      <span className="w-7 text-center font-bold text-slate-100 text-sm">{item.quantity}</span>
                       <button
                         onClick={() => updateQuantity(item.part.id, 1)}
-                        className="w-6 h-6 flex items-center justify-center rounded bg-slate-800 hover:bg-slate-700 text-slate-300"
+                        className="w-7 h-7 flex items-center justify-center rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200"
                       >
-                        <Plus className="w-3 h-3" />
+                        <Plus className="w-3.5 h-3.5" />
                       </button>
                       <button
                         onClick={() => removeFromCart(item.part.id)}
-                        className="w-6 h-6 flex items-center justify-center rounded bg-red-950/60 hover:bg-red-900 text-red-400 ml-1"
+                        className="w-7 h-7 flex items-center justify-center rounded-lg bg-red-950/70 hover:bg-red-900 text-red-400 ml-1"
                       >
-                        <Trash2 className="w-3 h-3" />
+                        <Trash2 className="w-3.5 h-3.5" />
                       </button>
                     </div>
                   </div>
@@ -452,10 +459,10 @@ export default function KasirPOSPage() {
             </div>
 
             {/* Extra Charges / Adjustments */}
-            <div className="space-y-2 pt-2 border-t border-slate-800 text-xs font-mono">
+            <div className="space-y-2.5 pt-3 border-t border-slate-800 text-xs">
               <div className="flex items-center justify-between">
                 <span className="text-slate-400">Total Suku Cadang:</span>
-                <span className="text-slate-200 font-bold">Rp {totalParts.toLocaleString("id-ID")}</span>
+                <span className="text-slate-200 font-bold text-sm">Rp {totalParts.toLocaleString("id-ID")}</span>
               </div>
 
               <div className="flex items-center justify-between">
@@ -466,7 +473,7 @@ export default function KasirPOSPage() {
                   step="5000"
                   value={serviceFee}
                   onChange={(e) => setServiceFee(Number(e.target.value))}
-                  className="w-28 text-right bg-slate-950 border border-slate-700 rounded px-2 py-1 text-slate-100 font-mono text-xs focus:outline-none focus:border-amber-500"
+                  className="w-32 text-right bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-100 text-xs font-semibold focus:outline-none focus:border-amber-500"
                 />
               </div>
 
@@ -478,36 +485,36 @@ export default function KasirPOSPage() {
                   step="5000"
                   value={discount}
                   onChange={(e) => setDiscount(Number(e.target.value))}
-                  className="w-28 text-right bg-slate-950 border border-slate-700 rounded px-2 py-1 text-slate-100 font-mono text-xs focus:outline-none focus:border-amber-500"
+                  className="w-32 text-right bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-100 text-xs font-semibold focus:outline-none focus:border-amber-500"
                 />
               </div>
             </div>
 
             {/* Grand Total Display */}
-            <div className="p-3 rounded-lg bg-slate-950 border border-amber-500/30 flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono">
-                Total Pembayaran:
+            <div className="p-4 rounded-xl bg-slate-950 border border-amber-500/30 flex items-center justify-between shadow-inner">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                Total Tagihan:
               </span>
-              <span className="text-xl font-black text-amber-400 font-mono">
+              <span className="text-2xl font-black text-amber-400">
                 Rp {grandTotal.toLocaleString("id-ID")}
               </span>
             </div>
 
             {/* Payment Method Selector */}
-            <div className="space-y-2">
-              <label className="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+            <div className="space-y-1.5">
+              <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider">
                 Metode Pembayaran
               </label>
-              <div className="grid grid-cols-4 gap-1.5 text-xs font-mono">
+              <div className="grid grid-cols-4 gap-2 text-xs">
                 {["CASH", "QRIS", "TRANSFER", "DEBIT"].map((m) => (
                   <button
                     key={m}
                     type="button"
                     onClick={() => setPaymentMethod(m)}
-                    className={`py-1.5 rounded border text-center transition-colors ${
+                    className={`py-2 rounded-lg border text-center transition-all ${
                       paymentMethod === m
-                        ? "bg-amber-500 text-slate-950 border-amber-400 font-bold"
-                        : "bg-slate-950 text-slate-300 border-slate-800 hover:bg-slate-800"
+                        ? "bg-amber-500 text-slate-950 border-amber-400 font-bold shadow-sm"
+                        : "bg-slate-900 text-slate-300 border-slate-800 hover:bg-slate-800"
                     }`}
                   >
                     {m}
@@ -517,36 +524,36 @@ export default function KasirPOSPage() {
             </div>
 
             {/* Cash Tendered & Change */}
-            <div className="grid grid-cols-2 gap-2 text-xs font-mono">
+            <div className="grid grid-cols-2 gap-3 text-xs">
               <div>
-                <label className="block text-slate-400 mb-1">Uang Diterima (Rp):</label>
+                <label className="block text-slate-400 mb-1 font-medium">Uang Diterima (Rp):</label>
                 <input
                   type="number"
                   min="0"
                   value={paidAmount}
                   onChange={(e) => setPaidAmount(Number(e.target.value))}
-                  className="w-full bg-slate-950 border border-slate-700 rounded px-2.5 py-1.5 text-slate-100 font-mono focus:outline-none focus:border-amber-500"
+                  className="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-slate-100 font-bold focus:outline-none focus:border-amber-500"
                 />
               </div>
               <div>
-                <label className="block text-slate-400 mb-1">Kembalian (Rp):</label>
-                <div className="bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-emerald-400 font-bold font-mono">
+                <label className="block text-slate-400 mb-1 font-medium">Kembalian (Rp):</label>
+                <div className="bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-emerald-400 font-extrabold text-sm">
                   Rp {changeAmount.toLocaleString("id-ID")}
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Quick Denomination Pills */}
-          <div className="flex gap-1.5 pt-3">
+          {/* Quick Denomination Shortcuts */}
+          <div className="flex gap-2 pt-3">
             {[grandTotal, 50000, 100000, 200000, 500000].map((amount, idx) => (
               <button
                 key={idx}
                 type="button"
                 onClick={() => setPaidAmount(amount)}
-                className="flex-1 py-1 bg-slate-800 hover:bg-slate-700 text-[10px] font-mono text-slate-300 rounded border border-slate-700"
+                className="flex-1 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 rounded-lg border border-slate-700 transition-colors"
               >
-                {amount === grandTotal ? "Pas" : `${amount / 1000}k`}
+                {amount === grandTotal ? "Uang Pas" : `${amount / 1000}k`}
               </button>
             ))}
           </div>
@@ -555,7 +562,7 @@ export default function KasirPOSPage() {
           <button
             onClick={handleCheckout}
             disabled={loading}
-            className="mt-4 w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black rounded-lg text-sm uppercase tracking-wider transition-all disabled:opacity-50 shadow-lg shadow-amber-500/20"
+            className="mt-5 w-full py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black rounded-xl text-sm uppercase tracking-wider transition-all disabled:opacity-50 shadow-lg shadow-amber-500/20"
           >
             {loading ? "Memproses Transaksi..." : "Bayar & Cetak Nota Transaksi"}
           </button>
@@ -565,15 +572,15 @@ export default function KasirPOSPage() {
       {/* Printable Receipt Modal */}
       {completedTransaction && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div className="bg-slate-900 border border-slate-700 rounded-xl max-w-md w-full p-6 space-y-4 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-              <h3 className="font-mono font-bold text-slate-100 text-sm flex items-center space-x-1.5">
-                <CheckCircle className="w-4 h-4 text-emerald-400" />
+          <div className="bg-[#101726] border border-slate-700 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+              <h3 className="font-bold text-white text-base flex items-center space-x-2">
+                <CheckCircle className="w-5 h-5 text-emerald-400" />
                 <span>Transaksi Berhasil Disimpan</span>
               </h3>
               <button
                 onClick={() => setCompletedTransaction(null)}
-                className="text-slate-400 hover:text-slate-100"
+                className="text-slate-400 hover:text-white p-1"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -582,15 +589,15 @@ export default function KasirPOSPage() {
             {/* Receipt Preview (Target of Print) */}
             <div
               id="printable-receipt"
-              className="bg-white text-slate-950 p-6 rounded font-mono text-xs space-y-3 border shadow-inner"
+              className="bg-white text-slate-950 p-6 rounded-xl font-mono text-xs space-y-3 border shadow-inner"
             >
               <div className="text-center border-b border-dashed border-slate-400 pb-3">
                 <div className="font-extrabold text-base tracking-wider">BENGKEL ONDERDIL ENGINE</div>
-                <div className="text-[10px] text-slate-600">Jl. Otomotif Cyber No. 5, S5 Tech Center</div>
-                <div className="text-[10px] text-slate-600">Telp: (021) 8899-7700</div>
+                <div className="text-[11px] text-slate-600">Jl. Otomotif Cyber No. 5, S5 Tech Center</div>
+                <div className="text-[11px] text-slate-600">Telp: (021) 8899-7700</div>
               </div>
 
-              <div className="text-[11px] space-y-0.5 border-b border-dashed border-slate-400 pb-2">
+              <div className="text-xs space-y-1 border-b border-dashed border-slate-400 pb-2">
                 <div className="flex justify-between">
                   <span>No. Faktur:</span>
                   <span className="font-bold">{completedTransaction.invoiceNumber}</span>
@@ -618,12 +625,12 @@ export default function KasirPOSPage() {
               </div>
 
               {/* Items List */}
-              <div className="space-y-1 border-b border-dashed border-slate-400 pb-2">
+              <div className="space-y-1.5 border-b border-dashed border-slate-400 pb-2 text-xs">
                 {completedTransaction.serviceOrder?.items?.map((it: any, idx: number) => (
                   <div key={idx} className="flex justify-between">
                     <div>
-                      <div>{it.sparepart.name}</div>
-                      <div className="text-[10px] text-slate-600">
+                      <div className="font-semibold">{it.sparepart.name}</div>
+                      <div className="text-[11px] text-slate-600">
                         {it.quantity} x Rp {it.priceAtTime.toLocaleString("id-ID")}
                       </div>
                     </div>
@@ -644,8 +651,8 @@ export default function KasirPOSPage() {
               </div>
 
               {/* Totals */}
-              <div className="space-y-1 font-bold">
-                <div className="flex justify-between">
+              <div className="space-y-1 font-bold text-xs">
+                <div className="flex justify-between text-sm">
                   <span>Total Tagihan:</span>
                   <span>Rp {completedTransaction.grandTotal.toLocaleString("id-ID")}</span>
                 </div>
@@ -659,19 +666,25 @@ export default function KasirPOSPage() {
                 </div>
               </div>
 
-              <div className="text-center pt-3 border-t border-dashed border-slate-400 text-[10px] text-slate-600">
-                Terima kasih atas kepercayaan Anda merawat kendaraan di Bengkel OnderdilEngine!
+              <div className="text-center pt-3 border-t border-dashed border-slate-400 text-[11px] text-slate-600">
+                Terima kasih atas kunjungan Anda merawat kendaraan di Bengkel OnderdilEngine!
               </div>
             </div>
 
             {/* Actions */}
-            <div className="flex justify-end space-x-2 pt-2">
+            <div className="flex justify-end space-x-3 pt-2">
+              <button
+                onClick={() => setCompletedTransaction(null)}
+                className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold rounded-xl text-xs"
+              >
+                Tutup
+              </button>
               <button
                 onClick={() => window.print()}
-                className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded text-xs flex items-center space-x-1.5 font-mono"
+                className="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs flex items-center space-x-2 shadow-md"
               >
                 <Printer className="w-4 h-4" />
-                <span>Cetak Nota / Download PDF</span>
+                <span>Cetak Nota / Unduh PDF</span>
               </button>
             </div>
           </div>
@@ -681,24 +694,24 @@ export default function KasirPOSPage() {
       {/* New Service Order Modal */}
       {showNewOrderModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl max-w-lg w-full p-6 space-y-4 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-              <h3 className="font-mono font-bold text-slate-100 text-sm flex items-center space-x-1.5">
-                <Car className="w-4 h-4 text-amber-400" />
+          <div className="bg-[#101726] border border-slate-800 rounded-2xl max-w-lg w-full p-6 sm:p-7 space-y-4 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+              <h3 className="font-bold text-white text-base flex items-center space-x-2">
+                <Car className="w-5 h-5 text-amber-400" />
                 <span>Pendaftaran Kendaraan Servis Baru</span>
               </h3>
               <button
                 onClick={() => setShowNewOrderModal(false)}
-                className="text-slate-400 hover:text-slate-100"
+                className="text-slate-400 hover:text-white p-1"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <form onSubmit={handleCreateOrder} className="space-y-3 text-xs font-mono">
+            <form onSubmit={handleCreateOrder} className="space-y-3.5 text-xs">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-400 mb-1">Nomor Polisi (Plat):</label>
+                  <label className="block text-slate-300 font-semibold mb-1">Nomor Polisi (Plat):</label>
                   <input
                     type="text"
                     required
@@ -707,11 +720,11 @@ export default function KasirPOSPage() {
                     onChange={(e) =>
                       setNewOrderData({ ...newOrderData, plateNumber: e.target.value.toUpperCase() })
                     }
-                    className="w-full bg-slate-950 border border-slate-700 rounded px-3 py-2 text-slate-100"
+                    className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-slate-100 uppercase font-mono font-bold focus:outline-none focus:border-amber-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-400 mb-1">Model / Tipe Mobil:</label>
+                  <label className="block text-slate-300 font-semibold mb-1">Model / Tipe Mobil:</label>
                   <input
                     type="text"
                     required
@@ -720,14 +733,14 @@ export default function KasirPOSPage() {
                     onChange={(e) =>
                       setNewOrderData({ ...newOrderData, vehicleModel: e.target.value })
                     }
-                    className="w-full bg-slate-950 border border-slate-700 rounded px-3 py-2 text-slate-100"
+                    className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-amber-500"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-400 mb-1">Nama Pemilik / Pelanggan:</label>
+                  <label className="block text-slate-300 font-semibold mb-1">Nama Pemilik:</label>
                   <input
                     type="text"
                     required
@@ -736,11 +749,11 @@ export default function KasirPOSPage() {
                     onChange={(e) =>
                       setNewOrderData({ ...newOrderData, customerName: e.target.value })
                     }
-                    className="w-full bg-slate-950 border border-slate-700 rounded px-3 py-2 text-slate-100"
+                    className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-amber-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-400 mb-1">No. WhatsApp / Telepon:</label>
+                  <label className="block text-slate-300 font-semibold mb-1">No. WhatsApp / HP:</label>
                   <input
                     type="text"
                     placeholder="misal: 08123456789"
@@ -748,13 +761,13 @@ export default function KasirPOSPage() {
                     onChange={(e) =>
                       setNewOrderData({ ...newOrderData, customerPhone: e.target.value })
                     }
-                    className="w-full bg-slate-950 border border-slate-700 rounded px-3 py-2 text-slate-100"
+                    className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-amber-500"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-slate-400 mb-1">Keluhan Kerusakan / Permintaan Servis:</label>
+                <label className="block text-slate-300 font-semibold mb-1">Keluhan Kerusakan / Permintaan Servis:</label>
                 <textarea
                   required
                   rows={3}
@@ -763,21 +776,21 @@ export default function KasirPOSPage() {
                   onChange={(e) =>
                     setNewOrderData({ ...newOrderData, complaint: e.target.value })
                   }
-                  className="w-full bg-slate-950 border border-slate-700 rounded px-3 py-2 text-slate-100"
+                  className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-slate-100 focus:outline-none focus:border-amber-500 leading-relaxed"
                 />
               </div>
 
-              <div className="flex justify-end space-x-2 pt-2">
+              <div className="flex justify-end space-x-2.5 pt-3 border-t border-slate-800">
                 <button
                   type="button"
                   onClick={() => setShowNewOrderModal(false)}
-                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded"
+                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold rounded-xl"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded"
+                  className="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl shadow-md"
                 >
                   Simpan Tiket Masuk
                 </button>
