@@ -3,29 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
-enum Role {
-  ADMIN
-  KASIR
-  MEKANIK
-}
-
-enum ServiceStatus {
-  MENUNGGU
-  PENGERJAAN
-  SELESAI
-  LUNAS
-  BATAL
-}
-
-enum PaymentMethod {
-  CASH
-  QRIS
-  TRANSFER
-  DEBIT
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model User {
@@ -33,7 +12,7 @@ model User {
   username     String         @unique
   name         String
   passwordHash String
-  role         Role           @default(KASIR)
+  role         String         @default("KASIR") // "ADMIN", "KASIR", "MEKANIK"
   active       Boolean        @default(true)
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
@@ -68,7 +47,7 @@ model ServiceOrder {
   customerPhone      String?
   complaint          String
   mechanicNotes      String?
-  status             ServiceStatus      @default(MENUNGGU)
+  status             String             @default("MENUNGGU") // "MENUNGGU", "PENGERJAAN", "SELESAI", "LUNAS", "BATAL"
   serviceFee         Float              @default(0)
   assignedMechanicId String?
   assignedMechanic   User?              @relation("MechanicOrders", fields: [assignedMechanicId], references: [id])
@@ -91,28 +70,28 @@ model ServiceOrderItem {
 }
 
 model Transaction {
-  id            String        @id @default(uuid())
-  invoiceNumber String        @unique
-  serviceOrderId String?      @unique
-  serviceOrder  ServiceOrder? @relation(fields: [serviceOrderId], references: [id])
-  totalParts    Float
-  totalService  Float
-  subtotal      Float
-  discount      Float         @default(0)
-  tax           Float         @default(0)
-  grandTotal    Float
-  paidAmount    Float
-  changeAmount  Float
-  paymentMethod PaymentMethod @default(CASH)
-  cashierId     String
-  cashier       User          @relation("CashierTransactions", fields: [cashierId], references: [id])
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  id             String        @id @default(uuid())
+  invoiceNumber  String        @unique
+  serviceOrderId String?       @unique
+  serviceOrder   ServiceOrder? @relation(fields: [serviceOrderId], references: [id])
+  totalParts     Float
+  totalService   Float
+  subtotal       Float
+  discount       Float         @default(0)
+  tax            Float         @default(0)
+  grandTotal     Float
+  paidAmount     Float
+  changeAmount   Float
+  paymentMethod  String        @default("CASH") // "CASH", "QRIS", "TRANSFER", "DEBIT"
+  cashierId      String
+  cashier        User          @relation("CashierTransactions", fields: [cashierId], references: [id])
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
 }
 
 model SecurityLog {
   id        String   @id @default(uuid())
-  event     String
+  event     String   // "LOGIN_SUCCESS", "LOGIN_FAILED", "RATE_LIMIT_EXCEEDED", "UNAUTHORIZED_ACCESS", "XSS_ATTEMPT"
   ipAddress String?
   userAgent String?
   details   String?

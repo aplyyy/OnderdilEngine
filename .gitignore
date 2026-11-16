@@ -24,6 +24,8 @@
 .DS_Store
 *.pem
 .agents/
+*.db
+*.db-journal
 
 # debug
 npm-debug.log*
