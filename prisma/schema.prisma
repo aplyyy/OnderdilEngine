@@ -1,0 +1,122 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  KASIR
+  MEKANIK
+}
+
+enum ServiceStatus {
+  MENUNGGU
+  PENGERJAAN
+  SELESAI
+  LUNAS
+  BATAL
+}
+
+enum PaymentMethod {
+  CASH
+  QRIS
+  TRANSFER
+  DEBIT
+}
+
+model User {
+  id           String         @id @default(uuid())
+  username     String         @unique
+  name         String
+  passwordHash String
+  role         Role           @default(KASIR)
+  active       Boolean        @default(true)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  
+  services     ServiceOrder[] @relation("MechanicOrders")
+  transactions Transaction[]  @relation("CashierTransactions")
+  logs         SecurityLog[]
+}
+
+model Sparepart {
+  id         String             @id @default(uuid())
+  sku        String             @unique
+  name       String
+  category   String
+  buyPrice   Float
+  sellPrice  Float
+  stock      Int
+  minStock   Int                @default(5)
+  unit       String             @default("Pcs")
+  createdAt  DateTime           @default(now())
+  updatedAt  DateTime           @updatedAt
+
+  orderItems ServiceOrderItem[]
+}
+
+model ServiceOrder {
+  id                 String             @id @default(uuid())
+  orderNumber        String             @unique
+  plateNumber        String
+  vehicleModel       String
+  customerName       String
+  customerPhone      String?
+  complaint          String
+  mechanicNotes      String?
+  status             ServiceStatus      @default(MENUNGGU)
+  serviceFee         Float              @default(0)
+  assignedMechanicId String?
+  assignedMechanic   User?              @relation("MechanicOrders", fields: [assignedMechanicId], references: [id])
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+
+  items              ServiceOrderItem[]
+  transaction        Transaction?
+}
+
+model ServiceOrderItem {
+  id             String       @id @default(uuid())
+  serviceOrderId String
+  serviceOrder   ServiceOrder @relation(fields: [serviceOrderId], references: [id], onDelete: Cascade)
+  sparepartId    String
+  sparepart      Sparepart    @relation(fields: [sparepartId], references: [id])
+  quantity       Int
+  priceAtTime    Float
+  createdAt      DateTime     @default(now())
+}
+
+model Transaction {
+  id            String        @id @default(uuid())
+  invoiceNumber String        @unique
+  serviceOrderId String?      @unique
+  serviceOrder  ServiceOrder? @relation(fields: [serviceOrderId], references: [id])
+  totalParts    Float
+  totalService  Float
+  subtotal      Float
+  discount      Float         @default(0)
+  tax           Float         @default(0)
+  grandTotal    Float
+  paidAmount    Float
+  changeAmount  Float
+  paymentMethod PaymentMethod @default(CASH)
+  cashierId     String
+  cashier       User          @relation("CashierTransactions", fields: [cashierId], references: [id])
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model SecurityLog {
+  id        String   @id @default(uuid())
+  event     String
+  ipAddress String?
+  userAgent String?
+  details   String?
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  createdAt DateTime @default(now())
+}
