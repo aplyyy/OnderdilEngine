@@ -1,5 +1,7 @@
 # OnderdilEngine — Sistem Point-of-Sale (POS) & Manajemen Operasional Bengkel Mobil
-> Tugas Besar Mata Kuliah Cyber Security — S1 Teknik Informatika / Sistem Informasi (Pra-UTS)
+> Tugas Besar Mata Kuliah Cyber Security — S1 Teknik Informatika / Fakultas Ilmu Komputer Universitas Kuningan (2026)  
+> **Disusun Oleh:** Apliy Tridiansyah Rosdiana (NIM: 20240810111) — Kelas TINFC-2024-01  
+> **Dosen Pengampu:** Fitra Nugraha, S.Kom., M.Kom.
 
 [![CyberSec Hardened](https://img.shields.io/badge/Security-OWASP_Top_10_Compliant-emerald.svg)](#penerapan-keamanan)
 [![Tech Stack](https://img.shields.io/badge/Stack-Next.js_15_%7C_Prisma_%7C_Tailwind-amber.svg)](#teknologi)
