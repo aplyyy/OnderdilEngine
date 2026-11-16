@@ -592,9 +592,10 @@ export default function KasirPOSPage() {
               className="bg-white text-slate-950 p-6 rounded-xl font-mono text-xs space-y-3 border shadow-inner"
             >
               <div className="text-center border-b border-dashed border-slate-400 pb-3">
-                <div className="font-extrabold text-base tracking-wider">BENGKEL ONDERDIL ENGINE</div>
-                <div className="text-[11px] text-slate-600">Jl. Otomotif Cyber No. 5, S5 Tech Center</div>
-                <div className="text-[11px] text-slate-600">Telp: (021) 8899-7700</div>
+                <div className="font-extrabold text-base tracking-wider uppercase">BENGKEL ANUGRAH MOTOR</div>
+                <div className="text-[11px] font-bold text-slate-800">PT Anugrah Motor</div>
+                <div className="text-[11px] text-slate-600">Jl. Syeh Maulana Akbar No.88, Kuningan, Jawa Barat 45511</div>
+                <div className="text-[11px] text-slate-600">Telp / WA: 081324735850 (Mang Acim)</div>
               </div>
 
               <div className="text-xs space-y-1 border-b border-dashed border-slate-400 pb-2">

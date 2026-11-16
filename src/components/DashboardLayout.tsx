@@ -137,7 +137,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 </div>
                 <div className="text-xs text-slate-400 flex items-center space-x-1.5 mt-0.5">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse" />
-                  <span>Sistem Kasir &amp; Bengkel</span>
+                  <span>PT Anugrah Motor</span>
                 </div>
               </div>
             </Link>
@@ -296,7 +296,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
         {/* Friendly Clean Footer */}
         <footer className="border-t border-slate-800/80 bg-[#0c121e] py-5 px-8 text-center text-xs text-slate-400">
-          OnderdilEngine &copy; 2026 &bull; Aplikasi Point-of-Sale (POS) &amp; Manajemen Bengkel Mobil
+          ShiftGear / OnderdilEngine &copy; 2026 &bull; Mitra: Bengkel Anugrah Motor (Jl. Syeh Maulana Akbar No.88, Kuningan &bull; Narahubung: Mang Acim / 081324735850)
         </footer>
       </div>
     </div>

@@ -11,19 +11,18 @@ export default async function HomePage() {
     <div className="space-y-8">
       {/* Welcome Banner */}
       <section className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-slate-900 to-[#162032] border border-slate-800 p-8 sm:p-10 shadow-xl">
-        <div className="max-w-2xl space-y-4">
+        <div className="max-w-3xl space-y-4">
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-400 text-xs font-semibold">
             <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-            <span>Sistem Operasional &amp; Kasir Bengkel</span>
+            <span>ShiftGear &bull; PT Anugrah Motor</span>
           </div>
 
           <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Selamat Datang di <span className="text-amber-400">OnderdilEngine</span>
+            Selamat Datang di <span className="text-amber-400">Bengkel Anugrah Motor</span>
           </h2>
 
           <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-            Kelola transaksi kasir suku cadang, pantau antrean perbaikan mobil mekanik,
-            serta rekapitulasi penjualan harian dengan mudah, cepat, dan terorganisir.
+            Platform digitalisasi layanan mekanik, kasir point-of-sale suku cadang, dan pemantauan antrean servis kendaraan terintegrasi.
           </p>
 
           <div className="pt-2 flex flex-wrap gap-3">
@@ -52,6 +51,52 @@ export default async function HomePage() {
               <Package className="w-4 h-4 text-amber-400" />
               <span>Cek Stok Suku Cadang</span>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Profil Mitra Terpilih (Sesuai Lembar Kerja RPL UNIKU) */}
+      <section className="bg-[#101726] border border-slate-800 rounded-2xl p-6 sm:p-7 space-y-4 shadow-lg">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-800 gap-2">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold">
+              <Car className="w-5 h-5" />
+            </div>
+            <div>
+              <h3 className="font-bold text-base text-white">Profil Mitra Terpilih: Bengkel Anugrah Motor</h3>
+              <p className="text-xs text-slate-400">PT Anugrah Motor &bull; Universitas Kuningan (TINFC2024-01 / Kelompok 3)</p>
+            </div>
+          </div>
+          <span className="text-xs px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 font-semibold w-fit">
+            Wawancara: 19 Okt 2026
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+          <div className="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1">
+            <span className="text-slate-400 font-medium">Alamat Bengkel:</span>
+            <p className="font-semibold text-slate-200">
+              Jl. Syeh Maulana Akbar No.88, Kuningan, Kec. Kuningan, Kab. Kuningan, Jawa Barat 45511
+            </p>
+          </div>
+
+          <div className="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1">
+            <span className="text-slate-400 font-medium">Narahubung &amp; Pemilik:</span>
+            <p className="font-bold text-amber-400 text-sm">Mang Acim (Pemilik)</p>
+            <p className="text-slate-300 font-mono">081324735850</p>
+          </div>
+
+          <div className="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1">
+            <span className="text-slate-400 font-medium">Pengguna Sistem:</span>
+            <p className="font-bold text-slate-200 text-sm">12 Pengguna Aktif</p>
+            <p className="text-slate-400">1 Pemilik, 1 Kasir, dan 10 Mekanik</p>
+          </div>
+
+          <div className="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1">
+            <span className="text-slate-400 font-medium">Sarana TIK di Bengkel:</span>
+            <p className="text-slate-300 leading-snug">
+              1 PC/Laptop di meja kasir (Wi-Fi) &amp; Smartphone Android teknisi mekanik
+            </p>
           </div>
         </div>
       </section>
