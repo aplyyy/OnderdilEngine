@@ -440,7 +440,7 @@ async function generateFullDocx() {
 
           // 2. URL REPOSITORY SOURCE CODE
           heading1("2. URL REPOSITORY SOURCE CODE (GITHUB)"),
-          bullet("https://github.com/Apliy3Dyansyah/OnderdilEngine", "• Repository Publik GitHub:"),
+          bullet("https://github.com/aplyyy/OnderdilEngine", "• Repository Publik GitHub:"),
 
           // 3. AKUN UJI COBA
           heading1("3. AKUN UJI COBA (TESTING CREDENTIALS)"),

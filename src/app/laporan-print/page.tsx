@@ -112,11 +112,11 @@ export default function LaporanPrintPage() {
                 <strong>Repository Publik GitHub:</strong>
                 <br />
                 <a
-                  href="https://github.com/Apliy3Dyansyah/OnderdilEngine"
+                  href="https://github.com/aplyyy/OnderdilEngine"
                   target="_blank"
                   className="text-blue-700 underline"
                 >
-                  https://github.com/Apliy3Dyansyah/OnderdilEngine
+                  https://github.com/aplyyy/OnderdilEngine
                 </a>
               </li>
             </ul>
@@ -495,7 +495,7 @@ export default function LaporanPrintPage() {
               <li>
                 <strong>Bukti Repository &amp; Commit Bertahap:</strong> Histori commit
                 bertahap telah terverifikasi pada repositori GitHub{" "}
-                <code>https://github.com/Apliy3Dyansyah/OnderdilEngine</code>.
+                <code>https://github.com/aplyyy/OnderdilEngine</code>.
               </li>
               <li>
                 <strong>Bukti Security Headers (Terminal):</strong> Hasil audit respon
