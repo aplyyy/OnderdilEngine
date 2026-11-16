@@ -184,46 +184,6 @@ async function generateFullDocx() {
     ],
   });
 
-  // 1B. Table Tim Pengembang
-  const tableTeam = new Table({
-    width: { size: 100, type: WidthType.PERCENTAGE },
-    borders: tableBorderSolid,
-    rows: [
-      new TableRow({
-        children: [
-          createCell("No", true, 8, true),
-          createCell("Nama Anggota", true, 34),
-          createCell("NIM", true, 23, true),
-          createCell("Peran Scrum", true, 35),
-        ],
-      }),
-      new TableRow({
-        children: [
-          createCell("1", false, 8, true),
-          createCell("Apliy Tridiansyah Rosdiana", false, 34, false, true),
-          createCell("20240810111", false, 23, true),
-          createCell("Product Owner (Penghubung Mitra & Backlog)", false, 35),
-        ],
-      }),
-      new TableRow({
-        children: [
-          createCell("2", false, 8, true),
-          createCell("Aam Setiana", false, 34),
-          createCell("-", false, 23, true),
-          createCell("Scrum Master (Pengatur Kerja Tim & Sprint)", false, 35),
-        ],
-      }),
-      new TableRow({
-        children: [
-          createCell("3", false, 8, true),
-          createCell("Iqbal Viandra Putra", false, 34),
-          createCell("-", false, 23, true),
-          createCell("Developer (Implementasi Fitur & Database)", false, 35),
-        ],
-      }),
-    ],
-  });
-
   // 2. Table Rincian Penerapan Aspek Keamanan
   const tableSecuritySpecs = new Table({
     width: { size: 100, type: WidthType.PERCENTAGE },
@@ -488,40 +448,36 @@ async function generateFullDocx() {
           tableCredentials,
 
           // 4. PENJELASAN APLIKASI
-          heading1("4. PENJELASAN APLIKASI & PROFIL MITRA (PT ANUGRAH MOTOR)"),
-          heading2("A. Profil Mitra & Latar Belakang Proyek"),
+          heading1("4. PENJELASAN APLIKASI (ONDERDILENGINE)"),
+          heading2("A. Latar Belakang dan Tujuan"),
           pText(
-            "Aplikasi ShiftGear (OnderdilEngine) dibangun berdasarkan hasil observasi dan wawancara awal pada tanggal 19 Oktober 2026 bersama Mang Acim selaku pemilik Bengkel Anugrah Motor (PT Anugrah Motor) yang berlokasi di Jl. Syeh Maulana Akbar No.88, Kuningan, Kec. Kuningan, Kabupaten Kuningan, Jawa Barat 45511 (No. HP: 081324735850). Bengkel ini memiliki kegiatan utama melayani servis berkala kendaraan, penjualan suku cadang, dan pengelolaan antrean pelanggan dengan jumlah pengguna operasional sebanyak 12 orang (1 Pemilik, 1 Kasir, dan 10 Mekanik). Sarana TIK yang tersedia adalah 1 unit PC/Laptop di meja kasir dengan koneksi Wi-Fi serta perangkat smartphone Android yang digunakan oleh para teknisi mekanik.",
+            "Aplikasi OnderdilEngine dibuat untuk menangani kebutuhan operasional transaksi dan servis pada bengkel mobil. Selama ini, pencatatan transaksi kasir dan pengerjaan mekanik masih sering dilakukan secara manual atau menggunakan aplikasi kasir sederhana yang belum memperhatikan celah keamanan web.",
             { indent: true }
           ),
           pText(
-            "Sebelum adanya sistem ini, proses pendaftaran pelanggan, penugasan montir, pemakaian suku cadang, dan pembayaran kasir masih terpisah serta mengandalkan nota kertas manual. Hal ini menimbulkan kendala nyata di lapangan: antrean kendaraan menumpuk saat akhir pekan, riwayat perbaikan kendaraan tidak terlacak, serta ketersediaan fisik sparepart sering tidak sinkron dengan catatan kasir. Oleh karena itu, platform ShiftGear / OnderdilEngine hadir sebagai solusi terpusat yang aman, cepat, dan terintegrasi untuk mengotomatiskan seluruh alur operasional bengkel mulai dari antrean servis hingga pembayaran kasir dan rekapitulasi finansial.",
+            "Pada aplikasi kasir dan bengkel, data suku cadang dan transaksi keuangan merupakan data penting. Jika sistem tidak diamankan dengan benar, penyerang dapat memanfaatkan kelemahan validasi input untuk melakukan SQL Injection pada form pencarian barang, mencuri token sesi kasir melalui celah XSS, atau memanipulasi nomor faktur dan harga servis (IDOR). Oleh karena itu, aplikasi OnderdilEngine dibangun dengan menerapkan prinsip penulisan kode aman (secure coding) guna mencegah serangan umum pada OWASP Top 10 tanpa memperlambat alur kerja kasir dan montir.",
             { indent: true }
           ),
 
-          heading2("B. Tim Pengembang (Kelompok 3 - Onderdil Engine)"),
-          pText("Pengembangan sistem dilakukan oleh Tim Kelompok 3 Kelas TINFC-2024-01 dengan rincian peran Scrum sebagai berikut:"),
-          tableTeam,
-
-          heading2("C. Fitur Utama Sistem"),
+          heading2("B. Fitur Utama Sistem"),
           numbered("1", "Sistem memisahkan tiga hak akses pengguna, yaitu Administrator, Kasir, dan Mekanik. Kata sandi disimpan menggunakan fungsi hash bcrypt. Sesi login dikelola menggunakan token JWT yang disimpan di dalam cookie berstatus HttpOnly dan Secure agar tidak bisa dibaca oleh script JavaScript peramban.", "Autentikasi & Kontrol Akses (RBAC):"),
-          numbered("2", "Kasir dapat mencari suku cadang dengan cepat, menambahkan barang ke keranjang belanja, menggabungkan biaya jasa servis montir, menghitung diskon dan nominal kembalian, serta mencetak nota pembayaran (faktur) resmi atas nama Bengkel Anugrah Motor dalam format cetak thermal receipt.", "Transaksi Kasir POS & Cetak Nota Resmi:"),
-          numbered("3", "Halaman montir menampilkan tahapan kendaraan mulai dari status Menunggu, Sedang Dikerjakan, hingga Selesai. Montir dapat menuliskan catatan perbaikan dan memilih suku cadang yang dipasang, yang secara otomatis akan mengurangi stok barang di gudang secara real-time.", "Alur Kerja Antrean Servis (Kanban Board):"),
+          numbered("2", "Kasir dapat mencari suku cadang dengan cepat, menambahkan barang ke keranjang belanja, menggabungkan biaya jasa servis montir, menghitung diskon dan nominal kembalian, serta mencetak nota pembayaran (faktur) dalam format cetak thermal receipt.", "Transaksi Kasir POS & Cetak Nota:"),
+          numbered("3", "Halaman montir menampilkan tahapan kendaraan mulai dari status Menunggu, Sedang Dikerjakan, hingga Selesai. Montir dapat menuliskan catatan perbaikan dan memilih suku cadang yang dipasang, yang secara otomatis akan mengurangi stok barang di gudang.", "Alur Kerja Antrean Servis (Kanban Board):"),
           numbered("4", "Pengelolaan data barang meliputi kode SKU, nama barang, kategori, harga modal, harga jual, dan jumlah stok fisik. Sistem dilengkapi penanda stok menipis (Low Stock Alert) jika persediaan barang berada di bawah batas minimum (5 unit).", "Master Data Suku Cadang (CRUD):"),
-          numbered("5", "Rekapitulasi transaksi kasir menampilkan total pendapatan, perbandingan omzet suku cadang dengan jasa montir, serta fitur unduh laporan transaksi ke berkas CSV / Excel.", "Laporan Penjualan & Ekspor CSV:"),
+          numbered("5", "Rekapitulasi transaksi kasir menampilkan total pendapatan, perbandingan omzet suku cadang dengan jasa montir, serta fitur unduh laporan transaksi ke berkas CSV.", "Laporan Penjualan & Ekspor CSV:"),
 
           // BREAK
           new Paragraph({ children: [new PageBreak()] }),
 
-          heading2("D. Arsitektur dan Teknologi yang Digunakan"),
+          heading2("C. Arsitektur dan Teknologi yang Digunakan"),
           bullet("Next.js versi 15 (App Router) berbasis runtime Node.js v24 dan bahasa pemrograman TypeScript.", "• Framework Utama:"),
           bullet("SQLite untuk lingkungan pengembangan lokal dan PostgreSQL untuk lingkungan server produksi, dikelola melalui Prisma ORM yang secara otomatis menggunakan Parameterized Queries.", "• Basis Data & ORM:"),
           bullet("Modul bcryptjs untuk hashing kata sandi dan modul jose untuk pembuatan serta verifikasi cryptographic signature token JWT.", "• Kriptografi & Manajemen Sesi:"),
           bullet("Pustaka zod untuk memastikan tipe data yang dikirimkan ke server sesuai dengan skema yang diizinkan.", "• Validasi Input:"),
-          bullet("Tailwind CSS v4 dengan tata letak dashboard sidebar profesional bertema otomotif modern.", "• Antarmuka Pengguna:"),
+          bullet("Tailwind CSS v4 dengan tata letak dashboard sidebar profesional bertema otomotif gelap (dark slate).", "• Antarmuka Pengguna:"),
           bullet("Next.js Edge Middleware untuk memasang HTTP Security Headers seperti Content-Security-Policy (CSP), X-Frame-Options: DENY, dan X-Content-Type-Options: nosniff.", "• Keamanan HTTP:"),
 
-          heading2("E. Rincian Penerapan Aspek Keamanan"),
+          heading2("D. Rincian Penerapan Aspek Keamanan"),
           pText("Penerapan kontrol keamanan pada kode program dirangkum pada tabel berikut:"),
           tableSecuritySpecs,
 

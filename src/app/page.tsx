@@ -63,8 +63,8 @@ export default async function HomePage() {
               <Car className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-bold text-base text-white">Profil Mitra Terpilih: Bengkel Anugrah Motor</h3>
-              <p className="text-xs text-slate-400">PT Anugrah Motor &bull; Universitas Kuningan (TINFC2024-01 / Kelompok 3)</p>
+              <h3 className="font-bold text-base text-white">Profil Mitra: Bengkel Anugrah Motor</h3>
+              <p className="text-xs text-slate-400">PT Anugrah Motor &bull; Universitas Kuningan (Apliy Tridiansyah Rosdiana - 20240810111)</p>
             </div>
           </div>
           <span className="text-xs px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 font-semibold w-fit">

@@ -243,71 +243,38 @@
   </table>
 
   <!-- BAGIAN 4: PENJELASAN APLIKASI -->
-  <div class="section-title">4. PENJELASAN APLIKASI &amp; PROFIL MITRA (PT ANUGRAH MOTOR)</div>
+  <div class="section-title">4. PENJELASAN APLIKASI (ONDERDILENGINE)</div>
   
-  <p class="subsection-title">A. Profil Mitra &amp; Latar Belakang Proyek</p>
+  <p class="subsection-title">A. Latar Belakang dan Tujuan</p>
   <p class="indent-p">
-    Aplikasi <strong>ShiftGear (OnderdilEngine)</strong> dibangun berdasarkan hasil observasi dan wawancara awal pada tanggal <strong>19 Oktober 2026</strong> bersama <strong>Mang Acim</strong> selaku pemilik <strong>Bengkel Anugrah Motor (PT Anugrah Motor)</strong> yang berlokasi di <strong>Jl. Syeh Maulana Akbar No.88, Kuningan, Kec. Kuningan, Kabupaten Kuningan, Jawa Barat 45511 (No. HP: 081324735850)</strong>. Bengkel ini memiliki kegiatan utama melayani servis berkala kendaraan, penjualan suku cadang, dan pengelolaan antrean pelanggan dengan jumlah pengguna operasional sebanyak 12 orang (1 Pemilik, 1 Kasir, dan 10 Mekanik). Sarana TIK yang tersedia adalah 1 unit PC/Laptop di meja kasir dengan koneksi Wi-Fi serta perangkat smartphone Android yang digunakan oleh para mekanik.
+    Aplikasi OnderdilEngine dibuat untuk menangani kebutuhan operasional transaksi dan servis pada bengkel mobil. Selama ini, pencatatan transaksi kasir dan pengerjaan mekanik masih sering dilakukan secara manual atau menggunakan aplikasi kasir sederhana yang belum memperhatikan celah keamanan web.
   </p>
   <p class="indent-p">
-    Sebelum adanya sistem ini, proses pendaftaran pelanggan, penugasan montir, pemakaian suku cadang, dan pembayaran kasir masih terpisah serta mengandalkan nota kertas manual. Hal ini menimbulkan kendala nyata di lapangan: antrean kendaraan menumpuk saat akhir pekan, riwayat perbaikan mobil/motor tidak terlacak, serta ketersediaan fisik sparepart sering tidak sinkron dengan catatan kasir. Oleh karena itu, platform ShiftGear / OnderdilEngine hadir sebagai solusi terpusat yang aman, cepat, dan terintegrasi untuk mengotomatiskan seluruh alur operasional bengkel mulai dari antrean servis hingga pembayaran kasir dan rekapitulasi finansial.
+    Pada aplikasi kasir dan bengkel, data suku cadang dan transaksi keuangan merupakan data penting. Jika sistem tidak diamankan dengan benar, penyerang dapat memanfaatkan kelemahan validasi input untuk melakukan SQL Injection pada form pencarian barang, mencuri token sesi kasir melalui celah XSS, atau memanipulasi nomor faktur dan harga servis (IDOR). Oleh karena itu, aplikasi OnderdilEngine dibangun dengan menerapkan prinsip penulisan kode aman (secure coding) guna mencegah serangan umum pada OWASP Top 10 tanpa memperlambat alur kerja kasir dan montir.
   </p>
 
-  <p class="subsection-title">B. Tim Pengembang (Kelompok 3 - Onderdil Engine)</p>
-  <p>Pengembangan sistem dilakukan oleh Tim Kelompok 3 Kelas TINFC-2024-01 dengan rincian peran Scrum sebagai berikut:</p>
-  <table>
-    <thead>
-      <tr>
-        <th style="width: 8%;">No</th>
-        <th style="width: 35%;">Nama Anggota</th>
-        <th style="width: 22%;">NIM</th>
-        <th style="width: 35%;">Peran Scrum</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="center">1</td>
-        <td><strong>Apliy Tridiansyah Rosdiana</strong></td>
-        <td class="center font-mono">20240810111</td>
-        <td><strong>Product Owner</strong> (Penghubung Mitra &amp; Backlog)</td>
-      </tr>
-      <tr>
-        <td class="center">2</td>
-        <td>Aam Setiana</td>
-        <td class="center font-mono">-</td>
-        <td>Scrum Master (Pengatur Kerja Tim &amp; Sprint)</td>
-      </tr>
-      <tr>
-        <td class="center">3</td>
-        <td>Iqbal Viandra Putra</td>
-        <td class="center font-mono">-</td>
-        <td>Developer (Implementasi Fitur &amp; Database)</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p class="subsection-title">C. Fitur Utama Sistem</p>
+  <p class="subsection-title">B. Fitur Utama Sistem</p>
   <ol>
     <li><strong>Autentikasi &amp; Kontrol Akses (RBAC):</strong> Sistem memisahkan tiga hak akses pengguna, yaitu Administrator, Kasir, dan Mekanik. Kata sandi disimpan menggunakan fungsi hash bcrypt. Sesi login dikelola menggunakan token JWT yang disimpan di dalam cookie berstatus HttpOnly dan Secure agar tidak bisa dibaca oleh script JavaScript peramban.</li>
-    <li><strong>Transaksi Kasir POS &amp; Cetak Nota Resmi:</strong> Kasir dapat mencari suku cadang dengan cepat, menambahkan barang ke keranjang belanja, menggabungkan biaya jasa servis montir, menghitung diskon dan nominal kembalian, serta mencetak nota pembayaran (faktur) resmi atas nama Bengkel Anugrah Motor dalam format thermal receipt.</li>
-    <li><strong>Alur Kerja Antrean Servis (Kanban Board):</strong> Halaman montir menampilkan tahapan kendaraan mulai dari status <em>Menunggu</em>, <em>Sedang Dikerjakan</em>, hingga <em>Selesai</em>. Montir dapat menuliskan catatan perbaikan dan memilih suku cadang yang dipasang, yang secara otomatis akan mengurangi stok barang di gudang secara real-time.</li>
+    <li><strong>Transaksi Kasir POS &amp; Cetak Nota:</strong> Kasir dapat mencari suku cadang dengan cepat, menambahkan barang ke keranjang belanja, menggabungkan biaya jasa servis montir, menghitung diskon dan nominal kembalian, serta mencetak nota pembayaran (faktur) dalam format cetak thermal receipt.</li>
+    <li><strong>Alur Kerja Antrean Servis (Kanban Board):</strong> Halaman montir menampilkan tahapan kendaraan mulai dari status <em>Menunggu</em>, <em>Sedang Dikerjakan</em>, hingga <em>Selesai</em>. Montir dapat menuliskan catatan perbaikan dan memilih suku cadang yang dipasang, yang secara otomatis akan mengurangi stok barang di gudang.</li>
     <li><strong>Master Data Suku Cadang (CRUD):</strong> Pengelolaan data barang meliputi kode SKU, nama barang, kategori, harga modal, harga jual, dan jumlah stok fisik. Sistem dilengkapi penanda stok menipis (<em>Low Stock Alert</em>) jika persediaan barang berada di bawah batas minimum (5 unit).</li>
-    <li><strong>Laporan Penjualan &amp; Ekspor CSV:</strong> Rekapitulasi transaksi kasir menampilkan total omzet, pendapatan suku cadang vs jasa montir, serta fitur unduh laporan transaksi ke berkas CSV / Excel.</li>
+    <li><strong>Laporan Penjualan &amp; Ekspor CSV:</strong> Rekapitulasi transaksi kasir menampilkan total pendapatan, perbandingan omzet suku cadang dengan jasa montir, serta fitur unduh laporan transaksi ke berkas CSV.</li>
   </ol>
 
   <div class="page-break"></div>
 
-  <p class="subsection-title">D. Arsitektur dan Teknologi yang Digunakan</p>
+  <p class="subsection-title">C. Arsitektur dan Teknologi yang Digunakan</p>
   <ul>
     <li><strong>Framework Utama:</strong> Next.js versi 15 (App Router) berbasis runtime Node.js v24 dan bahasa pemrograman TypeScript.</li>
     <li><strong>Basis Data &amp; ORM:</strong> SQLite untuk lingkungan pengembangan lokal dan PostgreSQL untuk lingkungan server produksi, dikelola melalui Prisma ORM yang secara otomatis menggunakan <em>Parameterized Queries</em>.</li>
     <li><strong>Kriptografi &amp; Manajemen Sesi:</strong> Modul <code>bcryptjs</code> untuk hashing kata sandi dan modul <code>jose</code> untuk pembuatan serta verifikasi cryptographic signature token JWT.</li>
     <li><strong>Validasi Input:</strong> Pustaka <code>zod</code> untuk memastikan tipe data yang dikirimkan ke server sesuai dengan skema yang diizinkan.</li>
-    <li><strong>Antarmuka Pengguna:</strong> Tailwind CSS v4 dengan tata letak dashboard sidebar profesional bertema bengkel otomotif modern.</li>
+    <li><strong>Antarmuka Pengguna:</strong> Tailwind CSS v4 dengan tata letak dashboard sidebar profesional bertema otomotif gelap (dark slate).</li>
     <li><strong>Keamanan HTTP:</strong> Next.js Edge Middleware untuk memasang HTTP Security Headers seperti Content-Security-Policy (CSP), X-Frame-Options, dan X-Content-Type-Options.</li>
   </ul>
 
-  <p class="subsection-title">E. Rincian Penerapan Aspek Keamanan</p>
+  <p class="subsection-title">D. Rincian Penerapan Aspek Keamanan</p>
   <p>Penerapan kontrol keamanan pada kode program dirangkum pada tabel berikut:</p>
 
   <table>
