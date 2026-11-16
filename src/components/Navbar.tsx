@@ -8,10 +8,7 @@ import {
   ShoppingCart,
   Package,
   BarChart3,
-  ShieldCheck,
   LogOut,
-  UserCheck,
-  AlertTriangle,
 } from "lucide-react";
 
 interface UserSession {
@@ -25,7 +22,6 @@ export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const [user, setUser] = useState<UserSession | null>(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch("/api/auth/me")
@@ -35,9 +31,8 @@ export default function Navbar() {
       })
       .then((data) => {
         setUser(data.user);
-        setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch(() => {});
   }, [pathname]);
 
   const handleLogout = async () => {
@@ -53,7 +48,6 @@ export default function Navbar() {
     { href: "/mekanik", label: "Antrean Servis", icon: Wrench, roles: ["ADMIN", "MEKANIK"] },
     { href: "/spareparts", label: "Stok Sparepart", icon: Package, roles: ["ADMIN", "KASIR"] },
     { href: "/laporan", label: "Laporan & Rekap", icon: BarChart3, roles: ["ADMIN", "KASIR"] },
-    { href: "/security-test", label: "Security Self-Test", icon: ShieldCheck, roles: ["ADMIN", "KASIR", "MEKANIK"] },
   ];
 
   const roleBadgeColor = {
@@ -68,7 +62,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo & Brand */}
           <div className="flex items-center space-x-3">
-            <Link href="/" className="flex items-center space-x-2 group">
+            <Link href="/" className="flex items-center space-x-2.5 group">
               <div className="w-9 h-9 rounded bg-amber-500 flex items-center justify-center font-black text-slate-950 text-xl tracking-tighter shadow-md shadow-amber-500/20 group-hover:bg-amber-400 transition-colors">
                 OE
               </div>
@@ -77,7 +71,7 @@ export default function Navbar() {
                   ONDERDIL<span className="text-amber-500">ENGINE</span>
                 </span>
                 <span className="hidden sm:block text-[10px] text-slate-400 font-mono tracking-tight">
-                  POS &amp; WORKSHOP CYBERSEC SYSTEM
+                  SISTEM POS &amp; BENGKEL MOBIL
                 </span>
               </div>
             </Link>
@@ -109,7 +103,7 @@ export default function Navbar() {
           {/* User Session Info & Action */}
           <div className="flex items-center space-x-3">
             {user ? (
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-3">
                 <div className="text-right hidden sm:block">
                   <div className="text-xs font-semibold text-slate-200">{user.name}</div>
                   <div className="flex items-center justify-end space-x-1">
@@ -133,7 +127,7 @@ export default function Navbar() {
             ) : (
               <Link
                 href="/login"
-                className="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider rounded"
+                className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider rounded"
               >
                 Login
               </Link>

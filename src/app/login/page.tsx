@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Shield, Lock, User, AlertCircle, CheckCircle2, Zap } from "lucide-react";
+import { Lock, User, AlertCircle, Zap } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -52,8 +52,8 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-[80vh] flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-6 bg-slate-900/90 border border-slate-800 p-8 rounded-xl shadow-2xl shadow-black/80 backdrop-blur-sm">
+    <div className="min-h-[75vh] flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-6 bg-slate-900 border border-slate-800 p-8 rounded-xl shadow-2xl">
         {/* Brand Header */}
         <div className="text-center">
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-lg bg-amber-500 text-slate-950 font-black text-3xl shadow-lg shadow-amber-500/20 mb-3">
@@ -63,12 +63,8 @@ export default function LoginPage() {
             ONDERDIL<span className="text-amber-500">ENGINE</span>
           </h2>
           <p className="mt-1 text-xs text-slate-400 font-mono">
-            Sistem POS Bengkel &amp; Manajemen Operasional
+            Sistem Point-of-Sale (POS) &amp; Manajemen Bengkel Mobil
           </p>
-          <div className="mt-3 inline-flex items-center space-x-1.5 px-2.5 py-1 rounded bg-slate-800 text-[11px] font-mono text-emerald-400 border border-slate-700">
-            <Shield className="w-3.5 h-3.5 text-emerald-400" />
-            <span>CyberSec Hardened (OWASP Level 1)</span>
-          </div>
         </div>
 
         {/* Error Alert */}
@@ -94,7 +90,7 @@ export default function LoginPage() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
-                placeholder="misal: admin / kasir / mekanik"
+                placeholder="misal: kasir / admin / mekanik"
                 className="w-full pl-9 pr-3 py-2 bg-slate-950 border border-slate-700 rounded-md text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 font-mono"
               />
             </div>
@@ -128,11 +124,11 @@ export default function LoginPage() {
           </button>
         </form>
 
-        {/* Evaluator Quick Demo Fill (Khusus Dosen / Penguji) */}
+        {/* Quick Demo Fill Buttons */}
         <div className="pt-4 border-t border-slate-800">
           <div className="flex items-center space-x-1.5 text-xs text-slate-400 mb-2 font-mono">
             <Zap className="w-3.5 h-3.5 text-amber-400" />
-            <span className="font-semibold text-slate-300">Akun Uji Coba Penguji (1-Click):</span>
+            <span className="font-semibold text-slate-300">Pilih Akun Demo (1-Click):</span>
           </div>
           <div className="grid grid-cols-3 gap-2">
             <button
@@ -159,18 +155,6 @@ export default function LoginPage() {
               <div className="text-[10px] text-blue-400 font-bold">MEKANIK</div>
               <div className="text-[10px] text-slate-400">mekanik</div>
             </button>
-          </div>
-        </div>
-
-        {/* Security Controls Info */}
-        <div className="pt-2 text-[11px] text-slate-500 font-mono space-y-1">
-          <div className="flex items-center space-x-1 text-slate-400">
-            <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
-            <span>Password di-hash bcrypt (cost 10) &amp; anti-brute force</span>
-          </div>
-          <div className="flex items-center space-x-1 text-slate-400">
-            <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
-            <span>Sesi aman HttpOnly Cookie &amp; parameterized query</span>
           </div>
         </div>
       </div>
