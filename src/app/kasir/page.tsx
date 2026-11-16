@@ -384,7 +384,10 @@ export default function KasirPOSPage() {
         </div>
 
         {/* Right Column: Checkout Ticket / POS Bill */}
-        <div className="lg:col-span-5 bg-[#101726] border border-slate-800 rounded-2xl p-6 flex flex-col justify-between shadow-xl sticky top-24">
+        <div
+          id="pos-checkout-box"
+          className="lg:col-span-5 bg-[#101726] border border-slate-800 rounded-2xl p-6 flex flex-col justify-between shadow-xl lg:sticky lg:top-24 scroll-mt-24"
+        >
           <div className="space-y-4">
             <div className="border-b border-slate-800 pb-3 flex items-center justify-between">
               <div>
@@ -568,6 +571,29 @@ export default function KasirPOSPage() {
           </button>
         </div>
       </div>
+
+      {/* Mobile Sticky Floating Cart Bar (for Android/Smartphone) */}
+      {(cart.length > 0 || serviceFee > 0) && (
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#101726]/95 border-t border-amber-500/30 p-3.5 backdrop-blur-md flex items-center justify-between shadow-2xl">
+          <div>
+            <div className="text-[11px] text-slate-400 font-medium">
+              {cart.reduce((sum, item) => sum + item.quantity, 0)} Item di Keranjang
+            </div>
+            <div className="text-base font-extrabold text-amber-400">
+              Rp {grandTotal.toLocaleString("id-ID")}
+            </div>
+          </div>
+          <button
+            onClick={() => {
+              document.getElementById("pos-checkout-box")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs flex items-center space-x-1.5 shadow-md shadow-amber-500/25 active:scale-95 transition-transform"
+          >
+            <span>Lihat Tagihan</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
+      )}
 
       {/* Printable Receipt Modal */}
       {completedTransaction && (

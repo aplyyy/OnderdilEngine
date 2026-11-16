@@ -41,6 +41,7 @@ export default function MekanikPage() {
   const [spareparts, setSpareparts] = useState<Sparepart[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedOrder, setSelectedOrder] = useState<ServiceOrder | null>(null);
+  const [mobileTab, setMobileTab] = useState<string>("MENUNGGU");
 
   // Edit / Update Form State
   const [mechanicNotes, setMechanicNotes] = useState("");
@@ -151,14 +152,45 @@ export default function MekanikPage() {
         </div>
       </div>
 
-      {/* Kanban Board Grid */}
+      {/* Mobile Tab Selector for Android / Smartphone View */}
+      <div className="md:hidden flex overflow-x-auto gap-2 pb-2 -mx-1 px-1 scrollbar-none">
+        {statusColumns.map((col) => {
+          const count = orders.filter((o) => o.status === col.key).length;
+          const isActive = mobileTab === col.key;
+          return (
+            <button
+              key={col.key}
+              onClick={() => setMobileTab(col.key)}
+              className={`px-3.5 py-2.5 rounded-xl text-xs font-bold shrink-0 flex items-center space-x-2 transition-all ${
+                isActive
+                  ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20"
+                  : "bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800"
+              }`}
+            >
+              <span>{col.label}</span>
+              <span
+                className={`px-2 py-0.5 rounded-full text-[11px] font-extrabold ${
+                  isActive
+                    ? "bg-slate-950 text-amber-400"
+                    : "bg-slate-800 text-slate-200 border border-slate-700"
+                }`}
+              >
+                {count}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Kanban Board Grid: On Mobile shows active mobileTab column, on Desktop shows full 4 columns side by side */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
         {statusColumns.map((col) => {
           const colOrders = orders.filter((o) => o.status === col.key);
+          const isMobileHidden = mobileTab !== col.key ? "hidden md:flex" : "flex";
           return (
             <div
               key={col.key}
-              className={`rounded-2xl border p-4 sm:p-5 flex flex-col justify-between min-h-[520px] shadow-lg ${col.color}`}
+              className={`rounded-2xl border p-4 sm:p-5 flex-col justify-between min-h-[460px] shadow-lg ${col.color} ${isMobileHidden}`}
             >
               <div className="space-y-3.5">
                 <div className="flex items-center justify-between pb-3 border-b border-slate-800">

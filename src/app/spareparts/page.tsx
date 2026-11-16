@@ -205,8 +205,87 @@ export default function SparepartsPage() {
         </div>
       </div>
 
-      {/* Data Table */}
-      <div className="bg-slate-900/90 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
+      {/* Mobile Card List (md:hidden) */}
+      <div className="md:hidden space-y-3">
+        {parts.length === 0 ? (
+          <div className="py-12 text-center text-slate-400 bg-slate-900/60 rounded-2xl border border-slate-800">
+            Tidak ada suku cadang yang cocok dengan pencarian.
+          </div>
+        ) : (
+          parts.map((p) => {
+            const isLow = p.stock <= p.minStock;
+            const isOut = p.stock <= 0;
+            return (
+              <div
+                key={p.id}
+                className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 space-y-3 shadow-md"
+              >
+                <div className="flex items-start justify-between">
+                  <div>
+                    <span className="text-amber-400 font-bold text-xs">{p.sku}</span>
+                    <h4 className="font-bold text-white text-sm leading-snug mt-0.5">{p.name}</h4>
+                  </div>
+                  <span className="px-2 py-0.5 rounded-lg bg-slate-800 border border-slate-700 text-xs text-slate-300">
+                    {p.category}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2 text-xs pt-1 border-t border-slate-800/80">
+                  <div>
+                    <span className="text-slate-400 block text-[11px]">Harga Jual:</span>
+                    <span className="font-extrabold text-amber-400 text-sm">
+                      Rp {p.sellPrice.toLocaleString("id-ID")}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 block text-[11px]">Harga Modal:</span>
+                    <span className="text-slate-300">Rp {p.buyPrice.toLocaleString("id-ID")}</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between pt-2 border-t border-slate-800/80">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-xs text-slate-300">
+                      Stok: <strong className="text-white">{p.stock}</strong> {p.unit}
+                    </span>
+                    {isOut ? (
+                      <span className="px-2 py-0.5 rounded-full bg-red-500/15 border border-red-500/30 text-[11px] text-red-400 font-semibold">
+                        Habis
+                      </span>
+                    ) : isLow ? (
+                      <span className="px-2 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-[11px] text-amber-400 font-semibold">
+                        Menipis
+                      </span>
+                    ) : (
+                      <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[11px] text-emerald-400 font-semibold">
+                        Aman
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="flex items-center space-x-1.5">
+                    <button
+                      onClick={() => handleOpenEdit(p)}
+                      className="p-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl border border-slate-700"
+                    >
+                      <Edit className="w-3.5 h-3.5" />
+                    </button>
+                    <button
+                      onClick={() => handleDelete(p.id, p.name)}
+                      className="p-2 bg-red-950/40 hover:bg-red-900/60 text-red-300 rounded-xl border border-red-900/50"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          })
+        )}
+      </div>
+
+      {/* Desktop Data Table (hidden md:block) */}
+      <div className="hidden md:block bg-slate-900/90 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead className="bg-slate-950 text-slate-400 font-semibold border-b border-slate-800">

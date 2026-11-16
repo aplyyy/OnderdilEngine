@@ -277,13 +277,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               </div>
             )}
 
-            {user && (
+            {user && pathname !== "/kasir" && (
               <Link
                 href="/kasir"
-                className="flex items-center space-x-2 px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-lg text-xs tracking-wide transition-all shadow-md shadow-amber-500/20"
+                className="flex items-center space-x-1.5 px-3 py-2 sm:px-4 sm:py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs tracking-wide transition-all shadow-md shadow-amber-500/20 shrink-0"
               >
                 <ShoppingCart className="w-4 h-4" />
-                <span>Buka Kasir POS</span>
+                <span className="hidden sm:inline">Buka Kasir POS</span>
+                <span className="sm:hidden font-bold">Kasir</span>
               </Link>
             )}
           </div>
