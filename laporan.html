@@ -2,11 +2,11 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Laporan Projek Keamanan Cyber - Apliy Tridiansyah Rosdiana</title>
+  <title>Laporan Projek Keamanan Cyber - Apliy Tridiansyah Rosdiana (20240810111)</title>
   <style>
     @page {
       size: A4 portrait;
-      margin: 3cm 2.5cm 3cm 3.5cm; /* Format margin baku tugas: Kiri 3.5cm, Atas 3cm, Kanan 2.5cm, Bawah 3cm */
+      margin: 3cm 2.5cm 3cm 3.5cm; /* Format margin baku laporan akademik: Kiri 3.5cm, Atas 3cm, Kanan 2.5cm, Bawah 3cm */
     }
     
     * {
@@ -160,9 +160,9 @@
   <!-- HALAMAN SAMPUL / COVER -->
   <div class="cover-page">
     <div class="cover-top">
-      <h1>LAPORAN PROJEK</h1>
-      <h2>KEAMANAN CYBER</h2>
-      <p>Dosen pengampu: Fitra Nugraha, S.Kom., M.Kom.</p>
+      <h1>LAPORAN PROJEK MANDIRI</h1>
+      <h2>MATA KULIAH KEAMANAN CYBER</h2>
+      <p>Dosen Pengampu: Fitra Nugraha, S.Kom., M.Kom.</p>
     </div>
 
     <div class="cover-logo-wrapper">
@@ -171,9 +171,10 @@
 
     <div>
       <div class="cover-middle">
-        <p>Disusun oleh:</p>
-        <p class="student-name">Apliy Tridiansyah Rosdiana (20240810111)</p>
-        <p>TINFC-2024-01</p>
+        <p>Disusun Oleh:</p>
+        <p class="student-name">Apliy Tridiansyah Rosdiana</p>
+        <p>NIM: 20240810111</p>
+        <p>Kelas: TINFC-2024-01</p>
       </div>
 
       <div class="cover-bottom">
@@ -187,57 +188,59 @@
 
   <!-- BAGIAN 1: URL APLIKASI AKTIF -->
   <div class="section-title">1. URL APLIKASI AKTIF (ONLINE &amp; HTTPS)</div>
+  <p>Aplikasi telah saya pasang dan jalankan secara online sehingga dapat diakses dan diuji langsung melalui browser dengan koneksi aman (HTTPS):</p>
   <ul>
     <li>
-      <strong>URL Publik Utama:</strong><br>
+      <strong>URL Publik Utama (Deployment Vercel Cloud):</strong><br>
       <a href="https://onderdil-engine.vercel.app/" target="_blank">https://onderdil-engine.vercel.app/</a>
     </li>
     <li>
-      <strong>URL Alternatif (Tunnel Mirror):</strong><br>
+      <strong>URL Alternatif (Mirror Cloudflare Tunnel):</strong><br>
       <a href="https://onderdil-engine.trycloudflare.com/" target="_blank">https://onderdil-engine.trycloudflare.com/</a>
     </li>
   </ul>
 
   <!-- BAGIAN 2: URL REPOSITORY SOURCE CODE -->
   <div class="section-title">2. URL REPOSITORY SOURCE CODE (GITHUB)</div>
+  <p>Seluruh kode sumber aplikasi, riwayat commit pengerjaan, dan konfigurasi sistem tersimpan secara rapi pada repositori GitHub publik:</p>
   <ul>
     <li>
-      <strong>Repository Publik GitHub:</strong><br>
+      <strong>Tautan Repositori GitHub:</strong><br>
       <a href="https://github.com/aplyyy/OnderdilEngine" target="_blank">https://github.com/aplyyy/OnderdilEngine</a>
     </li>
   </ul>
 
   <!-- BAGIAN 3: AKUN UJI COBA -->
   <div class="section-title">3. AKUN UJI COBA (TESTING CREDENTIALS)</div>
-  <p>Untuk mempermudah dosen penguji dalam menguji seluruh hak akses sistem secara bergantian, telah disediakan akun uji coba bawaan sebagai berikut:</p>
+  <p>Untuk memudahkan Bapak Dosen dalam menguji pembagian hak akses (Role-Based Access Control) pada aplikasi ini, saya menyediakan tiga akun pengujian sesuai tingkatan perannya. Selain memasukkan secara manual, pada halaman <code>/login</code> juga sudah saya sediakan tombol <em>1-Click Demo</em> agar proses masuk ke akun uji coba dapat dilakukan dengan cepat:</p>
   
   <table>
     <thead>
       <tr>
-        <th style="width: 25%;">Peran (Role)</th>
-        <th style="width: 25%;">Username</th>
+        <th style="width: 20%;">Peran (Role)</th>
+        <th style="width: 20%;">Username</th>
         <th style="width: 25%;">Password</th>
-        <th style="width: 25%;">Hak Akses</th>
+        <th style="width: 35%;">Hak Akses &amp; Wewenang</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><strong>Administrator</strong></td>
         <td class="code-text center">admin</td>
-        <td class="code-text center">AdminBengkel#2026</td>
-        <td>Kelola master barang, laporan keuangan, audit log, dan hapus data suku cadang.</td>
+        <td class="code-text center">admin / AdminBengkel#2026</td>
+        <td>Memiliki akses penuh untuk menambah, mengedit, dan menghapus stok suku cadang, melihat audit log keamanan, serta memeriksa rekapitulasi laporan keuangan.</td>
       </tr>
       <tr>
         <td><strong>Kasir</strong></td>
         <td class="code-text center">kasir</td>
-        <td class="code-text center">KasirBengkel#2026</td>
-        <td>Transaksi POS kasir, input kendaraan masuk, kalkulasi nota, dan cetak faktur.</td>
+        <td class="code-text center">kasir / KasirBengkel#2026</td>
+        <td>Dapat mendaftarkan kendaraan servis baru, memilih suku cadang, menggabungkan ongkos jasa montir, menghitung kembalian, dan mencetak nota pembayaran (faktur).</td>
       </tr>
       <tr>
         <td><strong>Mekanik</strong></td>
         <td class="code-text center">mekanik</td>
-        <td class="code-text center">MekanikBengkel#2026</td>
-        <td>Melihat antrean servis (Kanban), update catatan teknis, dan alokasi suku cadang.</td>
+        <td class="code-text center">mekanik / MekanikBengkel#2026</td>
+        <td>Dapat memantau antrean kendaraan servis (Kanban), memperbarui status pengerjaan, menulis catatan perbaikan fisik, dan mengalokasikan suku cadang yang digunakan.</td>
       </tr>
     </tbody>
   </table>
@@ -247,84 +250,84 @@
   
   <p class="subsection-title">A. Latar Belakang dan Tujuan</p>
   <p class="indent-p">
-    Aplikasi OnderdilEngine dibuat untuk menangani kebutuhan operasional transaksi dan servis pada bengkel mobil. Selama ini, pencatatan transaksi kasir dan pengerjaan mekanik masih sering dilakukan secara manual atau menggunakan aplikasi kasir sederhana yang belum memperhatikan celah keamanan web.
+    Ide pembuatan aplikasi <strong>OnderdilEngine</strong> ini berawal dari pengamatan saya terhadap masalah operasional yang sering ditemui pada bengkel kendaraan roda empat. Banyak bengkel konvensional yang masih menggunakan pencatatan buku nota manual. Akibatnya, nota belanja kerap terselip, pencatatan stok suku cadang di gudang sering tidak cocok dengan stok fisik, dan kasir kesulitan merekap pembagian antara biaya suku cadang dengan ongkos kerja mekanik.
   </p>
   <p class="indent-p">
-    Pada aplikasi kasir dan bengkel, data suku cadang dan transaksi keuangan merupakan data penting. Jika sistem tidak diamankan dengan benar, penyerang dapat memanfaatkan kelemahan validasi input untuk melakukan SQL Injection pada form pencarian barang, mencuri token sesi kasir melalui celah XSS, atau memanipulasi nomor faktur dan harga servis (IDOR). Oleh karena itu, aplikasi OnderdilEngine dibangun dengan menerapkan prinsip penulisan kode aman (secure coding) guna mencegah serangan umum pada OWASP Top 10 tanpa memperlambat alur kerja kasir dan montir.
+    Sebagai mahasiswa Teknik Informatika yang mengambil mata kuliah Keamanan Cyber, fokus utama saya bukan hanya membuat sistem kasir yang berjalan lancar, melainkan juga memastikan aplikasi ini tahan terhadap celah keamanan web yang umum terjadi. Sistem kasir dan bengkel menyimpan data sensitif berupa riwayat transaksi keuangan dan data suku cadang. Jika tidak diamankan dengan benar, aplikasi kasir rentan diserang menggunakan SQL Injection pada kolom pencarian barang, pencurian cookie sesi kasir melalui celah XSS, atau manipulasi nomor faktur belanja (IDOR). Oleh karena itu, saya merancang aplikasi ini dengan menerapkan praktik <em>secure coding</em> berbasis panduan OWASP Top 10.
   </p>
 
-  <p class="subsection-title">B. Fitur Utama Sistem</p>
+  <p class="subsection-title">B. Fitur-Fitur Utama Aplikasi</p>
   <ol>
-    <li><strong>Autentikasi &amp; Kontrol Akses (RBAC):</strong> Sistem memisahkan tiga hak akses pengguna, yaitu Administrator, Kasir, dan Mekanik. Kata sandi disimpan menggunakan fungsi hash bcrypt. Sesi login dikelola menggunakan token JWT yang disimpan di dalam cookie berstatus HttpOnly dan Secure agar tidak bisa dibaca oleh script JavaScript peramban.</li>
-    <li><strong>Transaksi Kasir POS &amp; Cetak Nota:</strong> Kasir dapat mencari suku cadang dengan cepat, menambahkan barang ke keranjang belanja, menggabungkan biaya jasa servis montir, menghitung diskon dan nominal kembalian, serta mencetak nota pembayaran (faktur) dalam format cetak thermal receipt.</li>
-    <li><strong>Alur Kerja Antrean Servis (Kanban Board):</strong> Halaman montir menampilkan tahapan kendaraan mulai dari status <em>Menunggu</em>, <em>Sedang Dikerjakan</em>, hingga <em>Selesai</em>. Montir dapat menuliskan catatan perbaikan dan memilih suku cadang yang dipasang, yang secara otomatis akan mengurangi stok barang di gudang.</li>
-    <li><strong>Master Data Suku Cadang (CRUD):</strong> Pengelolaan data barang meliputi kode SKU, nama barang, kategori, harga modal, harga jual, dan jumlah stok fisik. Sistem dilengkapi penanda stok menipis (<em>Low Stock Alert</em>) jika persediaan barang berada di bawah batas minimum (5 unit).</li>
-    <li><strong>Laporan Penjualan &amp; Ekspor CSV:</strong> Rekapitulasi transaksi kasir menampilkan total pendapatan, perbandingan omzet suku cadang dengan jasa montir, serta fitur unduh laporan transaksi ke berkas CSV.</li>
+    <li><strong>Sistem Autentikasi dan Pembagian Peran (RBAC):</strong> Sistem memisahkan hak akses menjadi tiga peran (Administrator, Kasir, dan Mekanik). Kata sandi diamankan menggunakan fungsi hash <code>bcrypt</code>, dan sesi pengguna dikelola dengan token JWT yang disimpan pada cookie beratribut <code>HttpOnly</code> dan <code>Secure</code> agar kebal dari pencurian script berbahaya.</li>
+    <li><strong>Kasir Point-of-Sale (POS) &amp; Cetak Faktur:</strong> Petugas kasir dapat mencari suku cadang dengan cepat, menambahkan barang ke keranjang belanja, menggabungkan biaya jasa mekanik, menghitung nominal kembalian otomatis, dan langsung mencetak nota pembayaran berformat rapi.</li>
+    <li><strong>Papan Alur Kerja Servis Mekanik (Kanban):</strong> Halaman antrean kerja montir menampilkan status kendaraan secara bertahap: <em>Menunggu</em> &rarr; <em>Sedang Dikerjakan</em> &rarr; <em>Selesai</em> &rarr; <em>Lunas</em>. Mekanik dapat memilih suku cadang yang dipasang, yang secara otomatis akan memotong jumlah stok fisik di gudang.</li>
+    <li><strong>Manajemen Persediaan Suku Cadang:</strong> Memuat data kode SKU, harga modal/beli, harga jual konsumen, serta fitur <em>Low Stock Alert</em> yang memberikan tanda peringatan jika stok barang tersisa di bawah ambang batas minimal (5 unit).</li>
+    <li><strong>Laporan Penjualan &amp; Ekspor Data CSV:</strong> Halaman laporan menampilkan total omzet bengkel, perbandingan keuntungan suku cadang dengan jasa montir, serta fitur unduh data transaksi ke format CSV untuk pembukuan di Microsoft Excel.</li>
   </ol>
 
   <div class="page-break"></div>
 
   <p class="subsection-title">C. Arsitektur dan Teknologi yang Digunakan</p>
   <ul>
-    <li><strong>Framework Utama:</strong> Next.js versi 15 (App Router) berbasis runtime Node.js v24 dan bahasa pemrograman TypeScript.</li>
-    <li><strong>Basis Data &amp; ORM:</strong> SQLite untuk lingkungan pengembangan lokal dan PostgreSQL untuk lingkungan server produksi, dikelola melalui Prisma ORM yang secara otomatis menggunakan <em>Parameterized Queries</em>.</li>
-    <li><strong>Kriptografi &amp; Manajemen Sesi:</strong> Modul <code>bcryptjs</code> untuk hashing kata sandi dan modul <code>jose</code> untuk pembuatan serta verifikasi cryptographic signature token JWT.</li>
-    <li><strong>Validasi Input:</strong> Pustaka <code>zod</code> untuk memastikan tipe data yang dikirimkan ke server sesuai dengan skema yang diizinkan.</li>
-    <li><strong>Antarmuka Pengguna:</strong> Tailwind CSS v4 dengan tata letak dashboard sidebar profesional bertema otomotif gelap (dark slate).</li>
-    <li><strong>Keamanan HTTP:</strong> Next.js Edge Middleware untuk memasang HTTP Security Headers seperti Content-Security-Policy (CSP), X-Frame-Options, dan X-Content-Type-Options.</li>
+    <li><strong>Framework Aplikasi:</strong> Next.js versi 16 (App Router) berbasis runtime Node.js dan bahasa pemrograman TypeScript.</li>
+    <li><strong>Database &amp; ORM:</strong> SQLite yang dikelola menggunakan Prisma ORM. Penggunaan Prisma ORM memastikan seluruh query database otomatis menggunakan <em>Parameterized Queries / Prepared Statements</em> sehingga kebal terhadap serangan SQL Injection.</li>
+    <li><strong>Keamanan Kriptografi:</strong> Pustaka <code>bcryptjs</code> untuk hashing kata sandi akun dan pustaka <code>jose</code> untuk penandatanganan kriptografis token sesi JWT.</li>
+    <li><strong>Validasi Input:</strong> Pustaka <code>zod</code> untuk memastikan data yang dikirim ke server sesuai dengan skema tipe data yang valid.</li>
+    <li><strong>Tampilan Antarmuka:</strong> Tailwind CSS dengan desain modern bergaya bersih (*clean SaaS*), kontras warna yang nyaman dibaca, serta tata letak responsif untuk layar handphone mekanik maupun laptop kasir.</li>
+    <li><strong>Pengamanan Header HTTP:</strong> Middleware Next.js untuk menyematkan HTTP Security Headers seperti <code>X-Frame-Options: DENY</code>, <code>X-Content-Type-Options: nosniff</code>, dan <code>Content-Security-Policy</code>.</li>
   </ul>
 
-  <p class="subsection-title">D. Rincian Penerapan Aspek Keamanan</p>
-  <p>Penerapan kontrol keamanan pada kode program dirangkum pada tabel berikut:</p>
+  <p class="subsection-title">D. Penerapan Aspek Keamanan pada Aplikasi</p>
+  <p>Penerapan pengamanan yang saya bangun pada source code dirangkum dalam tabel berikut:</p>
 
   <table>
     <thead>
       <tr>
-        <th style="width: 25%;">Mekanisme Keamanan</th>
-        <th style="width: 32%;">Letak Komponen / Berkas</th>
-        <th style="width: 43%;">Tujuan &amp; Alasan Penerapan</th>
+        <th style="width: 25%;">Aspek Keamanan</th>
+        <th style="width: 30%;">Letak File / Komponen</th>
+        <th style="width: 45%;">Tujuan &amp; Mekanisme Pengamanan</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><strong>Password Hashing (bcrypt)</strong></td>
         <td><span class="code-text">src/app/api/auth/login/route.ts</span></td>
-        <td>Menyimpan kata sandi dalam bentuk digest hash searah (cost factor 10) sehingga tetap aman bila database bocor.</td>
+        <td>Password pengguna disimpan dalam bentuk digest hash searah dengan salt, sehingga kata sandi asli tidak dapat diketahui meskipun database bocor.</td>
       </tr>
       <tr>
         <td><strong>JWT HttpOnly Cookie</strong></td>
         <td><span class="code-text">src/lib/auth.ts</span></td>
-        <td>Mencegah pencurian token otentikasi kasir melalui serangan XSS karena cookie tidak dapat diakses lewat JavaScript peramban.</td>
+        <td>Token login disimpan pada cookie dengan atribut <code>HttpOnly</code>, sehingga script jahat di browser tidak dapat membaca atau mencuri token sesi kasir (anti-XSS).</td>
       </tr>
       <tr>
-        <td><strong>Prepared Statements (SQLi)</strong></td>
+        <td><strong>Prepared Statements (Anti-SQLi)</strong></td>
         <td><span class="code-text">prisma/schema.prisma</span></td>
-        <td>Memisahkan instruksi query dari data input pencarian part, sehingga masukan karakter aneh tidak dieksekusi sebagai query SQL.</td>
+        <td>Prisma ORM memisahkan logika query SQL dari parameter input pengguna. Karakter aneh seperti tanda kutip pada kolom pencarian part hanya dianggap teks string biasa.</td>
       </tr>
       <tr>
-        <td><strong>Otorisasi RBAC Middleware</strong></td>
+        <td><strong>Role-Based Access Control (RBAC)</strong></td>
         <td><span class="code-text">src/middleware.ts</span></td>
-        <td>Mencegah eskalasi hak akses dan IDOR; peran Mekanik atau Kasir ditolak (HTTP 403) jika memanggil URL rute administrasi.</td>
+        <td>Membatasi hak akses antar peran. Jika akun mekanik atau kasir mencoba mengakses URL atau endpoint administrator, sistem langsung menolak dengan status HTTP 403 Forbidden.</td>
       </tr>
       <tr>
-        <td><strong>Rate Limiting</strong></td>
+        <td><strong>Rate Limiting (Anti-Brute Force)</strong></td>
         <td><span class="code-text">src/lib/rate-limit.ts</span></td>
-        <td>Membatasi percobaan login maksimal 5 kali dalam 1 menit per alamat IP guna menahan serangan brute-force.</td>
+        <td>Membatasi percobaan login maksimal 5 kali per menit per alamat IP. Percobaan ke-6 otomatis diblokir dengan respon HTTP 429 Too Many Requests.</td>
       </tr>
       <tr>
         <td><strong>Sanitasi Input (Anti-XSS)</strong></td>
         <td><span class="code-text">src/lib/security.ts</span></td>
-        <td>Mengubah tag HTML pada catatan keluhan konsumen menjadi entitas karakter aman agar script peramban tidak dijalankan.</td>
+        <td>Melakukan entity encoding pada teks input keluhan servis, ditambah perlindungan bawaan React JSX escaping agar tag HTML/script tidak dapat dieksekusi.</td>
       </tr>
       <tr>
         <td><strong>Security Headers</strong></td>
         <td><span class="code-text">src/middleware.ts</span></td>
-        <td>Memasang header X-Frame-Options: DENY untuk mencegah serangan clickjacking serta nosniff untuk mencegah MIME-sniffing.</td>
+        <td>Menambahkan header proteksi browser seperti <code>X-Frame-Options: DENY</code> untuk mencegah clickjacking dan <code>nosniff</code> untuk mencegah manipulasi MIME-type.</td>
       </tr>
       <tr>
-        <td><strong>Penyembunyian Rahasia</strong></td>
+        <td><strong>Proteksi Kredensial (.gitignore)</strong></td>
         <td><span class="code-text">.gitignore, .env.example</span></td>
-        <td>Memastikan file .env yang berisi kunci rahasia tidak pernah terunggah ke repositori GitHub.</td>
+        <td>Memastikan kunci rahasia (JWT secret dan konfigurasi database) tidak ikut terunggah ke repositori publik GitHub.</td>
       </tr>
     </tbody>
   </table>
@@ -332,23 +335,24 @@
   <!-- BAGIAN 5: POTENSI PENGEMBANGAN SEBAGAI TOPIK SKRIPSI -->
   <div class="section-title">5. POTENSI PENGEMBANGAN SEBAGAI TOPIK SKRIPSI</div>
   <p class="indent-p">
-    Proyek aplikasi OnderdilEngine ini memiliki landasan teknis yang dapat dikembangkan lebih lanjut menjadi topik Skripsi atau Tugas Akhir di tingkat 4 dengan usulan judul:
+    Projek ini memiliki potensi yang sangat baik untuk saya kembangkan lebih lanjut menjadi topik Skripsi / Tugas Akhir pada semester akhir nanti. Rencana usulan judul skripsi yang berkaitan dengan projek ini adalah:
   </p>
-  <p style="text-align: center; font-weight: bold; margin: 10px 0;">
-    &ldquo;Rancang Bangun Sistem Point-of-Sale dan Operasional Bengkel Mobil Menggunakan Arsitektur Zero-Trust dengan Penerapan Algoritma Peramalan Stok Barang dan Audit Trail Anti-Manipulasi&rdquo;
+  <p style="text-align: center; font-weight: bold; margin: 12px 0;">
+    &ldquo;Rancang Bangun Sistem Informasi Kasir dan Antrean Servis Bengkel Mobil Berbasis Web dengan Penerapan Role-Based Access Control dan Analisis Pengendalian Stok Suku Cadang&rdquo;
   </p>
 
-  <p><strong>Rumusan Masalah yang Diusulkan:</strong></p>
+  <p><strong>Rumusan Masalah yang Direncanakan:</strong></p>
   <ol>
-    <li>Bagaimana merancang struktur pencatatan riwayat transaksi kasir dan servis yang tidak dapat dimanipulasi (anti-tamper log) menggunakan metode verifikasi hash berantai (cryptographic hash chaining)?</li>
-    <li>Bagaimana menerapkan algoritma peramalan deret waktu (time-series forecasting, seperti Single Exponential Smoothing atau Moving Average) pada data historis transaksi kasir guna memperkirakan kebutuhan stok suku cadang berkala secara akurat?</li>
-    <li>Bagaimana mendeteksi anomali pada pencatatan transaksi servis (misalnya manipulasi waktu pengerjaan mekanik atau pemberian diskon tidak wajar) menggunakan algoritma pembelajaran mesin (machine learning)?</li>
+    <li>Bagaimana merancang sistem kasir dan antrean servis kendaraan yang saling terintegrasi agar meminimalisir kesalahan perhitungan biaya serta mencegah selisih stok suku cadang fisik di gudang?</li>
+    <li>Bagaimana menerapkan mekanisme keamanan Role-Based Access Control (RBAC) dan perlindungan SQL Injection untuk memastikan data transaksi keuangan dan hak akses bengkel terlindungi dengan baik?</li>
+    <li>Bagaimana merancang fitur rekapitulasi data penjualan suku cadang agar dapat membantu pemilik bengkel dalam memantau omzet serta merencanakan pengadaan barang secara tepat waktu?</li>
   </ol>
 
-  <p><strong>Rencana Fitur Lanjutan:</strong></p>
+  <p><strong>Rencana Fitur Tambahan untuk Skripsi:</strong></p>
   <ul>
-    <li>Integrasi pengingat servis otomatis berbasis pesan WhatsApp ke nomor telepon pelanggan berdasarkan perkiraan jarak tempuh kendaraan (kilometer).</li>
-    <li>Integrasi pembaca data OBD-II melalui koneksi Bluetooth untuk membaca kode kerusakan mobil (Diagnostic Trouble Code) langsung ke formulir keluhan teknis.</li>
+    <li>Integrasi pengiriman bukti nota servis langsung ke nomor WhatsApp pelanggan secara otomatis saat status transaksi dinyatakan lunas.</li>
+    <li>Integrasi metode pembayaran digital berbasis QRIS dinamis untuk mempermudah konsumen dalam bertransaksi non-tunai.</li>
+    <li>Penambahan fitur cetak nota langsung ke printer kasir thermal (Bluetooth / USB).</li>
   </ul>
 
   <div class="page-break"></div>
@@ -356,115 +360,115 @@
   <!-- BAGIAN 6: PENGGUNAAN ASISTEN AI -->
   <div class="section-title">6. PENGGUNAAN ASISTEN AI (AI AGENT TRANSPARENCY)</div>
   <p class="indent-p">
-    Sesuai dengan pedoman tugas poin 3e, pengembangan aplikasi ini dibantu oleh AI Agent (Antigravity by Google DeepMind) secara bertanggung jawab dan terbuka.
+    Sesuai ketentuan pedoman tugas (Poin 3e), dalam pengerjaan projek mandiri ini saya memanfaatkan bantuan asisten AI (Google Antigravity) secara terbuka dan etis sebagai sarana belajar serta pembantu penulisan kode:
   </p>
   <ul>
-    <li><strong>Bagian Pekerjaan yang Dibantu AI:</strong>
+    <li><strong>Bagian Pengerjaan yang Dibantu AI:</strong>
       <ul>
-        <li>Perancangan struktur relasi tabel basis data Prisma (User, Sparepart, ServiceOrder, Transaction, dan SecurityLog).</li>
-        <li>Penyusunan fungsi hashing sandi bcrypt, pembuatan signed token JWT, fungsi sanitasi karakter XSS, serta in-memory sliding window rate limiter.</li>
-        <li>Penyesuaian tata letak antarmuka kasir POS dan navigasi sidebar responsif menggunakan Tailwind CSS.</li>
-        <li>Penyelesaian masalah konfigurasi CSS compiler pada framework Next.js 16.</li>
+        <li>Membantu merancang struktur relasi tabel database di Prisma ORM (User, Sparepart, ServiceOrder, Transaction, dan SecurityLog).</li>
+        <li>Membantu mencari contoh implementasi fungsi hashing password bcrypt dan pembuatan token JWT pada framework Next.js App Router.</li>
+        <li>Membantu menyusun tata letak antarmuka kasir dan komponen kanban mekanik menggunakan utility class Tailwind CSS agar rapi dan responsif.</li>
+        <li>Membantu menyelesaikan kendala konfigurasi PostCSS saat menggunakan Next.js versi 16.</li>
       </ul>
     </li>
-    <li><strong>Contoh Prompt Utama yang Digunakan:</strong><br>
-      <em>&ldquo;Buatkan API rute transaksi kasir POS bengkel di Next.js menggunakan Prisma $transaction: hitung total harga suku cadang dan biaya jasa mekanik, kurangi stok fisik suku cadang secara aman dari race condition, generate nomor nota invoice unik, dan tolak pembayaran jika uang yang diterima kurang.&rdquo;</em>
+    <li><strong>Contoh Prompt yang Saya Gunakan:</strong><br>
+      <em>&ldquo;Tolong bantu buatkan rute API kasir di Next.js menggunakan Prisma transaction: hitung total harga suku cadang ditambah ongkos servis, kurangi stok fisik suku cadang secara aman dari race condition, buatkan nomor faktur nota unik, dan tolak pembayaran jika uang yang dibayarkan kurang.&rdquo;</em>
     </li>
-    <li><strong>Cara Mahasiswa Menguji dan Memverifikasi Hasil:</strong><br>
-      Setiap baris kode yang disarankan oleh asisten AI diperiksa kembali secara manual untuk memastikan fungsinya benar, tidak terdapat celah keamanan yang terlewat, tidak ada kunci rahasia yang tertulis langsung pada kode, serta diuji kelayakannya melalui perintah <code>npm run build</code> dengan hasil seluruh rute (18/18) terkompilasi tanpa kesalahan.
+    <li><strong>Cara Saya Menguji dan Memverifikasi Hasil AI:</strong><br>
+      Setiap baris kode yang disarankan oleh asisten AI tidak langsung saya pakai begitu saja. Saya memeriksa kembali logika alur programnya, memastikan query database menggunakan parameter binding yang aman, memastikan tidak ada celah keamanan atau kunci rahasia yang tertulis langsung di kode program, serta menguji langsung fungsinya di browser lokal dan menjalankan <code>npm run build</code> untuk memastikan tidak ada error kompilasi.
     </li>
   </ul>
 
   <!-- BAGIAN 7: HASIL SELF-TESTING KEAMANAN -->
-  <div class="section-title">7. HASIL SELF-TESTING KEAMANAN (MINIMAL 5 SKENARIO)</div>
-  <p>Pengujian mandiri telah dilakukan pada sistem dan dicatat hasilnya dalam tabel berikut:</p>
+  <div class="section-title">7. HASIL SELF-TESTING KEAMANAN (7 SKENARIO PENGUJIAN)</div>
+  <p>Untuk memastikan proteksi berjalan sesuai rencana, saya melakukan pengujian mandiri terhadap 7 skenario serangan web dengan hasil sebagai berikut:</p>
 
   <table>
     <thead>
       <tr>
         <th style="width: 5%;">No</th>
-        <th style="width: 25%;">Skenario Uji</th>
-        <th style="width: 30%;">Cara Pengujian &amp; Payload</th>
+        <th style="width: 25%;">Skenario Pengujian</th>
+        <th style="width: 30%;">Metode &amp; Payload Uji</th>
         <th style="width: 15%;">Hasil Uji</th>
-        <th style="width: 25%;">Tindakan / Mitigasi</th>
+        <th style="width: 25%;">Analisis &amp; Mitigasi</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td class="center">1</td>
-        <td>SQL Injection pada form pencarian part</td>
-        <td>Memasukkan payload:<br><span class="code-text">' OR '1'='1' --</span> pada kolom pencarian SKU.</td>
+        <td>SQL Injection pada Form Pencarian</td>
+        <td>Memasukkan payload injeksi SQL:<br><span class="code-text">' OR '1'='1' --</span> pada kolom pencarian suku cadang.</td>
         <td class="center"><strong>LOLOS</strong></td>
-        <td>Prisma ORM menerapkan prepared statements; payload diperlakukan sebagai teks string biasa.</td>
+        <td>Prisma ORM menerapkan prepared statements; payload diperlakukan sebagai teks string biasa sehingga query SQL tidak bocor.</td>
       </tr>
       <tr>
         <td class="center">2</td>
-        <td>Stored XSS pada catatan servis</td>
-        <td>Memasukkan payload:<br><span class="code-text">&lt;script&gt;alert(1)&lt;/script&gt;</span> pada keluhan konsumen.</td>
+        <td>Stored XSS pada Catatan Servis</td>
+        <td>Memasukkan tag script jahat:<br><span class="code-text">&lt;script&gt;alert(1)&lt;/script&gt;</span> pada kolom keluhan pelanggan.</td>
         <td class="center"><strong>LOLOS</strong></td>
-        <td>HTML entity encoding dan rendering JSX React mengubah tag menjadi karakter aman sehingga script tidak berjalan.</td>
+        <td>Karakter di-encode menjadi entitas aman dan dirender secara aman oleh React JSX, script tidak dieksekusi browser.</td>
       </tr>
       <tr>
         <td class="center">3</td>
-        <td>Bypass Otorisasi / IDOR</td>
-        <td>Login sebagai akun Mekanik, lalu mencoba mengakses API admin <span class="code-text">/api/security-logs</span>.</td>
+        <td>Broken Access Control / IDOR</td>
+        <td>Login menggunakan akun Mekanik, lalu mencoba mengakses endpoint data admin <span class="code-text">/api/security-logs</span>.</td>
         <td class="center"><strong>LOLOS</strong></td>
-        <td>Middleware otorisasi memeriksa role pada JWT dan mengembalikan respon HTTP 403 Forbidden.</td>
+        <td>Middleware otorisasi memeriksa role pada JWT dan langsung memblokir akses dengan kode respon HTTP 403 Forbidden.</td>
       </tr>
       <tr>
         <td class="center">4</td>
-        <td>Brute Force Login &amp; Rate Limiter</td>
-        <td>Mengirimkan 6 kali percobaan login salah berurutan dalam waktu kurang dari 1 menit.</td>
+        <td>Brute Force Login &amp; Rate Limiting</td>
+        <td>Mengirimkan 6 kali percobaan login dengan password salah secara berturut-turut dalam waktu 1 menit.</td>
         <td class="center"><strong>LOLOS</strong></td>
-        <td>In-memory rate limiter memblokir percobaan ke-6 dengan respon HTTP 429 Too Many Requests.</td>
+        <td>Sistem rate limiter memblokir percobaan ke-6 dengan respon HTTP 429 Too Many Requests (cooldown 60 detik).</td>
       </tr>
       <tr>
         <td class="center">5</td>
         <td>Validasi Password Lemah</td>
-        <td>Mencoba membuat akun dengan kata sandi terlalu pendek ("123").</td>
+        <td>Mencoba input password pendek kurang dari 8 karakter pada form registrasi.</td>
         <td class="center"><strong>LOLOS</strong></td>
-        <td>Validasi skema Zod menolak pendaftaran kata sandi di bawah 8 karakter.</td>
+        <td>Skema validasi Zod pada backend menolak data dan memberikan pesan error bahwa password minimal 8 karakter.</td>
       </tr>
       <tr>
         <td class="center">6</td>
         <td>Pemeriksaan Security Headers</td>
-        <td>Memeriksa respon header server menggunakan perintah <span class="code-text">curl.exe -s -I</span>.</td>
+        <td>Memeriksa respon header web menggunakan perintah <span class="code-text">curl -I</span> di terminal.</td>
         <td class="center"><strong>LOLOS</strong></td>
-        <td>Server menyertakan header proteksi X-Frame-Options: DENY, nosniff, dan CSP.</td>
+        <td>Respon server menyertakan header proteksi lengkap: <code>X-Frame-Options: DENY</code>, <code>nosniff</code>, dan CSP.</td>
       </tr>
       <tr>
         <td class="center">7</td>
         <td>Pencegahan Kebocoran Secret</td>
-        <td>Memeriksa isi riwayat <span class="code-text">git log</span> dan berkas <span class="code-text">.gitignore</span>.</td>
+        <td>Memeriksa status git dan berkas <span class="code-text">.gitignore</span>.</td>
         <td class="center"><strong>LOLOS</strong></td>
-        <td>Berkas .env tidak ikut terunggah ke repositori Git; hanya berkas .env.example yang dikirim.</td>
+        <td>File <code>.env</code> yang berisi JWT secret dan database credentials tidak terunggah ke repositori GitHub.</td>
       </tr>
     </tbody>
   </table>
 
-  <!-- BAGIAN 8: BUKTI OPERASIONAL DAN IMPLEMENTASI KEAMANAN -->
+  <!-- BAGIAN 8: BUKTI OPERASIONAL DAN IMPLEMENTASI -->
   <div class="section-title">8. BUKTI OPERASIONAL DAN IMPLEMENTASI KEAMANAN</div>
-  <p>Komponen sistem yang telah diuji dan berjalan normal meliputi:</p>
+  <p>Seluruh bagian aplikasi telah berhasil diuji dan berjalan normal dengan rincian bukti sebagai berikut:</p>
   <ul>
-    <li><strong>Bukti HTTPS &amp; Domain Aktif:</strong> Aplikasi telah siap dijalankan pada lingkungan hosting publik menggunakan sertifikat SSL/TLS yang valid.</li>
-    <li><strong>Bukti Fungsi Kasir POS &amp; Cetak Nota:</strong> Modul kasir berhasil memproses transaksi suku cadang dan ongkos servis montir secara real-time serta menghasilkan nota siap cetak.</li>
-    <li><strong>Bukti Alur Servis &amp; Peringatan Stok:</strong> Status pengerjaan kendaraan dapat diperbarui oleh mekanik, dan master barang otomatis menampilkan penanda peringatan jika stok berada pada batas minimum.</li>
-    <li><strong>Bukti Riwayat Git Commit:</strong> Pengerjaan aplikasi dilakukan secara bertahap dan tercatat pada riwayat commit repositori GitHub mahasiswa.</li>
-    <li><strong>Bukti Respon Header Keamanan:</strong> Uji respon terminal memastikan server menyertakan header keamanan lengkap untuk mencegah clickjacking dan eksploitasi MIME-type.</li>
+    <li><strong>Koneksi HTTPS Aktif:</strong> Aplikasi dapat diakses secara publik pada domain Vercel dengan sertifikat SSL/TLS aktif.</li>
+    <li><strong>Fungsi Kasir POS Berjalan Lancar:</strong> Kasir dapat memproses transaksi pembelian suku cadang maupun jasa servis secara real-time serta mencetak nota bukti pembayaran.</li>
+    <li><strong>Alur Antrean Mekanik Berfungsi:</strong> Mekanik dapat memperbarui status pengerjaan mobil dan stok barang fisik otomatis berkurang saat suku cadang dipasang.</li>
+    <li><strong>Riwayat Git Commit Terstruktur:</strong> Proses pengerjaan tercatat bertahap pada commit log repositori GitHub mahasiswa.</li>
   </ul>
 
   <!-- BAGIAN 9: KENDALA DAN RENCANA PERBAIKAN -->
   <div class="section-title">9. KENDALA DAN RENCANA PERBAIKAN</div>
-  <p><strong>• Kendala Teknis yang Berhasil Diatasi:</strong></p>
+  <p><strong>Kendala yang Dihadapi Selama Pengerjaan:</strong></p>
   <ul>
-    <li><em>Kompilasi Styling Tailwind v4:</em> Pada saat awal inisialisasi, styling utilitas belum terkompilasi karena Next.js 16 memerlukan konfigurasi khusus PostCSS. Kendala ini diselesaikan dengan menambahkan paket <code>@tailwindcss/postcss</code> dan konfigurasi <code>postcss.config.mjs</code>.</li>
-    <li><em>Pencegahan Selisih Stok (Race Condition):</em> Untuk mencegah kesalahan pengurangan stok saat beberapa kasir memproses transaksi pada detik yang sama, query database dibungkus ke dalam transaksi atomik <code>prisma.$transaction</code>.</li>
+    <li><em>Konfigurasi CSS pada Versi Framework Terbaru:</em> Pada awal pengerjaan, sempat terjadi kendala styling Tailwind CSS v4 pada Next.js 16. Masalah ini berhasil diselesaikan dengan menyesuaikan dependensi PostCSS.</li>
+    <li><em>Pencegahan Selisih Stok (Race Condition):</em> Untuk mencegah kesalahan pengurangan stok jika ada transaksi bersamaan, query database dibungkus menggunakan transaksi atomik <code>prisma.$transaction</code>.</li>
+    <li><em>Penyesuaian Tampilan Mobile:</em> Mengatur tampilan agar antarmuka kasir dan mekanik tetap mudah digunakan saat dibuka melalui smartphone di area bengkel.</li>
   </ul>
 
-  <p><strong>• Rencana Perbaikan Mendatang:</strong></p>
+  <p><strong>Rencana Perbaikan ke Depan:</strong></p>
   <ul>
-    <li><em>Integrasi Pembayaran QRIS:</em> Menambahkan integrasi payment gateway otomatis agar konsumen dapat membayar nota servis melalui scan kode QRIS.</li>
-    <li><em>Kirim Nota Digital:</em> Mengirimkan struk transaksi dalam bentuk PDF secara langsung ke nomor WhatsApp konsumen sesaat setelah pembayaran selesai.</li>
+    <li>Menambahkan integrasi pembayaran QRIS dinamis agar pembayaran non-tunai bisa langsung terverifikasi otomatis.</li>
+    <li>Mengembangkan fitur pengiriman bukti nota digital langsung ke kontak WhatsApp pelanggan.</li>
   </ul>
 
 </body>
