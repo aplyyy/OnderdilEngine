@@ -1,24 +1,27 @@
 import Link from "next/link";
 import {
-  ShoppingCart,
   Wrench,
-  Package,
-  BarChart3,
-  ArrowRight,
   Car,
+  Clock,
+  Phone,
+  MapPin,
   CheckCircle2,
   ShieldCheck,
-  Clock,
-  Lock,
-  Database,
-  Smartphone,
-  FileText,
-  UserCheck,
+  Star,
+  Users,
   ChevronRight,
-  TrendingUp,
-  Cpu,
-  AlertTriangle,
-  Zap,
+  Sparkles,
+  ArrowRight,
+  Package,
+  Calendar,
+  Fuel,
+  Settings,
+  BatteryCharging,
+  Disc,
+  Flame,
+  Award,
+  ExternalLink,
+  MessageCircle,
 } from "lucide-react";
 import { getSession } from "@/lib/auth";
 
@@ -27,257 +30,380 @@ export const dynamic = "force-dynamic";
 export default async function HomePage() {
   const session = await getSession();
 
+  const services = [
+    {
+      title: "Tune Up & Perawatan Berkala",
+      desc: "Pembersihan sistem pembakaran, throttle body, injector cleaner, kalibrasi busi, dan pemeriksaan 20 titik komponen vital kendaraan.",
+      icon: Settings,
+      tag: "Populer",
+    },
+    {
+      title: "Ganti Oli & Filter Mesin",
+      desc: "Pilihan oli mesin berkualitas terbaik (Mineral, Semi & Full Synthetic 10W-40, 5W-30) lengkap dengan penggantian filter oli original.",
+      icon: Fuel,
+      tag: "Rutin",
+    },
+    {
+      title: "Sistem Pengereman & Kaki-kaki",
+      desc: "Penggantian kampas rem, kuras minyak rem, servis kaliper, tierod, ball joint, bearing roda, dan shock absorber untuk kenyamanan jalan.",
+      icon: Disc,
+      tag: "Keselamatan",
+    },
+    {
+      title: "Overhaul Mesin & Transmisi",
+      desc: "Penanganan turun mesin parsial/total, skir klep, pergantian gasket silinder, kampas kopling, dan servis transmisi manual maupun matik.",
+      icon: Wrench,
+      tag: "Spesialis",
+    },
+    {
+      title: "Kelistrikan, Starter & Aki",
+      desc: "Pengecekan dinamo ampere (alternator), motor starter, lampu & kelistrikan bodi, serta pengujian daya dan penggantian aki bergaransi.",
+      icon: BatteryCharging,
+      tag: "Elektrikal",
+    },
+    {
+      title: "AC Mobil & Sistem Pendingin Mesin",
+      desc: "Kuras freon, flushing oli kompresor, pembersihan evaporator/kondensor, perbaikan radiator bocor, dan sirkulasi water pump.",
+      icon: Sparkles,
+      tag: "Kenyamanan",
+    },
+  ];
+
+  const advantages = [
+    {
+      title: "10 Mekanik Ahli & Berpengalaman",
+      desc: "Dikerjakan langsung oleh teknisi mekanik senior yang memahami spesifikasi mesin berbagai merk mobil (Toyota, Honda, Daihatsu, Suzuki, Mitsubishi, dll).",
+      icon: Users,
+    },
+    {
+      title: "Diagnosa Jujur & Transparan",
+      desc: "Kerusakan dijelaskan secara terbuka sebelum pengerjaan. Kami hanya mengganti suku cadang yang benar-benar memerlukan perbaikan.",
+      icon: CheckCircle2,
+    },
+    {
+      title: "Suku Cadang Asli & Bergaransi",
+      desc: "Menyediakan stok suku cadang genuine (OEM) dan opsi aftermarket berkualitas tinggi yang bergaransi untuk keandalan jarak jauh.",
+      icon: ShieldCheck,
+    },
+    {
+      title: "Pencatatan Servis Terkomputerisasi",
+      desc: "Didukung sistem kasir dan antrean digital ShiftGear, riwayat servis mobil dan kalkulasi biaya tercatat transparan tanpa nota hilang.",
+      icon: Award,
+    },
+  ];
+
+  const popularParts = [
+    { name: "Oli Mesin Castrol Magnatec 10W-40 (4L)", category: "Oli & Pelumas", status: "Stok Ready" },
+    { name: "Kampas Rem Depan Bendix Avanza / Xenia", category: "Pengereman", status: "Stok Ready" },
+    { name: "Filter Oli Original Toyota / Daihatsu", category: "Filter", status: "Stok Ready" },
+    { name: "Minyak Rem Prestone DOT 3 & DOT 4", category: "Pengereman", status: "Stok Ready" },
+    { name: "Busi Iridium & Standar NGK / Denso", category: "Pengapian", status: "Stok Ready" },
+    { name: "Filter Udara Avanza / Innova / Rush", category: "Filter", status: "Stok Ready" },
+  ];
+
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 selection:bg-amber-400 selection:text-slate-950 flex flex-col">
-      {/* 1. STICKY TOP NAVBAR */}
-      <header className="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-slate-200/80 transition-all">
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 selection:bg-amber-400 selection:text-slate-950 flex flex-col font-sans">
+      {/* 1. TOP ANNOUNCEMENT / UTILITY BAR */}
+      <div className="bg-slate-900 text-slate-300 text-xs py-2.5 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-4 gap-y-1">
+            <span className="flex items-center space-x-1.5 text-amber-400 font-medium">
+              <Clock className="w-3.5 h-3.5" />
+              <span>Senin – Sabtu: 08.00 – 17.00 WIB</span>
+            </span>
+            <span className="hidden sm:inline text-slate-600">&bull;</span>
+            <span className="flex items-center space-x-1.5 text-slate-300">
+              <MapPin className="w-3.5 h-3.5 text-slate-400" />
+              <span>Jl. Syeh Maulana Akbar No.88, Kuningan</span>
+            </span>
+          </div>
+
+          <div className="flex items-center space-x-4">
+            <a
+              href="https://wa.me/6281324735850"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-200 hover:text-amber-400 font-semibold flex items-center space-x-1 transition"
+            >
+              <Phone className="w-3 h-3 text-emerald-400" />
+              <span>0813-2473-5850 (Mang Acim)</span>
+            </a>
+            <span className="text-slate-700">|</span>
+            <Link
+              href="/kasir"
+              className="text-amber-400 hover:text-amber-300 font-bold flex items-center space-x-1 transition"
+            >
+              <span>Portal POS Staf &rarr;</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. MAIN HEADER & NAVBAR */}
+      <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 transition-all shadow-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          {/* Logo & Brand */}
-          <Link href="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center font-black text-slate-950 text-xl font-mono shadow-xs group-hover:scale-105 transition-transform">
-              OE
+          {/* Logo & Brand Identity */}
+          <Link href="/" className="flex items-center space-x-3.5 group">
+            <div className="w-11 h-11 rounded-2xl bg-amber-500 flex items-center justify-center text-slate-950 font-black text-2xl font-mono shadow-xs group-hover:scale-105 transition-transform">
+              AM
             </div>
             <div>
-              <div className="font-extrabold text-base tracking-wide text-slate-900 flex items-center space-x-1.5">
-                <span>ONDERDIL</span>
-                <span className="text-amber-600">ENGINE</span>
-                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200">
-                  ShiftGear
-                </span>
+              <div className="font-extrabold text-lg tracking-tight text-slate-900 leading-tight">
+                BENGKEL <span className="text-amber-600">ANUGRAH MOTOR</span>
               </div>
-              <div className="text-xs text-slate-500 flex items-center space-x-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" />
-                <span>Mitra: PT Anugrah Motor Kuningan</span>
+              <div className="text-xs text-slate-500 font-medium flex items-center space-x-1.5 mt-0.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse" />
+                <span>PT Anugrah Motor &bull; Servis Mobil &amp; Sparepart Kuningan</span>
               </div>
             </div>
           </Link>
 
-          {/* Nav Links (Desktop) */}
-          <nav className="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-600">
-            <a href="#fitur" className="hover:text-slate-900 transition-colors">
-              Fitur Utama
+          {/* Desktop Nav Links */}
+          <nav className="hidden lg:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+            <a href="#tentang" className="hover:text-slate-900 transition-colors">
+              Tentang Kami
             </a>
-            <a href="#alur-kerja" className="hover:text-slate-900 transition-colors">
-              Alur Kerja
+            <a href="#layanan" className="hover:text-slate-900 transition-colors">
+              Layanan Servis
             </a>
-            <a href="#keamanan" className="hover:text-slate-900 transition-colors">
-              Keamanan Cyber
+            <a href="#keunggulan" className="hover:text-slate-900 transition-colors">
+              Keunggulan
             </a>
-            <a href="#mitra" className="hover:text-slate-900 transition-colors">
-              Profil Mitra
+            <a href="#spareparts" className="hover:text-slate-900 transition-colors">
+              Suku Cadang
+            </a>
+            <a href="#lokasi" className="hover:text-slate-900 transition-colors">
+              Lokasi &amp; Kontak
             </a>
           </nav>
 
-          {/* Action CTAs */}
+          {/* Direct Contact Button */}
           <div className="flex items-center space-x-3">
+            <a
+              href="https://wa.me/6281324735850?text=Halo%20Bengkel%20Anugrah%20Motor,%20saya%20ingin%20konsultasi%20jadwal%20servis%20mobil"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-2 px-4 sm:px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm rounded-xl transition shadow-xs"
+            >
+              <MessageCircle className="w-4 h-4" />
+              <span>Hubungi WhatsApp</span>
+            </a>
+
             {session ? (
-              <div className="flex items-center space-x-3">
-                <span className="hidden sm:inline-block text-xs text-slate-500">
-                  Halo, <strong className="text-slate-800">{session.name}</strong> ({session.role})
-                </span>
-                <Link
-                  href="/kasir"
-                  className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition shadow-xs flex items-center space-x-1.5"
-                >
-                  <ShoppingCart className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Buka Dashboard POS</span>
-                </Link>
-              </div>
+              <Link
+                href="/kasir"
+                className="hidden sm:inline-flex items-center space-x-1.5 px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs rounded-xl border border-slate-200 transition"
+              >
+                <span>Masuk Kasir POS</span>
+              </Link>
             ) : (
-              <div className="flex items-center space-x-2.5">
-                <Link
-                  href="/login"
-                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl border border-slate-200 transition"
-                >
-                  Masuk Akun
-                </Link>
-                <Link
-                  href="/kasir"
-                  className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs rounded-xl transition shadow-xs flex items-center space-x-1"
-                >
-                  <span>Coba Demo POS</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
+              <Link
+                href="/login"
+                className="hidden sm:inline-flex items-center space-x-1.5 px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs rounded-xl border border-slate-200 transition"
+              >
+                <span>Login Staf</span>
+              </Link>
             )}
           </div>
         </div>
       </header>
 
-      {/* 2. HERO SECTION */}
-      <section className="relative overflow-hidden pt-12 pb-20 md:pt-16 md:pb-28">
+      {/* 3. HERO SECTION */}
+      <section className="relative overflow-hidden pt-12 pb-20 md:pt-20 md:pb-28 bg-gradient-to-b from-white to-slate-50 border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Hero Header */}
-          <div className="max-w-3xl mx-auto text-center space-y-5">
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200/80 text-amber-800 text-xs font-semibold shadow-2xs">
-              <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-              <span>ShiftGear &bull; Sistem POS &amp; Manajemen Bengkel Modern</span>
-            </div>
-
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
-              Digitalisasi Total Operasional Bengkel Mobil dalam Satu Platform.
-            </h1>
-
-            <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
-              Solusi cerdas bagi pemilik bengkel, kasir, dan mekanik: memantau antrean kendaraan servis real-time, transparansi suku cadang, kalkulasi tagihan otomatis, dan standar keamanan cyber enterprise.
-            </p>
-
-            {/* CTAs */}
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Link
-                href="/kasir"
-                className="w-full sm:w-auto px-7 py-3.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl text-sm transition-all shadow-xs flex items-center justify-center space-x-2"
-              >
-                <ShoppingCart className="w-4 h-4" />
-                <span>Mulai Transaksi Kasir POS</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-
-              <Link
-                href="/mekanik"
-                className="w-full sm:w-auto px-7 py-3.5 bg-white hover:bg-slate-50 text-slate-800 font-semibold rounded-xl text-sm border border-slate-200 transition shadow-xs flex items-center justify-center space-x-2"
-              >
-                <Wrench className="w-4 h-4 text-amber-600" />
-                <span>Papan Antrean Servis Mekanik</span>
-              </Link>
-            </div>
-
-            {/* Trust Badges */}
-            <div className="pt-4 flex flex-wrap items-center justify-center gap-y-2 gap-x-6 text-xs text-slate-500 font-medium">
-              <span className="flex items-center space-x-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <span>Divalidasi di Bengkel Anugrah Motor</span>
-              </span>
-              <span className="flex items-center space-x-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <span>12 Pengguna Aktif (1 Pemilik, 1 Kasir, 10 Teknisi)</span>
-              </span>
-              <span className="flex items-center space-x-1.5">
-                <ShieldCheck className="w-4 h-4 text-blue-600" />
-                <span>Kepatuhan Keamanan OWASP Top 10</span>
-              </span>
-            </div>
-          </div>
-
-          {/* Product UI Preview Mockup (Browser Window) */}
-          <div className="mt-14 max-w-5xl mx-auto rounded-3xl border border-slate-200/90 bg-white shadow-xl overflow-hidden">
-            {/* Window Top Bar */}
-            <div className="bg-slate-50 border-b border-slate-200/80 px-4 py-3 flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 rounded-full bg-red-400" />
-                <div className="w-3 h-3 rounded-full bg-amber-400" />
-                <div className="w-3 h-3 rounded-full bg-emerald-400" />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Left Column: Heading, Value Prop, CTA */}
+            <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200/80 text-amber-800 text-xs font-bold shadow-2xs">
+                <Car className="w-3.5 h-3.5 text-amber-600" />
+                <span>Bengkel Spesialis Perawatan &amp; Perbaikan Mobil Kuningan</span>
               </div>
-              <div className="px-4 py-1 rounded-lg bg-white border border-slate-200 text-xs font-mono text-slate-500 font-medium flex items-center space-x-1.5 shadow-2xs">
-                <Lock className="w-3 h-3 text-emerald-600" />
-                <span>https://onderdil-engine.vercel.app/kasir</span>
+
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.12]">
+                Solusi Terpercaya untuk Performa Maksimal Mobil Anda.
+              </h1>
+
+              <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                Bengkel Anugrah Motor melayani tune up berkala, ganti oli, perbaikan kaki-kaki, transmisi, pengereman, hingga turun mesin. Ditangani langsung oleh tim 10 teknisi mekanik berpengalaman dengan transparansi suku cadang berkualitas.
+              </p>
+
+              {/* Action Buttons */}
+              <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5">
+                <a
+                  href="https://wa.me/6281324735850?text=Halo%20Bengkel%20Anugrah%20Motor,%20saya%20mau%20tanya%20estimasi%20biaya%20servis"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto px-7 py-3.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl text-sm transition-all shadow-xs flex items-center justify-center space-x-2"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>Konsultasi &amp; Booking Servis</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+
+                <a
+                  href="#layanan"
+                  className="w-full sm:w-auto px-6 py-3.5 bg-white hover:bg-slate-50 text-slate-800 font-semibold rounded-xl text-sm border border-slate-200 transition shadow-xs flex items-center justify-center space-x-2"
+                >
+                  <Wrench className="w-4 h-4 text-amber-600" />
+                  <span>Lihat Layanan Kami</span>
+                </a>
               </div>
-              <div className="text-[11px] font-semibold text-slate-400">Live Preview</div>
+
+              {/* Key Trust Signals */}
+              <div className="pt-4 grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs font-semibold text-slate-700 max-w-lg mx-auto lg:mx-0 text-left">
+                <div className="flex items-center space-x-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>10 Mekanik Ahli</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>Diagnosa Transparan</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>Suku Cadang Asli</span>
+                </div>
+              </div>
             </div>
 
-            {/* Mockup Inside: Split Screen POS & Kanban */}
-            <div className="p-5 sm:p-7 grid grid-cols-1 lg:grid-cols-12 gap-6 bg-slate-50/50">
-              {/* Left Side: Kasir Checkout Window (7 cols) */}
-              <div className="lg:col-span-7 bg-white rounded-2xl border border-slate-200/90 p-5 space-y-4 shadow-xs">
-                <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                  <div className="flex items-center space-x-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center font-bold">
-                      <Car className="w-4 h-4" />
+            {/* Right Column: Workshop Highlight Card */}
+            <div className="lg:col-span-5">
+              <div className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-7 space-y-6 shadow-xl relative">
+                {/* Header Profile Badge */}
+                <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-12 h-12 rounded-2xl bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-lg font-mono">
+                      AM
                     </div>
                     <div>
-                      <div className="font-extrabold text-sm text-slate-900">B 1234 ABC &bull; Toyota Avanza 2021</div>
-                      <div className="text-xs text-slate-500">Tiket: ORD-2026-004 &bull; Pemilik: Pak Budi Santoso</div>
+                      <h3 className="font-bold text-base text-slate-900">PT Anugrah Motor</h3>
+                      <p className="text-xs text-slate-500">Bengkel Mobil &amp; Toko Suku Cadang</p>
                     </div>
                   </div>
                   <span className="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200">
-                    Selesai Dikerjakan
+                    Buka Hari Ini
                   </span>
                 </div>
 
-                {/* Items List */}
-                <div className="space-y-2 text-xs">
-                  <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-100">
-                    <div>
-                      <div className="font-bold text-slate-800">Kampas Rem Depan Bendix Avanza</div>
-                      <div className="text-slate-500">1 unit x Rp 275.000 (SKU: BRK-AVZ-01)</div>
+                {/* Quick Info Grid */}
+                <div className="space-y-3.5 text-xs">
+                  <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
+                    <div className="text-slate-500 font-medium">Alamat Bengkel:</div>
+                    <div className="font-bold text-slate-900 text-sm">
+                      Jl. Syeh Maulana Akbar No.88, Kuningan
                     </div>
-                    <div className="font-extrabold text-slate-900">Rp 275.000</div>
+                    <div className="text-slate-500">Kec. Kuningan, Kab. Kuningan, Jawa Barat 45511</div>
                   </div>
 
-                  <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-100">
-                    <div>
-                      <div className="font-bold text-slate-800">Oli Mesin Castrol Magnatec 10W-40 4L</div>
-                      <div className="text-slate-500">1 galon x Rp 380.000 (SKU: OIL-CAS-1040)</div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
+                      <div className="text-slate-500 font-medium">Pemilik / Pengelola:</div>
+                      <div className="font-extrabold text-amber-700 text-sm">Mang Acim</div>
+                      <div className="text-slate-500">0813-2473-5850</div>
                     </div>
-                    <div className="font-extrabold text-slate-900">Rp 380.000</div>
+                    <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-100 space-y-1">
+                      <div className="text-slate-500 font-medium">Tenaga Kerja:</div>
+                      <div className="font-extrabold text-slate-900 text-sm">12 Personel</div>
+                      <div className="text-slate-500">1 Kasir, 10 Teknisi Mekanik</div>
+                    </div>
                   </div>
 
-                  <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-slate-100">
-                    <div>
-                      <div className="font-bold text-slate-800">Jasa Servis Rem &amp; Tune Up Mesin</div>
-                      <div className="text-slate-500">Teknisi Mekanik: Kang Ujang</div>
+                  <div className="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200/80 space-y-1.5 text-amber-900">
+                    <div className="font-bold flex items-center space-x-1.5 text-xs">
+                      <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+                      <span>Manajemen Servis Terintegrasi</span>
                     </div>
-                    <div className="font-extrabold text-slate-900">Rp 120.000</div>
+                    <p className="text-[11px] text-amber-800 leading-relaxed">
+                      Bengkel kami menggunakan sistem kasir dan papan antrean digital <em>ShiftGear</em>, memastikan riwayat pengerjaan mobil Anda terdokumentasi akurat dan transparan.
+                    </p>
                   </div>
                 </div>
 
-                {/* Summary Total */}
-                <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+                {/* Direct Action */}
+                <a
+                  href="https://wa.me/6281324735850"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-xs transition shadow-xs flex items-center justify-center space-x-2"
+                >
+                  <Phone className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Hubungi Bengkel Langsung (Telepon / WA)</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. TENTANG BENGKEL KAMI */}
+      <section id="tentang" className="py-20 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div className="lg:col-span-6 space-y-5">
+            <div className="text-xs font-bold text-amber-600 uppercase tracking-widest">Mengenal Lebih Dekat</div>
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+              Bengkel Anugrah Motor: Dedikasi Merawat Kendaraan Anda Sejak Puluhan Tahun
+            </h2>
+            <p className="text-slate-600 text-sm leading-relaxed">
+              Berlokasi strategis di <strong>Jl. Syeh Maulana Akbar No.88, Kuningan</strong>, Bengkel Anugrah Motor (PT Anugrah Motor) hadir sebagai mitra andalan pemilik kendaraan roda empat di wilayah Kabupaten Kuningan dan sekitarnya.
+            </p>
+            <p className="text-slate-600 text-sm leading-relaxed">
+              Dipimpin oleh <strong>Mang Acim</strong> bersama tim 10 orang teknisi mekanik berpengalaman, bengkel kami mengutamakan diagnosa kerusakan yang akurat, penanganan mekanis yang teliti, dan transparansi suku cadang tanpa biaya terselubung.
+            </p>
+
+            <div className="pt-2 grid grid-cols-2 gap-4 text-xs">
+              <div className="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-xs space-y-1">
+                <div className="text-2xl font-black text-slate-900">10+ Mekanik</div>
+                <div className="text-slate-500 font-medium">Teknisi berpengalaman menangani berbagai tipe mobil</div>
+              </div>
+              <div className="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-xs space-y-1">
+                <div className="text-2xl font-black text-amber-600">100% Terbuka</div>
+                <div className="text-slate-500 font-medium">Konsultasi kerusakan gratis dan estimasi biaya sebelum kerja</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="lg:col-span-6 space-y-4">
+            <div className="bg-white rounded-3xl border border-slate-200/90 p-7 space-y-5 shadow-xs">
+              <h3 className="text-lg font-bold text-slate-900 flex items-center space-x-2">
+                <Award className="w-5 h-5 text-amber-500" />
+                <span>Prinsip Layanan Bengkel Anugrah Motor</span>
+              </h3>
+
+              <div className="space-y-4 text-xs">
+                <div className="flex items-start space-x-3.5">
+                  <div className="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold shrink-0 mt-0.5">
+                    1
+                  </div>
                   <div>
-                    <span className="text-xs text-slate-500 block">Total Tagihan Final:</span>
-                    <span className="text-xl font-black text-slate-900">Rp 775.000</span>
-                  </div>
-                  <Link
-                    href="/kasir"
-                    className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs rounded-xl transition shadow-xs"
-                  >
-                    Cetak Nota Resmi &rarr;
-                  </Link>
-                </div>
-              </div>
-
-              {/* Right Side: Live Kanban & Early Warning (5 cols) */}
-              <div className="lg:col-span-5 space-y-4">
-                {/* Mechanic Queue Pill */}
-                <div className="bg-white rounded-2xl border border-slate-200/90 p-4 space-y-3 shadow-xs">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-slate-900 flex items-center space-x-1.5">
-                      <Wrench className="w-3.5 h-3.5 text-amber-500" />
-                      <span>Papan Alur Mekanik (Real-time)</span>
-                    </span>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
-                      4 Unit Aktif
-                    </span>
-                  </div>
-
-                  <div className="space-y-2 text-xs">
-                    <div className="p-2.5 rounded-xl border border-amber-200 bg-amber-50/60">
-                      <div className="flex justify-between font-bold text-slate-900">
-                        <span>E 4589 YZ</span>
-                        <span className="text-amber-800 text-[11px]">Sedang Dikerjakan</span>
-                      </div>
-                      <div className="text-slate-600 text-[11px] mt-0.5">Innova 2018 &bull; Ganti Kampas Kopling</div>
-                    </div>
-
-                    <div className="p-2.5 rounded-xl border border-slate-200 bg-slate-50">
-                      <div className="flex justify-between font-bold text-slate-900">
-                        <span>D 8888 XY</span>
-                        <span className="text-slate-600 text-[11px]">Antrean Baru</span>
-                      </div>
-                      <div className="text-slate-600 text-[11px] mt-0.5">Honda CR-V &bull; Cek Kaki-kaki Depan</div>
-                    </div>
+                    <h4 className="font-bold text-slate-900 text-sm">Kejujuran Diagnosa</h4>
+                    <p className="text-slate-600 mt-0.5 leading-relaxed">
+                      Kami tidak pernah mengada-ada kerusakan. Jika suku cadang masih layak pakai dan cukup dibersihkan, kami sampaikan apa adanya kepada pemilik mobil.
+                    </p>
                   </div>
                 </div>
 
-                {/* Stock Early Warning Alert Card */}
-                <div className="bg-white rounded-2xl border border-red-200 p-4 space-y-2 shadow-xs">
-                  <div className="flex items-center space-x-2 text-red-700">
-                    <AlertTriangle className="w-4 h-4" />
-                    <span className="text-xs font-bold">Peringatan Stok Gudang</span>
+                <div className="flex items-start space-x-3.5">
+                  <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold shrink-0 mt-0.5">
+                    2
                   </div>
-                  <p className="text-xs text-slate-600">
-                    Filter Oli Avanza sisa <strong>3 unit</strong> (Batas minimum: 5 unit). Sistem otomatis mengirim sinyal pengadaan ke manajer.
-                  </p>
+                  <div>
+                    <h4 className="font-bold text-slate-900 text-sm">Jaminan Kualitas Suku Cadang</h4>
+                    <p className="text-slate-600 mt-0.5 leading-relaxed">
+                      Suku cadang yang kami sediakan berasal dari suplier resmi dan distributor terpercaya, mulai dari oli mesin, kampas rem, hingga part transmisi.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-3.5">
+                  <div className="w-7 h-7 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center font-bold shrink-0 mt-0.5">
+                    3
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900 text-sm">Pelayanan Ramah &amp; Nyaman</h4>
+                    <p className="text-slate-600 mt-0.5 leading-relaxed">
+                      Staf kasir dan mekanik kami siap mendengarkan keluhan kendaraan Anda dengan ramah serta memberikan solusi perawatan berkala yang paling hemat dan tepat.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -285,353 +411,404 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 3. METRIC IMPACT RIBBON */}
-      <section className="bg-white border-y border-slate-200/80 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-            <div className="space-y-1">
-              <div className="text-3xl sm:text-4xl font-black text-slate-900">12 Pengguna</div>
-              <div className="text-xs sm:text-sm font-semibold text-slate-700">Mitra Terdaftar</div>
-              <div className="text-xs text-slate-500">1 Pemilik, 1 Kasir, 10 Teknisi</div>
-            </div>
-
-            <div className="space-y-1">
-              <div className="text-3xl sm:text-4xl font-black text-slate-900">&lt; 2 Menit</div>
-              <div className="text-xs sm:text-sm font-semibold text-slate-700">Pencatatan Servis</div>
-              <div className="text-xs text-slate-500">Dari plat masuk sampai nota cetak</div>
-            </div>
-
-            <div className="space-y-1">
-              <div className="text-3xl sm:text-4xl font-black text-slate-900">100% Paperless</div>
-              <div className="text-xs sm:text-sm font-semibold text-slate-700">Alokasi Sparepart</div>
-              <div className="text-xs text-slate-500">Sinkron otomatis dengan stok fisik</div>
-            </div>
-
-            <div className="space-y-1">
-              <div className="text-3xl sm:text-4xl font-black text-slate-900">OWASP Top 10</div>
-              <div className="text-xs sm:text-sm font-semibold text-slate-700">Standar Proteksi</div>
-              <div className="text-xs text-slate-500">Anti-SQL Injection &amp; RBAC ketat</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. FITUR UTAMA (CORE MODULES) */}
-      <section id="fitur" className="py-20 md:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        <div className="text-center max-w-2xl mx-auto space-y-3">
-          <div className="text-xs font-bold text-amber-600 uppercase tracking-widest">Fitur Unggulan Sistem</div>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Dirancang Sesuai Ritme Kerja Nyata di Bengkel Mobil
-          </h2>
-          <p className="text-sm text-slate-600">
-            Mengatasi kendala hilangnya nota kertas, ketidakcocokan stok suku cadang, dan kesulitan pelacakan komisi mekanik.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* Card 1 */}
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-6 space-y-4 shadow-xs hover:border-amber-300 hover:shadow-md transition-all">
-            <div className="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold">
-              <ShoppingCart className="w-6 h-6" />
-            </div>
-            <h3 className="font-bold text-base text-slate-900">Kasir POS &amp; Cetak Nota</h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Pencarian kilat suku cadang via nama atau SKU, kalkulasi diskon, hitung kembalian instan, dan cetak faktur invoice PDF/thermal resmi.
-            </p>
-            <div className="pt-2 text-xs font-semibold text-amber-600 flex items-center space-x-1">
-              <Link href="/kasir" className="hover:underline">Buka Kasir POS &rarr;</Link>
-            </div>
-          </div>
-
-          {/* Card 2 */}
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-6 space-y-4 shadow-xs hover:border-blue-300 hover:shadow-md transition-all">
-            <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
-              <Wrench className="w-6 h-6" />
-            </div>
-            <h3 className="font-bold text-base text-slate-900">Kanban Alur Servis Mekanik</h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Papan pemantauan 4 status (*Menunggu, Pengerjaan, Selesai, Lunas*). Teknisi dapat memasukkan sparepart terpakai langsung dari smartphone.
-            </p>
-            <div className="pt-2 text-xs font-semibold text-blue-600 flex items-center space-x-1">
-              <Link href="/mekanik" className="hover:underline">Lihat Alur Servis &rarr;</Link>
-            </div>
-          </div>
-
-          {/* Card 3 */}
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-6 space-y-4 shadow-xs hover:border-purple-300 hover:shadow-md transition-all">
-            <div className="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold">
-              <Package className="w-6 h-6" />
-            </div>
-            <h3 className="font-bold text-base text-slate-900">Katalog &amp; Early Alert Stok</h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Pencatatan harga modal, harga jual eceran, dan peringatan otomatis ketika stok barang fisik berada di bawah ambang batas kritis.
-            </p>
-            <div className="pt-2 text-xs font-semibold text-purple-600 flex items-center space-x-1">
-              <Link href="/spareparts" className="hover:underline">Kelola Sparepart &rarr;</Link>
-            </div>
-          </div>
-
-          {/* Card 4 */}
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-6 space-y-4 shadow-xs hover:border-emerald-300 hover:shadow-md transition-all">
-            <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
-              <BarChart3 className="w-6 h-6" />
-            </div>
-            <h3 className="font-bold text-base text-slate-900">Laporan &amp; Ekspor Excel</h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Rekapitulasi omzet penjualan suku cadang, total pendapatan jasa teknisi, dan fitur ekspor data transaksi ke format CSV / Microsoft Excel.
-            </p>
-            <div className="pt-2 text-xs font-semibold text-emerald-600 flex items-center space-x-1">
-              <Link href="/laporan" className="hover:underline">Lihat Laporan &rarr;</Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. ALUR KERJA OPERASIONAL (WORKFLOW 3 LANGKAH) */}
-      <section id="alur-kerja" className="bg-white border-y border-slate-200/80 py-20">
+      {/* 5. LAYANAN SERVIS KAMI */}
+      <section id="layanan" className="bg-white border-y border-slate-200/80 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <div className="text-xs font-bold text-amber-600 uppercase tracking-widest">Sederhana &amp; Efisien</div>
+            <div className="text-xs font-bold text-amber-600 uppercase tracking-widest">Pelayanan Lengkap</div>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-              Alur Operasional Bengkel 3 Langkah
+              Layanan Perbaikan &amp; Servis Berkala Mobil
             </h2>
             <p className="text-sm text-slate-600">
-              Proses kerja terstruktur dari kendaraan masuk bengkel hingga serah terima kunci dan faktur lunas.
+              Menangani berbagai keluhan kendaraan harian, mobil keluarga, maupun armada niaga dengan peralatan bengkel memadai.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-            {/* Step 1 */}
-            <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-7 space-y-4 relative">
-              <div className="w-10 h-10 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center font-black text-lg">
-                1
-              </div>
-              <h3 className="font-bold text-base text-slate-900">Pendaftaran Kendaraan Masuk</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Kasir memasukkan nomor polisi (plat kendaraan), tipe mobil, nama pemilik, dan keluhan kerusakan. Sistem secara otomatis membuat tiket servis dengan nomor unik.
-              </p>
-              <div className="p-3 bg-white rounded-xl border border-slate-200 text-xs font-mono text-slate-600">
-                &rarr; Tiket: <strong>ORD-2026-004</strong> dibuat status <em>Menunggu</em>
-              </div>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.map((svc, idx) => {
+              const Icon = svc.icon;
+              return (
+                <div
+                  key={idx}
+                  className="bg-slate-50 border border-slate-200/90 rounded-2xl p-6 space-y-4 hover:bg-white hover:border-amber-300 hover:shadow-md transition-all group flex flex-col justify-between"
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold group-hover:bg-amber-500 group-hover:text-slate-950 transition-colors">
+                        <Icon className="w-6 h-6" />
+                      </div>
+                      <span className="px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-600 text-xs font-semibold">
+                        {svc.tag}
+                      </span>
+                    </div>
 
-            {/* Step 2 */}
-            <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-7 space-y-4 relative">
-              <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-black text-lg">
-                2
-              </div>
-              <h3 className="font-bold text-base text-slate-900">Mekanik Menangani &amp; Alokasi Part</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Teknisi mekanik memindahkan status ke <em>Sedang Dikerjakan</em>, memilih suku cadang yang dipasang dari gudang, dan mengisi catatan teknis perbaikan.
-              </p>
-              <div className="p-3 bg-white rounded-xl border border-slate-200 text-xs font-mono text-slate-600">
-                &rarr; Pasang: <strong>Kampas Rem Bendix</strong> (Stok gudang -1 otomatis)
-              </div>
-            </div>
+                    <h3 className="font-bold text-base text-slate-900 group-hover:text-amber-700 transition-colors">
+                      {svc.title}
+                    </h3>
+                    <p className="text-xs text-slate-600 leading-relaxed">
+                      {svc.desc}
+                    </p>
+                  </div>
 
-            {/* Step 3 */}
-            <div className="bg-slate-50 border border-slate-200/80 rounded-2xl p-7 space-y-4 relative">
-              <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-black text-lg">
-                3
-              </div>
-              <h3 className="font-bold text-base text-slate-900">Pembayaran Kasir &amp; Cetak Nota</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Kendaraan yang telah selesai langsung muncul di modul kasir siap bayar. Kasir menerima pembayaran (Tunai/QRIS/Transfer) dan langsung mencetak faktur nota resmi.
-              </p>
-              <div className="p-3 bg-white rounded-xl border border-slate-200 text-xs font-mono text-slate-600">
-                &rarr; Status <strong>Lunas</strong> &amp; Faktur dicetak untuk pelanggan
-              </div>
-            </div>
+                  <div className="pt-2 border-t border-slate-200/60 flex items-center justify-between text-xs font-semibold text-amber-700">
+                    <a
+                      href={`https://wa.me/6281324735850?text=Halo%20Bengkel%20Anugrah%20Motor,%20saya%20mau%20tanya%20layanan:%20${encodeURIComponent(svc.title)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:underline flex items-center space-x-1"
+                    >
+                      <span>Tanya Biaya Servis Ini &rarr;</span>
+                    </a>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* 6. KEAMANAN CYBER & KEPATUHAN AKADEMIK (CYBERSECURITY COMPLIANCE) */}
-      <section id="keamanan" className="py-20 md:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold border border-blue-200">
-            <ShieldCheck className="w-3.5 h-3.5" />
-            <span>Mata Kuliah: Keamanan Cyber (TINFC-2024-01)</span>
-          </div>
+      {/* 6. KEUNGGULAN KAMI */}
+      <section id="keunggulan" className="py-20 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div className="text-center max-w-2xl mx-auto space-y-3">
+          <div className="text-xs font-bold text-amber-600 uppercase tracking-widest">Kenapa Memilih Kami</div>
           <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Arsitektur Keamanan Siber Berstandar Industri
+            Alasan Pemilik Mobil di Kuningan Mempercayakan Kendaraannya pada Kami
           </h2>
           <p className="text-sm text-slate-600">
-            Dosen Pengampu: <strong>Fitra Nugraha, S.Kom., M.Kom.</strong> &bull; Disusun oleh: <strong>Apliy Tridiansyah Rosdiana (20240810111)</strong>, Universitas Kuningan.
+            Kombinasi keahlian teknisi berpengalaman, ketersediaan suku cadang, dan pemanfaatan sistem manajemen digital modern.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-6 space-y-3 shadow-xs">
-            <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
-              <Database className="w-5 h-5" />
-            </div>
-            <h4 className="font-bold text-sm text-slate-900">Parameterized Queries</h4>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Mencegah serangan <strong>SQL Injection (SQLi)</strong> menggunakan Prisma ORM. Input pengguna dienkapsulasi dan dipisahkan dari logika query database.
-            </p>
-          </div>
-
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-6 space-y-3 shadow-xs">
-            <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold">
-              <UserCheck className="w-5 h-5" />
-            </div>
-            <h4 className="font-bold text-sm text-slate-900">Role-Based Access (RBAC)</h4>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Pemisahan wewenang ketat: Teknisi Mekanik tidak dapat memodifikasi harga jual part/menghapus data kasir, dan Kasir dibatasi dari pengaturan manajerial.
-            </p>
-          </div>
-
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-6 space-y-3 shadow-xs">
-            <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold">
-              <Lock className="w-5 h-5" />
-            </div>
-            <h4 className="font-bold text-sm text-slate-900">Secure Cookie &amp; Hashing</h4>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Password di-hash dengan standar kriptografi modern ber-salt. Sesi otentikasi disimpan dalam cookie dengan atribut <code>HttpOnly</code>, <code>SameSite</code>, dan <code>Secure</code>.
-            </p>
-          </div>
-
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-6 space-y-3 shadow-xs">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
-              <ShieldCheck className="w-5 h-5" />
-            </div>
-            <h4 className="font-bold text-sm text-slate-900">Security Audit Logging</h4>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Setiap aksi kritis seperti login gagal, transaksi penjualan, dan percobaan akses tanpa izin dicatat ke dalam audit trail database secara permanen.
-            </p>
-          </div>
+          {advantages.map((adv, idx) => {
+            const Icon = adv.icon;
+            return (
+              <div
+                key={idx}
+                className="bg-white border border-slate-200/90 rounded-2xl p-6 space-y-3 shadow-xs hover:border-slate-300 transition-all"
+              >
+                <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold">
+                  <Icon className="w-5 h-5" />
+                </div>
+                <h3 className="font-bold text-sm text-slate-900">{adv.title}</h3>
+                <p className="text-xs text-slate-600 leading-relaxed">{adv.desc}</p>
+              </div>
+            );
+          })}
         </div>
       </section>
 
-      {/* 7. SPOTLIGHT MITRA LAPANGAN (BENGKEL ANUGRAH MOTOR) */}
-      <section id="mitra" className="bg-white border-y border-slate-200/80 py-20">
+      {/* 7. KATALOG SUKU CADANG TRANSPARAN */}
+      <section id="spareparts" className="bg-white border-y border-slate-200/80 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200/80">
             <div>
-              <div className="text-xs font-bold text-amber-600 uppercase tracking-widest">Studi Kasus Lapangan Nyata</div>
+              <div className="text-xs font-bold text-amber-600 uppercase tracking-widest">Transparansi Stok &amp; Komponen</div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
-                Profil Mitra: Bengkel Anugrah Motor Kuningan
+                Katalog Suku Cadang &amp; Pelumas Original
               </h2>
+              <p className="text-xs text-slate-500 mt-1">
+                Kami menyediakan suku cadang fast-moving maupun komponen khusus dengan kualitas terjamin.
+              </p>
             </div>
-            <span className="text-xs px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 font-bold w-fit">
-              Hasil Wawancara: 19 Oktober 2026
-            </span>
+
+            <div className="flex items-center space-x-2">
+              <a
+                href="https://wa.me/6281324735850?text=Halo%20Bengkel%20Anugrah%20Motor,%20apakah%20ada%20stok%20sparepart..."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs rounded-xl transition shadow-xs flex items-center space-x-1.5"
+              >
+                <span>Tanya Ketersediaan Part via WA</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-xs">
-            <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
-              <span className="text-slate-500 font-semibold block text-[11px] uppercase tracking-wider">Lokasi Bengkel:</span>
-              <p className="font-bold text-slate-900 text-sm leading-snug">
-                Jl. Syeh Maulana Akbar No.88, Kuningan
-              </p>
-              <p className="text-slate-500">Kec. Kuningan, Kab. Kuningan, Jawa Barat 45511</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {popularParts.map((p, idx) => (
+              <div
+                key={idx}
+                className="bg-slate-50 border border-slate-200/80 rounded-2xl p-4.5 space-y-2.5 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between text-[11px]">
+                    <span className="text-slate-500 font-medium">{p.category}</span>
+                    <span className="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                      {p.status}
+                    </span>
+                  </div>
+                  <h4 className="font-bold text-sm text-slate-900 mt-1.5">{p.name}</h4>
+                </div>
+                <div className="pt-2 border-t border-slate-200/60 flex items-center justify-between text-xs">
+                  <span className="text-slate-500">Kualitas: Original OEM</span>
+                  <a
+                    href={`https://wa.me/6281324735850?text=Halo,%20apakah%20${encodeURIComponent(p.name)}%20ready%20di%20Bengkel%20Anugrah%20Motor?`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-amber-700 font-bold hover:underline"
+                  >
+                    Cek Harga &rarr;
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center text-xs text-slate-500 pt-2">
+            * Butuh suku cadang untuk mobil merk atau tahun tertentu? Kami memiliki jaringan suplier suku cadang resmi terlengkap di wilayah Kuningan.
+          </div>
+        </div>
+      </section>
+
+      {/* 8. LOKASI, JAM OPERASIONAL & KONTAK */}
+      <section id="lokasi" className="py-20 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div className="text-center max-w-2xl mx-auto space-y-3">
+          <div className="text-xs font-bold text-amber-600 uppercase tracking-widest">Kunjungi Kami</div>
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            Lokasi Bengkel &amp; Jam Operasional
+          </h2>
+          <p className="text-sm text-slate-600">
+            Mudah diakses dari jalan utama pusat kota Kuningan. Silakan datang langsung atau hubungi kami terlebih dahulu untuk janji temu.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Contact Details Card (5 cols) */}
+          <div className="lg:col-span-5 bg-white rounded-3xl border border-slate-200/90 p-7 space-y-6 shadow-xs">
+            <div className="space-y-4">
+              <div className="flex items-start space-x-3.5">
+                <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold shrink-0 mt-0.5">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">Alamat Lengkap:</div>
+                  <p className="font-bold text-slate-900 text-sm mt-0.5">
+                    Jl. Syeh Maulana Akbar No.88, Kuningan
+                  </p>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Kec. Kuningan, Kab. Kuningan, Jawa Barat 45511
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-3.5">
+                <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold shrink-0 mt-0.5">
+                  <Phone className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">Telepon &amp; WhatsApp:</div>
+                  <p className="font-bold text-slate-900 text-base mt-0.5 font-mono">
+                    0813-2473-5850
+                  </p>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Narahubung &amp; Pemilik: <strong>Mang Acim</strong>
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start space-x-3.5">
+                <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold shrink-0 mt-0.5">
+                  <Clock className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">Jam Buka Bengkel:</div>
+                  <div className="text-xs text-slate-700 mt-1 space-y-1">
+                    <div className="flex justify-between">
+                      <span className="font-medium">Senin – Sabtu:</span>
+                      <strong className="text-slate-900">08.00 – 17.00 WIB</strong>
+                    </div>
+                    <div className="flex justify-between text-slate-500">
+                      <span>Minggu &amp; Libur Nasional:</span>
+                      <span className="font-medium">Tutup / Janji Khusus</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
-              <span className="text-slate-500 font-semibold block text-[11px] uppercase tracking-wider">Pemilik / Narahubung:</span>
-              <p className="font-bold text-amber-700 text-sm">Mang Acim (Pemilik)</p>
-              <p className="text-slate-700 font-mono font-bold">081324735850</p>
+            <div className="pt-4 border-t border-slate-100 flex flex-col gap-2.5">
+              <a
+                href="https://wa.me/6281324735850?text=Halo%20Mang%20Acim,%20saya%20mau%20tanya%20jadwal%20servis%20mobil%20di%20Bengkel%20Anugrah%20Motor"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition shadow-xs flex items-center justify-center space-x-2"
+              >
+                <MessageCircle className="w-4 h-4" />
+                <span>Chat WhatsApp Mang Acim</span>
+              </a>
+
+              <a
+                href="https://maps.google.com/?q=Jl.+Syeh+Maulana+Akbar+No.88+Kuningan+Jawa+Barat"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl text-xs border border-slate-200 transition flex items-center justify-center space-x-2"
+              >
+                <MapPin className="w-4 h-4 text-amber-600" />
+                <span>Buka Rute di Google Maps</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Interactive Workshop Service Card (7 cols) */}
+          <div className="lg:col-span-7 bg-white rounded-3xl border border-slate-200/90 p-7 space-y-6 shadow-xs">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+              <h3 className="font-bold text-base text-slate-900 flex items-center space-x-2">
+                <Car className="w-5 h-5 text-amber-500" />
+                <span>Alur Kunjungan &amp; Penerimaan Kendaraan</span>
+              </h3>
+              <span className="text-xs text-slate-500">Prosedur Cepat</span>
             </div>
 
-            <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
-              <span className="text-slate-500 font-semibold block text-[11px] uppercase tracking-wider">Total Personel Bengkel:</span>
-              <p className="font-bold text-slate-900 text-sm">12 Pengguna Aktif</p>
-              <p className="text-slate-500">1 Pemilik Usaha, 1 Petugas Kasir, dan 10 Teknisi Mekanik</p>
+            <div className="space-y-4 text-xs">
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1.5">
+                <div className="font-bold text-slate-900 text-sm flex items-center space-x-2">
+                  <span className="w-6 h-6 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-xs">1</span>
+                  <span>Kendaraan Tiba di Bengkel</span>
+                </div>
+                <p className="text-slate-600 pl-8 leading-relaxed">
+                  Tim kami menyambut Anda, mencatat plat nomor, tipe mobil, serta keluhan kerusakan kendaraan secara teliti di sistem digital.
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1.5">
+                <div className="font-bold text-slate-900 text-sm flex items-center space-x-2">
+                  <span className="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs">2</span>
+                  <span>Pengecekan &amp; Estimasi Biaya</span>
+                </div>
+                <p className="text-slate-600 pl-8 leading-relaxed">
+                  Mekanik memeriksa komponen fisik. Kami menyampaikan rincian pekerjaan dan kebutuhan suku cadang beserta estimasi biaya sebelum membongkar.
+                </p>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-1.5">
+                <div className="font-bold text-slate-900 text-sm flex items-center space-x-2">
+                  <span className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs">3</span>
+                  <span>Pengerjaan &amp; Uji Coba (Test Drive)</span>
+                </div>
+                <p className="text-slate-600 pl-8 leading-relaxed">
+                  10 teknisi kami bekerja cepat dan rapi. Setelah servis selesai, mobil diuji coba untuk memastikan kendaraan aman dibawa pulang.
+                </p>
+              </div>
             </div>
 
-            <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
-              <span className="text-slate-500 font-semibold block text-[11px] uppercase tracking-wider">Sarana TIK yang Digunakan:</span>
-              <p className="font-semibold text-slate-800">
-                1 PC/Laptop Kasir (Wi-Fi) &amp; Smartphone Android Mekanik
-              </p>
-              <p className="text-slate-500">Aplikasi web responsif diakses lancar via browser Chrome mobile</p>
+            <div className="p-4 rounded-2xl bg-amber-50/80 border border-amber-200/80 text-amber-950 text-xs flex items-center justify-between">
+              <div>
+                <strong>Ingin booking jadwal servis agar tidak antre?</strong>
+                <p className="text-amber-800 text-[11px] mt-0.5">Kirim pesan WhatsApp sekarang untuk reservasi slot servis mobil Anda.</p>
+              </div>
+              <a
+                href="https://wa.me/6281324735850"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl shrink-0 shadow-2xs"
+              >
+                Booking WA &rarr;
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 8. CALL TO ACTION BANNER */}
-      <section className="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-slate-900 text-white rounded-3xl p-8 sm:p-12 md:p-16 text-center space-y-6 shadow-xl relative overflow-hidden">
-          <div className="max-w-2xl mx-auto space-y-3">
-            <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
-              Siap Menjalankan Operasional Bengkel Lebih Cepat &amp; Aman?
-            </h2>
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-              Akses sistem kasir POS, papan antrean teknisi, dan pemantauan stok suku cadang secara langsung sekarang.
-            </p>
-          </div>
-
-          <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
-            <Link
-              href="/kasir"
-              className="px-8 py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-sm transition shadow-lg shadow-amber-500/20"
-            >
-              Mulai Kasir POS Sekarang &rarr;
-            </Link>
-            <Link
-              href="/login"
-              className="px-7 py-3.5 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-xl text-sm border border-slate-700 transition"
-            >
-              Masuk ke Akun
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 9. COMPREHENSIVE FOOTER */}
-      <footer className="mt-auto bg-white border-t border-slate-200/80 pt-12 pb-8">
+      {/* 9. PORTAL STAF & MANAJEMEN INTERNAL (SHIFTGEAR ACCESS) */}
+      <section className="bg-slate-900 text-white py-14 border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-slate-100">
-            {/* Brand Info */}
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6 p-8 rounded-3xl bg-slate-950/80 border border-slate-800">
+            <div className="space-y-2 text-center lg:text-left">
+              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/15 text-amber-400 text-xs font-bold border border-amber-500/30">
+                <Award className="w-3.5 h-3.5" />
+                <span>Portal Khusus Karyawan &amp; Teknisi Bengkel</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-bold">
+                Akses Sistem Digital Kasir POS &amp; Papan Alur Mekanik (ShiftGear)
+              </h3>
+              <p className="text-xs text-slate-400 max-w-xl">
+                Khusus untuk 12 personel internal Bengkel Anugrah Motor: pencatatan nota kasir, antrean servis mobil, dan update suku cadang gudang.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <Link
+                href="/kasir"
+                className="px-5 py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs transition shadow-xs flex items-center space-x-1.5"
+              >
+                <Car className="w-4 h-4" />
+                <span>Masuk Kasir POS</span>
+              </Link>
+              <Link
+                href="/mekanik"
+                className="px-5 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-xl text-xs border border-slate-700 transition flex items-center space-x-1.5"
+              >
+                <Wrench className="w-4 h-4 text-amber-400" />
+                <span>Papan Mekanik</span>
+              </Link>
+              <Link
+                href="/login"
+                className="px-4 py-3 bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white font-medium rounded-xl text-xs border border-slate-800 transition"
+              >
+                <span>Login Akun</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 10. FOOTER */}
+      <footer className="bg-white border-t border-slate-200/80 pt-12 pb-8 text-xs text-slate-600">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-slate-100">
+            {/* Col 1: Identity */}
             <div className="space-y-3 md:col-span-2">
               <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 rounded-lg bg-amber-500 text-slate-950 flex items-center justify-center font-black text-base font-mono">
-                  OE
+                <div className="w-9 h-9 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center font-black text-lg font-mono">
+                  AM
                 </div>
-                <div className="font-extrabold text-slate-900 tracking-wide">
-                  ONDERDIL<span className="text-amber-600">ENGINE</span>
+                <div>
+                  <div className="font-extrabold text-slate-900 text-sm tracking-wide">
+                    BENGKEL ANUGRAH MOTOR
+                  </div>
+                  <div className="text-[11px] text-slate-500">PT Anugrah Motor &bull; Kuningan, Jawa Barat</div>
                 </div>
               </div>
               <p className="text-xs text-slate-600 leading-relaxed max-w-sm">
-                ShiftGear &bull; Sistem Point-of-Sale dan Manajemen Operasional Bengkel Mobil terpadu dengan standar keamanan siber enterprise.
+                Pusat perawatan dan perbaikan kendaraan bermotor roda empat profesional. Melayani servis berkala, tune up, ganti oli, pengereman, kaki-kaki, dan suku cadang original.
               </p>
-              <div className="text-xs text-slate-500 pt-1">
-                Mitra Lapangan: <strong>PT Anugrah Motor</strong> (Kuningan, Jawa Barat).
-              </div>
+              <p className="text-xs text-slate-500">
+                Alamat: Jl. Syeh Maulana Akbar No.88, Kuningan (Narahubung: Mang Acim / 0813-2473-5850)
+              </p>
             </div>
 
-            {/* Quick Navigation */}
+            {/* Col 2: Layanan */}
             <div className="space-y-2">
-              <div className="text-xs font-bold text-slate-900 uppercase tracking-wider">Aplikasi POS</div>
-              <ul className="space-y-1.5 text-xs text-slate-600">
-                <li><Link href="/kasir" className="hover:text-slate-900 transition">Kasir POS &amp; Nota</Link></li>
-                <li><Link href="/mekanik" className="hover:text-slate-900 transition">Antrean Servis Mekanik</Link></li>
-                <li><Link href="/spareparts" className="hover:text-slate-900 transition">Katalog Stok Suku Cadang</Link></li>
-                <li><Link href="/laporan" className="hover:text-slate-900 transition">Laporan &amp; Rekapitulasi</Link></li>
-                <li><Link href="/login" className="hover:text-slate-900 transition">Masuk Akun Pengguna</Link></li>
+              <div className="text-xs font-bold text-slate-900 uppercase tracking-wider">Layanan Servis</div>
+              <ul className="space-y-1.5 text-slate-600">
+                <li>Tune Up &amp; Servis Berkala</li>
+                <li>Ganti Oli Mesin &amp; Filter</li>
+                <li>Perbaikan Kaki-kaki &amp; Rem</li>
+                <li>Overhaul Mesin &amp; Kopling</li>
+                <li>Kelistrikan &amp; AC Mobil</li>
               </ul>
             </div>
 
-            {/* Academic Information */}
+            {/* Col 3: Informasi Akademik */}
             <div className="space-y-2">
-              <div className="text-xs font-bold text-slate-900 uppercase tracking-wider">Informasi Akademik</div>
-              <div className="text-xs text-slate-600 space-y-1 leading-relaxed">
+              <div className="text-xs font-bold text-slate-900 uppercase tracking-wider">Kredit Sistem Digital</div>
+              <div className="space-y-1 text-slate-600 leading-relaxed">
+                <p><strong>Aplikasi:</strong> ShiftGear / OnderdilEngine</p>
                 <p><strong>Penyusun:</strong> Apliy Tridiansyah Rosdiana</p>
                 <p><strong>NIM:</strong> 20240810111 (TINFC-2024-01)</p>
                 <p><strong>Dosen:</strong> Fitra Nugraha, S.Kom., M.Kom.</p>
-                <p>Mata Kuliah Keamanan Cyber &bull; Universitas Kuningan (2026)</p>
+                <p className="text-[11px] text-slate-500">Teknik Informatika &bull; Universitas Kuningan (2026)</p>
               </div>
             </div>
           </div>
 
-          <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2">
+          <div className="flex flex-col sm:flex-row items-center justify-between text-slate-500 text-[11px] gap-2 text-center sm:text-left">
             <div>
-              &copy; 2026 ShiftGear / OnderdilEngine. Seluruh hak cipta dilindungi.
+              &copy; 2026 PT Anugrah Motor / Bengkel Anugrah Motor Kuningan. All rights reserved.
             </div>
             <div>
-              Disusun untuk Ujian/Tugas Projek Keamanan Cyber Fakultas Ilmu Komputer UNIKU.
+              Didukung oleh Sistem Manajemen Bengkel Digital ShiftGear.
             </div>
           </div>
         </div>
