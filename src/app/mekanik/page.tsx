@@ -132,21 +132,21 @@ export default function MekanikPage() {
   };
 
   const statusColumns = [
-    { key: "MENUNGGU", label: "1. Antrean Baru", color: "border-slate-800 bg-slate-900/60 text-slate-200" },
-    { key: "PENGERJAAN", label: "2. Sedang Dikerjakan", color: "border-amber-600/40 bg-amber-950/20 text-amber-300" },
-    { key: "SELESAI", label: "3. Selesai (Siap Bayar)", color: "border-emerald-600/40 bg-emerald-950/20 text-emerald-300" },
-    { key: "LUNAS", label: "4. Lunas (Selesai Kasir)", color: "border-blue-700/40 bg-blue-950/20 text-blue-300" },
+    { key: "MENUNGGU", label: "1. Antrean Baru", color: "border-slate-200 bg-slate-100/70 text-slate-800" },
+    { key: "PENGERJAAN", label: "2. Sedang Dikerjakan", color: "border-amber-200 bg-amber-50/50 text-amber-900" },
+    { key: "SELESAI", label: "3. Selesai (Siap Bayar)", color: "border-emerald-200 bg-emerald-50/50 text-emerald-900" },
+    { key: "LUNAS", label: "4. Lunas (Selesai Kasir)", color: "border-blue-200 bg-blue-50/50 text-blue-900" },
   ];
 
   return (
     <div className="space-y-8">
       {/* Page Header */}
-      <div className="flex items-center justify-between border-b border-slate-800/80 pb-5">
+      <div className="flex items-center justify-between border-b border-slate-200/80 pb-5">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight flex items-center space-x-2">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight flex items-center space-x-2">
             <span>Alur Kerja &amp; Antrean Mekanik</span>
           </h1>
-          <p className="text-sm text-slate-300 mt-1">
+          <p className="text-sm text-slate-500 mt-1">
             Papan pemantauan alur servis mobil secara langsung, alokasi suku cadang, dan catatan teknis mekanik.
           </p>
         </div>
@@ -163,16 +163,16 @@ export default function MekanikPage() {
               onClick={() => setMobileTab(col.key)}
               className={`px-3.5 py-2.5 rounded-xl text-xs font-bold shrink-0 flex items-center space-x-2 transition-all ${
                 isActive
-                  ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20"
-                  : "bg-slate-900 text-slate-300 border border-slate-800 hover:bg-slate-800"
+                  ? "bg-slate-900 text-white shadow-xs"
+                  : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-50"
               }`}
             >
               <span>{col.label}</span>
               <span
                 className={`px-2 py-0.5 rounded-full text-[11px] font-extrabold ${
                   isActive
-                    ? "bg-slate-950 text-amber-400"
-                    : "bg-slate-800 text-slate-200 border border-slate-700"
+                    ? "bg-white/20 text-white"
+                    : "bg-slate-100 text-slate-600 border border-slate-200"
                 }`}
               >
                 {count}
@@ -182,7 +182,7 @@ export default function MekanikPage() {
         })}
       </div>
 
-      {/* Kanban Board Grid: On Mobile shows active mobileTab column, on Desktop shows full 4 columns side by side */}
+      {/* Kanban Board Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
         {statusColumns.map((col) => {
           const colOrders = orders.filter((o) => o.status === col.key);
@@ -190,14 +190,14 @@ export default function MekanikPage() {
           return (
             <div
               key={col.key}
-              className={`rounded-2xl border p-4 sm:p-5 flex-col justify-between min-h-[460px] shadow-lg ${col.color} ${isMobileHidden}`}
+              className={`rounded-2xl border p-4 sm:p-5 flex-col justify-between min-h-[460px] shadow-xs ${col.color} ${isMobileHidden}`}
             >
               <div className="space-y-3.5">
-                <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+                <div className="flex items-center justify-between pb-3 border-b border-slate-200/80">
                   <span className="font-bold text-sm tracking-tight">
                     {col.label}
                   </span>
-                  <span className="px-2.5 py-0.5 rounded-full bg-slate-800 text-xs font-bold text-white border border-slate-700">
+                  <span className="px-2.5 py-0.5 rounded-full bg-white text-xs font-bold text-slate-700 border border-slate-200 shadow-xs">
                     {colOrders.length}
                   </span>
                 </div>
@@ -211,65 +211,65 @@ export default function MekanikPage() {
                     {colOrders.map((order) => (
                       <div
                         key={order.id}
-                        className="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-3 shadow-md hover:border-slate-700 transition-all"
+                        className="bg-white border border-slate-200/90 rounded-2xl p-4 space-y-3 shadow-xs hover:border-slate-300 transition-all text-slate-900"
                       >
                         {/* Plate & Model */}
                         <div className="flex items-start justify-between">
                           <div>
-                            <div className="font-extrabold text-base text-amber-400 tracking-tight">
+                            <div className="font-extrabold text-base text-slate-900 tracking-tight">
                               {order.plateNumber}
                             </div>
-                            <div className="text-xs text-slate-300 font-medium">{order.vehicleModel}</div>
+                            <div className="text-xs text-slate-500 font-medium">{order.vehicleModel}</div>
                           </div>
-                          <span className="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-400">
+                          <span className="text-xs px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 font-mono font-medium border border-slate-200">
                             {order.orderNumber}
                           </span>
                         </div>
 
                         {/* Customer & Complaint */}
                         <div className="text-xs space-y-1.5">
-                          <div className="text-slate-200">
-                            Pemilik: <strong className="text-white">{order.customerName}</strong>
+                          <div className="text-slate-600">
+                            Pemilik: <strong className="text-slate-900">{order.customerName}</strong>
                           </div>
-                          <div className="p-2.5 bg-slate-950/80 rounded-lg text-xs text-slate-300 leading-relaxed border border-slate-800">
-                            <span className="font-semibold text-amber-300/90">Keluhan:</span> {order.complaint}
+                          <div className="p-2.5 bg-slate-50 rounded-xl text-xs text-slate-700 leading-relaxed border border-slate-200/70">
+                            <span className="font-semibold text-amber-700">Keluhan:</span> {order.complaint}
                           </div>
                         </div>
 
                         {/* Mechanic Notes if any */}
                         {order.mechanicNotes && (
-                          <div className="text-xs p-2.5 bg-blue-950/50 border border-blue-900/60 rounded-lg text-blue-200">
-                            <span className="font-bold text-blue-300">Catatan Mekanik:</span> {order.mechanicNotes}
+                          <div className="text-xs p-2.5 bg-blue-50/70 border border-blue-200/70 rounded-xl text-blue-900">
+                            <span className="font-bold text-blue-700">Catatan Mekanik:</span> {order.mechanicNotes}
                           </div>
                         )}
 
                         {/* Parts Used */}
                         {order.items && order.items.length > 0 && (
-                          <div className="text-xs text-slate-300 space-y-1 bg-slate-950/40 p-2.5 rounded-lg border border-slate-800/80">
-                            <span className="font-bold text-amber-400 text-xs">Suku Cadang Digunakan:</span>
+                          <div className="text-xs text-slate-700 space-y-1 bg-slate-50 p-2.5 rounded-xl border border-slate-200/70">
+                            <span className="font-bold text-slate-900 text-xs">Suku Cadang Digunakan:</span>
                             {order.items.map((it, idx) => (
-                              <div key={idx} className="flex justify-between text-slate-300">
+                              <div key={idx} className="flex justify-between text-slate-600">
                                 <span>• {it.sparepart.name}</span>
-                                <span className="font-bold text-white">x{it.quantity}</span>
+                                <span className="font-bold text-slate-900">x{it.quantity}</span>
                               </div>
                             ))}
                           </div>
                         )}
 
                         {/* Action Buttons */}
-                        <div className="pt-2.5 border-t border-slate-800 flex items-center justify-between gap-2">
+                        <div className="pt-2.5 border-t border-slate-100 flex items-center justify-between gap-2">
                           <button
                             onClick={() => handleOpenEdit(order)}
-                            className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition-all border border-slate-700"
+                            className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold flex items-center space-x-1.5 transition-all border border-slate-200"
                           >
-                            <FileText className="w-3.5 h-3.5 text-amber-400" />
+                            <FileText className="w-3.5 h-3.5 text-amber-600" />
                             <span>Edit Part / Catatan</span>
                           </button>
 
                           {order.status === "MENUNGGU" && (
                             <button
                               onClick={() => updateStatus(order.id, "PENGERJAAN")}
-                              className="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-lg text-xs flex items-center space-x-1 transition-all shadow-sm"
+                              className="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl text-xs flex items-center space-x-1 transition-all shadow-xs"
                             >
                               <PlayCircle className="w-3.5 h-3.5" />
                               <span>Mulai</span>
@@ -279,7 +279,7 @@ export default function MekanikPage() {
                           {order.status === "PENGERJAAN" && (
                             <button
                               onClick={() => updateStatus(order.id, "SELESAI")}
-                              className="px-3 py-1.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-lg text-xs flex items-center space-x-1 transition-all shadow-sm"
+                              className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center space-x-1 transition-all shadow-xs"
                             >
                               <CheckCircle2 className="w-3.5 h-3.5" />
                               <span>Selesai</span>
@@ -298,55 +298,55 @@ export default function MekanikPage() {
 
       {/* Edit Work Order Notes & Used Parts Modal */}
       {selectedOrder && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div className="bg-slate-900 border border-slate-700 rounded-xl max-w-lg w-full p-6 space-y-4 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-              <h3 className="font-mono font-bold text-slate-100 text-sm flex items-center space-x-1.5">
-                <Wrench className="w-4 h-4 text-amber-400" />
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm">
+          <div className="bg-white border border-slate-200 rounded-2xl max-w-lg w-full p-6 space-y-4 shadow-xl animate-in fade-in zoom-in-95 duration-150">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <h3 className="font-bold text-slate-900 text-sm flex items-center space-x-1.5">
+                <Wrench className="w-4 h-4 text-amber-500" />
                 <span>Pengerjaan Servis: {selectedOrder.plateNumber}</span>
               </h3>
               <button
                 onClick={() => setSelectedOrder(null)}
-                className="text-slate-400 hover:text-slate-100"
+                className="text-slate-400 hover:text-slate-700 p-1 rounded-lg hover:bg-slate-100 transition"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="space-y-3 text-xs font-mono">
+            <div className="space-y-3.5 text-xs">
               <div>
-                <label className="block text-slate-400 mb-1">Catatan Penanganan Teknis Mekanik:</label>
+                <label className="block text-slate-700 font-medium mb-1">Catatan Penanganan Teknis Mekanik:</label>
                 <textarea
                   rows={3}
                   value={mechanicNotes}
                   onChange={(e) => setMechanicNotes(e.target.value)}
                   placeholder="misal: Oli lama sudah dikuras, filter oli baru terpasang. Kampas rem depan aus 80% diganti 1 set Bendix."
-                  className="w-full bg-slate-950 border border-slate-700 rounded px-3 py-2 text-slate-100"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-900 focus:bg-white focus:outline-none focus:border-amber-500 transition"
                 />
               </div>
 
               <div>
-                <label className="block text-slate-400 mb-1">Estimasi Biaya Jasa Mekanik (Rp):</label>
+                <label className="block text-slate-700 font-medium mb-1">Estimasi Biaya Jasa Mekanik (Rp):</label>
                 <input
                   type="number"
                   min="0"
                   step="5000"
                   value={serviceFee}
                   onChange={(e) => setServiceFee(Number(e.target.value))}
-                  className="w-full bg-slate-950 border border-slate-700 rounded px-3 py-2 text-slate-100"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-900 focus:bg-white focus:outline-none focus:border-amber-500 transition"
                 />
               </div>
 
               {/* Suku cadang yang dipakai */}
-              <div className="pt-2 border-t border-slate-800 space-y-2">
-                <label className="block text-slate-300 font-bold">
+              <div className="pt-2 border-t border-slate-100 space-y-2">
+                <label className="block text-slate-900 font-bold">
                   Suku Cadang yang Digunakan pada Kendaraan:
                 </label>
 
                 <div className="flex gap-2">
                   <select
                     id="part-select"
-                    className="flex-1 bg-slate-950 border border-slate-700 rounded px-2 py-1.5 text-slate-100 text-xs"
+                    className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-900 text-xs focus:bg-white focus:outline-none focus:border-amber-500 transition"
                     defaultValue=""
                   >
                     <option value="" disabled>
@@ -366,28 +366,28 @@ export default function MekanikPage() {
                         addPartToOrder(sel.value);
                       }
                     }}
-                    className="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded text-xs"
+                    className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl text-xs shadow-xs transition"
                   >
-                    Pasang Part
+                    Pasang
                   </button>
                 </div>
 
                 {/* List Selected Parts */}
-                <div className="space-y-1 max-h-32 overflow-y-auto">
+                <div className="space-y-1.5 max-h-32 overflow-y-auto">
                   {selectedParts.map((sp) => {
                     const info = spareparts.find((p) => p.id === sp.sparepartId);
                     return (
                       <div
                         key={sp.sparepartId}
-                        className="flex items-center justify-between p-1.5 rounded bg-slate-950 border border-slate-800 text-[11px]"
+                        className="flex items-center justify-between p-2 rounded-xl bg-slate-50 border border-slate-200 text-xs"
                       >
-                        <span className="text-slate-200">{info?.name || "Part"}</span>
+                        <span className="text-slate-800 font-medium">{info?.name || "Part"}</span>
                         <div className="flex items-center space-x-2">
-                          <span className="text-amber-400 font-bold">{sp.quantity} unit</span>
+                          <span className="text-amber-700 font-bold">{sp.quantity} unit</span>
                           <button
                             type="button"
                             onClick={() => removePartFromOrder(sp.sparepartId)}
-                            className="text-red-400 hover:text-red-300"
+                            className="text-red-500 hover:text-red-700 p-1"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
@@ -398,18 +398,18 @@ export default function MekanikPage() {
                 </div>
               </div>
 
-              <div className="flex justify-end space-x-2 pt-3 border-t border-slate-800">
+              <div className="flex justify-end space-x-2 pt-3 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setSelectedOrder(null)}
-                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded"
+                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl border border-slate-200 transition"
                 >
                   Batal
                 </button>
                 <button
                   type="button"
                   onClick={handleSaveNotes}
-                  className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded"
+                  className="px-5 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl shadow-xs transition"
                 >
                   Simpan Catatan Servis
                 </button>

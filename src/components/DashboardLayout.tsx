@@ -86,9 +86,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   ];
 
   const roleBadgeStyle = {
-    ADMIN: "bg-red-500/15 text-red-400 border-red-500/30",
-    KASIR: "bg-amber-500/15 text-amber-400 border-amber-500/30",
-    MEKANIK: "bg-blue-500/15 text-blue-400 border-blue-500/30",
+    ADMIN: "bg-rose-50 text-rose-700 border-rose-200/80",
+    KASIR: "bg-amber-50 text-amber-800 border-amber-200/80",
+    MEKANIK: "bg-blue-50 text-blue-700 border-blue-200/80",
   };
 
   const roleLabelMap = {
@@ -108,35 +108,35 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const currentMeta = pageMeta[pathname] || { title: "Panel Bengkel", subtitle: "OnderdilEngine Management System" };
 
   return (
-    <div className="min-h-screen bg-[#0B0F19] text-slate-100 flex flex-col lg:flex-row">
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex flex-col lg:flex-row">
       {/* Mobile Drawer Backdrop */}
       {sidebarOpen && (
         <div
           onClick={() => setSidebarOpen(false)}
-          className="fixed inset-0 z-40 bg-black/75 backdrop-blur-sm lg:hidden transition-opacity"
+          className="fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-sm lg:hidden transition-opacity"
         />
       )}
 
-      {/* Modern, User-Friendly Sidebar */}
+      {/* Modern, Clean & High-Taste Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-72 bg-[#101726] border-r border-slate-800/80 flex flex-col justify-between transition-transform duration-200 ease-in-out lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 w-72 bg-white border-r border-slate-200/80 flex flex-col justify-between transition-transform duration-200 ease-in-out lg:translate-x-0 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } shadow-2xl lg:shadow-none`}
+        } shadow-xl lg:shadow-none`}
       >
         <div className="flex flex-col h-full">
           {/* Logo Brand Header */}
-          <div className="h-20 px-6 border-b border-slate-800/80 flex items-center justify-between bg-[#0e1422]">
+          <div className="h-20 px-6 border-b border-slate-200/80 flex items-center justify-between bg-white">
             <Link href="/" className="flex items-center space-x-3.5 group">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center font-black text-slate-950 text-xl font-mono shadow-lg shadow-amber-500/25 group-hover:scale-105 transition-transform">
+              <div className="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center font-black text-slate-950 text-xl font-mono shadow-sm group-hover:scale-105 transition-transform">
                 OE
               </div>
               <div>
-                <div className="font-extrabold text-base tracking-wide text-slate-100 flex items-center space-x-1">
+                <div className="font-extrabold text-base tracking-wide text-slate-900 flex items-center space-x-1">
                   <span>ONDERDIL</span>
-                  <span className="text-amber-400">ENGINE</span>
+                  <span className="text-amber-600">ENGINE</span>
                 </div>
-                <div className="text-xs text-slate-400 flex items-center space-x-1.5 mt-0.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse" />
+                <div className="text-xs text-slate-500 flex items-center space-x-1.5 mt-0.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />
                   <span>PT Anugrah Motor</span>
                 </div>
               </div>
@@ -144,7 +144,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
             <button
               onClick={() => setSidebarOpen(false)}
-              className="lg:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"
+              className="lg:hidden p-2 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100"
             >
               <X className="w-5 h-5" />
             </button>
@@ -169,25 +169,25 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                         onClick={() => setSidebarOpen(false)}
                         className={`flex items-center justify-between px-3.5 py-3 rounded-xl transition-all ${
                           isActive
-                            ? "bg-amber-500 text-slate-950 font-bold shadow-md shadow-amber-500/20"
-                            : "text-slate-300 hover:text-white hover:bg-slate-800/60"
+                            ? "bg-slate-900 text-white font-bold shadow-sm"
+                            : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/80"
                         }`}
                       >
                         <div className="flex items-center space-x-3.5">
                           <div
                             className={`w-8 h-8 rounded-lg flex items-center justify-center ${
                               isActive
-                                ? "bg-slate-950/20 text-slate-950"
-                                : "bg-slate-800/70 text-amber-400"
+                                ? "bg-slate-800 text-amber-400"
+                                : "bg-slate-100 text-slate-600"
                             }`}
                           >
                             <Icon className="w-4 h-4" />
                           </div>
                           <div>
-                            <div className="text-sm font-medium leading-snug">{item.label}</div>
+                            <div className="text-sm font-semibold leading-snug">{item.label}</div>
                             <div
                               className={`text-[11px] ${
-                                isActive ? "text-slate-900" : "text-slate-400"
+                                isActive ? "text-slate-300" : "text-slate-400"
                               }`}
                             >
                               {item.desc}
@@ -196,7 +196,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                         </div>
                         <ChevronRight
                           className={`w-4 h-4 ${
-                            isActive ? "text-slate-950" : "text-slate-600"
+                            isActive ? "text-amber-400" : "text-slate-400"
                           }`}
                         />
                       </Link>
@@ -208,17 +208,17 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
 
           {/* User Profile Card in Sidebar Footer */}
-          <div className="p-4 border-t border-slate-800/80 bg-[#0e1422]">
+          <div className="p-4 border-t border-slate-200/80 bg-slate-50/70">
             {user ? (
-              <div className="p-3 rounded-xl bg-slate-800/70 border border-slate-700/60 flex items-center justify-between">
+              <div className="p-3 rounded-xl bg-white border border-slate-200/80 shadow-xs flex items-center justify-between">
                 <div className="flex items-center space-x-3 overflow-hidden">
-                  <div className="w-9 h-9 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-sm shrink-0">
+                  <div className="w-9 h-9 rounded-full bg-amber-100 border border-amber-200/80 flex items-center justify-center text-amber-800 font-bold text-sm shrink-0">
                     {user.name.charAt(0).toUpperCase()}
                   </div>
                   <div className="overflow-hidden">
-                    <div className="text-xs font-bold text-slate-100 truncate">{user.name}</div>
-                    <div className="text-[11px] text-slate-400 mt-0.5">
-                      <span className={`inline-block px-1.5 py-0.5 rounded text-[10px] border ${roleBadgeStyle[user.role]}`}>
+                    <div className="text-xs font-bold text-slate-900 truncate">{user.name}</div>
+                    <div className="text-[11px] text-slate-500 mt-0.5">
+                      <span className={`inline-block px-2 py-0.5 rounded text-[10px] font-semibold border ${roleBadgeStyle[user.role]}`}>
                         {roleLabelMap[user.role] || user.role}
                       </span>
                     </div>
@@ -228,7 +228,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 <button
                   onClick={handleLogout}
                   title="Keluar dari Akun"
-                  className="p-2 rounded-lg text-slate-400 hover:text-red-400 hover:bg-slate-800 transition-colors shrink-0"
+                  className="p-2 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors shrink-0"
                 >
                   <LogOut className="w-4 h-4" />
                 </button>
@@ -236,7 +236,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             ) : (
               <Link
                 href="/login"
-                className="w-full py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs uppercase tracking-wider block text-center shadow-md shadow-amber-500/20"
+                className="w-full py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs uppercase tracking-wider block text-center shadow-sm"
               >
                 Masuk / Login
               </Link>
@@ -248,21 +248,21 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       {/* Main Content Area */}
       <div className="flex-1 lg:pl-72 flex flex-col min-w-0">
         {/* Top Header / Bar */}
-        <header className="sticky top-0 z-30 h-20 bg-[#101726]/90 border-b border-slate-800/80 backdrop-blur-md px-6 sm:px-8 flex items-center justify-between">
+        <header className="sticky top-0 z-30 h-20 bg-white/90 border-b border-slate-200/80 backdrop-blur-md px-6 sm:px-8 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="lg:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"
+              className="lg:hidden p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100"
             >
               <Menu className="w-6 h-6" />
             </button>
 
             {/* Page Header Title */}
             <div>
-              <h1 className="text-lg font-bold text-slate-100 leading-tight">
+              <h1 className="text-lg font-bold text-slate-900 leading-tight">
                 {currentMeta.title}
               </h1>
-              <p className="text-xs text-slate-400 mt-0.5 hidden sm:block">
+              <p className="text-xs text-slate-500 mt-0.5 hidden sm:block">
                 {currentMeta.subtitle}
               </p>
             </div>
@@ -271,8 +271,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           {/* Quick Header Right Actions */}
           <div className="flex items-center space-x-3">
             {currentTime && (
-              <div className="hidden md:flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-slate-800/60 border border-slate-700/60 text-slate-300 text-xs">
-                <Clock className="w-3.5 h-3.5 text-amber-400" />
+              <div className="hidden md:flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-slate-100 border border-slate-200/80 text-slate-700 text-xs font-medium">
+                <Clock className="w-3.5 h-3.5 text-amber-600" />
                 <span>{currentTime}</span>
               </div>
             )}
@@ -280,7 +280,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             {user && pathname !== "/kasir" && (
               <Link
                 href="/kasir"
-                className="flex items-center space-x-1.5 px-3 py-2 sm:px-4 sm:py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs tracking-wide transition-all shadow-md shadow-amber-500/20 shrink-0"
+                className="flex items-center space-x-1.5 px-3 py-2 sm:px-4 sm:py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs tracking-wide transition-all shadow-sm shrink-0"
               >
                 <ShoppingCart className="w-4 h-4" />
                 <span className="hidden sm:inline">Buka Kasir POS</span>
@@ -296,7 +296,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </main>
 
         {/* Friendly Clean Footer */}
-        <footer className="border-t border-slate-800/80 bg-[#0c121e] py-5 px-8 text-center text-xs text-slate-400">
+        <footer className="border-t border-slate-200/80 bg-white py-5 px-8 text-center text-xs text-slate-500">
           ShiftGear / OnderdilEngine &copy; 2026 &bull; Mitra: Bengkel Anugrah Motor (Jl. Syeh Maulana Akbar No.88, Kuningan &bull; Narahubung: Mang Acim / 081324735850)
         </footer>
       </div>

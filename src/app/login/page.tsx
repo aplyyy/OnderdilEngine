@@ -53,24 +53,24 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-[75vh] flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-6 bg-slate-900 border border-slate-800 p-8 rounded-xl shadow-2xl">
+      <div className="max-w-md w-full space-y-6 bg-white border border-slate-200/90 p-8 sm:p-9 rounded-3xl shadow-xl">
         {/* Brand Header */}
         <div className="text-center">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-lg bg-amber-500 text-slate-950 font-black text-3xl shadow-lg shadow-amber-500/20 mb-3">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-amber-500 text-slate-950 font-black text-2xl shadow-xs mb-3">
             OE
           </div>
-          <h2 className="text-2xl font-extrabold tracking-tight text-slate-100 font-mono">
-            ONDERDIL<span className="text-amber-500">ENGINE</span>
+          <h2 className="text-2xl font-extrabold tracking-tight text-slate-900">
+            ONDERDIL<span className="text-amber-600">ENGINE</span>
           </h2>
-          <p className="mt-1 text-xs text-slate-400 font-mono">
+          <p className="mt-1 text-xs text-slate-500">
             Sistem Point-of-Sale (POS) &amp; Manajemen Bengkel Mobil
           </p>
         </div>
 
         {/* Error Alert */}
         {error && (
-          <div className="p-3 bg-red-950/70 border border-red-800 rounded-md flex items-start space-x-2 text-xs text-red-200">
-            <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+          <div className="p-3.5 bg-red-50 border border-red-200 rounded-xl flex items-start space-x-2 text-xs text-red-700">
+            <AlertCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
             <div>{error}</div>
           </div>
         )}
@@ -78,11 +78,11 @@ export default function LoginPage() {
         {/* Form */}
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
               Username
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                 <User className="w-4 h-4" />
               </div>
               <input
@@ -91,17 +91,17 @@ export default function LoginPage() {
                 onChange={(e) => setUsername(e.target.value)}
                 required
                 placeholder="misal: kasir / admin / mekanik"
-                className="w-full pl-9 pr-3 py-2 bg-slate-950 border border-slate-700 rounded-md text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 font-mono"
+                className="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-amber-500 transition"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
               Password
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                 <Lock className="w-4 h-4" />
               </div>
               <input
@@ -110,7 +110,7 @@ export default function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 placeholder="••••••••••••"
-                className="w-full pl-9 pr-3 py-2 bg-slate-950 border border-slate-700 rounded-md text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 font-mono"
+                className="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-amber-500 transition"
               />
             </div>
           </div>
@@ -118,42 +118,42 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2.5 px-4 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-md text-sm uppercase tracking-wider transition-all disabled:opacity-50 shadow-md shadow-amber-500/20"
+            className="w-full py-3 px-4 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl text-sm uppercase tracking-wider transition-all disabled:opacity-50 shadow-xs"
           >
             {loading ? "Memverifikasi..." : "Masuk ke Sistem"}
           </button>
         </form>
 
         {/* Quick Demo Fill Buttons */}
-        <div className="pt-4 border-t border-slate-800">
-          <div className="flex items-center space-x-1.5 text-xs text-slate-400 mb-2 font-mono">
-            <Zap className="w-3.5 h-3.5 text-amber-400" />
-            <span className="font-semibold text-slate-300">Pilih Akun Demo (1-Click):</span>
+        <div className="pt-4 border-t border-slate-100">
+          <div className="flex items-center space-x-1.5 text-xs text-slate-500 mb-2.5">
+            <Zap className="w-3.5 h-3.5 text-amber-500" />
+            <span className="font-semibold text-slate-700">Pilih Akun Demo (1-Click):</span>
           </div>
           <div className="grid grid-cols-3 gap-2">
             <button
               type="button"
               onClick={() => setDemoAccount("admin", "AdminBengkel#2026")}
-              className="px-2 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded text-center text-xs font-mono text-slate-200 transition-colors"
+              className="px-2 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-center text-xs transition"
             >
-              <div className="text-[10px] text-red-400 font-bold">ADMIN</div>
-              <div className="text-[10px] text-slate-400">admin</div>
+              <div className="text-[10px] text-red-600 font-bold">ADMIN</div>
+              <div className="text-[11px] text-slate-600 font-medium">admin</div>
             </button>
             <button
               type="button"
               onClick={() => setDemoAccount("kasir", "KasirBengkel#2026")}
-              className="px-2 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded text-center text-xs font-mono text-slate-200 transition-colors"
+              className="px-2 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-center text-xs transition"
             >
-              <div className="text-[10px] text-amber-400 font-bold">KASIR</div>
-              <div className="text-[10px] text-slate-400">kasir</div>
+              <div className="text-[10px] text-amber-700 font-bold">KASIR</div>
+              <div className="text-[11px] text-slate-600 font-medium">kasir</div>
             </button>
             <button
               type="button"
               onClick={() => setDemoAccount("mekanik", "MekanikBengkel#2026")}
-              className="px-2 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded text-center text-xs font-mono text-slate-200 transition-colors"
+              className="px-2 py-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-center text-xs transition"
             >
-              <div className="text-[10px] text-blue-400 font-bold">MEKANIK</div>
-              <div className="text-[10px] text-slate-400">mekanik</div>
+              <div className="text-[10px] text-blue-700 font-bold">MEKANIK</div>
+              <div className="text-[11px] text-slate-600 font-medium">mekanik</div>
             </button>
           </div>
         </div>

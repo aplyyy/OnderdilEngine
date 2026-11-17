@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0b0f19;
-  --foreground: #f8fafc;
-  --card-bg: #131b2e;
-  --border-color: #1e293b;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card-bg: #ffffff;
+  --border-color: #e2e8f0;
   --accent-amber: #f59e0b;
   --accent-amber-hover: #d97706;
 }
@@ -24,20 +24,20 @@ a, button, input, select, textarea {
   transition: all 0.15s ease-in-out;
 }
 
-/* Custom scrollbar */
+/* Clean minimal scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0b0f19;
+  background: #f1f5f9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #27354a;
+  background: #cbd5e1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #384b66;
+  background: #94a3b8;
 }
 
 /* Receipt Print Media Style */

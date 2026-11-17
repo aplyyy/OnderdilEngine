@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id">
-      <body className="bg-[#090D16] text-slate-100 min-h-screen antialiased selection:bg-amber-500 selection:text-slate-950">
+      <body className="bg-[#f8fafc] text-slate-900 min-h-screen antialiased selection:bg-amber-400 selection:text-slate-950">
         <DashboardLayout>{children}</DashboardLayout>
       </body>
     </html>

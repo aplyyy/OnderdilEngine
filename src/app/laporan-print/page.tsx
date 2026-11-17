@@ -5,22 +5,22 @@ import Link from "next/link";
 
 export default function LaporanPrintPage() {
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-900 py-8 px-4 print:p-0 print:bg-white">
+    <div className="min-h-screen bg-slate-100 text-slate-900 py-8 px-4 print:p-0 print:bg-white">
       {/* Action Bar (Hidden when printed) */}
-      <div className="max-w-4xl mx-auto mb-6 flex items-center justify-between print:hidden bg-slate-950 p-4 rounded-xl border border-slate-800 text-white font-mono text-xs">
+      <div className="max-w-4xl mx-auto mb-6 flex items-center justify-between print:hidden bg-white p-4 rounded-2xl border border-slate-200 shadow-xs text-slate-900 text-xs">
         <Link
           href="/"
-          className="flex items-center space-x-1.5 text-slate-300 hover:text-white"
+          className="flex items-center space-x-1.5 text-slate-600 hover:text-slate-900 font-semibold"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Kembali ke Dashboard</span>
         </Link>
 
         <div className="flex items-center space-x-3">
-          <span className="text-slate-400">Siap Cetak A4 / Export PDF</span>
+          <span className="text-slate-500 font-medium">Siap Cetak A4 / Export PDF</span>
           <button
             onClick={() => window.print()}
-            className="flex items-center space-x-1.5 px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-lg uppercase tracking-wider shadow-md"
+            className="flex items-center space-x-1.5 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl shadow-xs"
           >
             <Printer className="w-4 h-4" />
             <span>Cetak / Simpan Sebagai PDF</span>
