@@ -248,28 +248,28 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       {/* Main Content Area */}
       <div className="flex-1 lg:pl-72 flex flex-col min-w-0">
         {/* Top Header / Bar */}
-        <header className="sticky top-0 z-30 h-20 bg-white/90 border-b border-slate-200/80 backdrop-blur-md px-6 sm:px-8 flex items-center justify-between">
-          <div className="flex items-center space-x-4">
+        <header className="sticky top-0 z-30 min-h-16 py-3 bg-white/90 border-b border-slate-200/80 backdrop-blur-md px-4 sm:px-8 flex items-center justify-between gap-3">
+          <div className="flex items-center space-x-3 min-w-0">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="lg:hidden p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100"
+              className="lg:hidden p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 shrink-0"
             >
-              <Menu className="w-6 h-6" />
+              <Menu className="w-5 h-5" />
             </button>
 
             {/* Page Header Title */}
-            <div>
-              <h1 className="text-lg font-bold text-slate-900 leading-tight">
+            <div className="min-w-0">
+              <h1 className="text-base sm:text-lg font-bold text-slate-900 leading-tight truncate">
                 {currentMeta.title}
               </h1>
-              <p className="text-xs text-slate-500 mt-0.5 hidden sm:block">
+              <p className="text-xs text-slate-500 mt-0.5 hidden sm:block truncate">
                 {currentMeta.subtitle}
               </p>
             </div>
           </div>
 
           {/* Quick Header Right Actions */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
             {currentTime && (
               <div className="hidden md:flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-slate-100 border border-slate-200/80 text-slate-700 text-xs font-medium">
                 <Clock className="w-3.5 h-3.5 text-amber-600" />

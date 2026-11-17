@@ -25,6 +25,7 @@
 *.pem
 .agents/
 *.db
+!prisma/dev.db
 *.db-journal
 
 # debug

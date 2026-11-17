@@ -103,63 +103,27 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-slate-900 selection:bg-amber-400 selection:text-slate-950 flex flex-col font-sans">
-      {/* 1. TOP ANNOUNCEMENT / UTILITY BAR */}
-      <div className="bg-slate-900 text-slate-300 text-xs py-2.5 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
-          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-4 gap-y-1">
-            <span className="flex items-center space-x-1.5 text-amber-400 font-medium">
-              <Clock className="w-3.5 h-3.5" />
-              <span>Senin – Sabtu: 08.00 – 17.00 WIB</span>
-            </span>
-            <span className="hidden sm:inline text-slate-600">&bull;</span>
-            <span className="flex items-center space-x-1.5 text-slate-300">
-              <MapPin className="w-3.5 h-3.5 text-slate-400" />
-              <span>Jl. Syeh Maulana Akbar No.88, Kuningan</span>
-            </span>
-          </div>
-
-          <div className="flex items-center space-x-4">
-            <a
-              href="https://wa.me/6281324735850"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-slate-200 hover:text-amber-400 font-semibold flex items-center space-x-1 transition"
-            >
-              <Phone className="w-3 h-3 text-emerald-400" />
-              <span>0813-2473-5850 (Mang Acim)</span>
-            </a>
-            <span className="text-slate-700">|</span>
-            <Link
-              href="/kasir"
-              className="text-amber-400 hover:text-amber-300 font-bold flex items-center space-x-1 transition"
-            >
-              <span>Portal POS Staf &rarr;</span>
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* 2. MAIN HEADER & NAVBAR */}
-      <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 transition-all shadow-xs">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      {/* MAIN HEADER & NAVBAR */}
+      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 transition-all shadow-xs">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-16 py-3 flex items-center justify-between gap-4">
           {/* Logo & Brand Identity */}
-          <Link href="/" className="flex items-center space-x-3.5 group">
-            <div className="w-11 h-11 rounded-2xl bg-amber-500 flex items-center justify-center text-slate-950 font-black text-2xl font-mono shadow-xs group-hover:scale-105 transition-transform">
+          <Link href="/" className="flex items-center space-x-3 group min-w-0">
+            <div className="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center text-slate-950 font-black text-xl font-mono shadow-xs group-hover:scale-105 transition-transform shrink-0">
               AM
             </div>
-            <div>
-              <div className="font-extrabold text-lg tracking-tight text-slate-900 leading-tight">
+            <div className="min-w-0">
+              <div className="font-extrabold text-base sm:text-lg tracking-tight text-slate-900 leading-tight truncate">
                 BENGKEL <span className="text-amber-600">ANUGRAH MOTOR</span>
               </div>
-              <div className="text-xs text-slate-500 font-medium flex items-center space-x-1.5 mt-0.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse" />
-                <span>PT Anugrah Motor &bull; Servis Mobil &amp; Sparepart Kuningan</span>
+              <div className="text-[11px] text-slate-500 font-medium flex items-center space-x-1.5 mt-0.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse shrink-0" />
+                <span className="truncate">PT Anugrah Motor Kuningan</span>
               </div>
             </div>
           </Link>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center space-x-8 text-sm font-semibold text-slate-600">
+          <nav className="hidden lg:flex items-center space-x-8 text-sm font-semibold text-slate-600 shrink-0">
             <a href="#tentang" className="hover:text-slate-900 transition-colors">
               Tentang Kami
             </a>
@@ -178,28 +142,28 @@ export default async function HomePage() {
           </nav>
 
           {/* Direct Contact Button */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2.5 shrink-0">
             <a
               href="https://wa.me/6281324735850?text=Halo%20Bengkel%20Anugrah%20Motor,%20saya%20ingin%20konsultasi%20jadwal%20servis%20mobil"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 px-4 sm:px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm rounded-xl transition shadow-xs"
+              className="inline-flex items-center space-x-1.5 px-3.5 sm:px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition shadow-xs"
             >
-              <MessageCircle className="w-4 h-4" />
-              <span>Hubungi WhatsApp</span>
+              <MessageCircle className="w-3.5 h-3.5" />
+              <span>WhatsApp Mang Acim</span>
             </a>
 
             {session ? (
               <Link
                 href="/kasir"
-                className="hidden sm:inline-flex items-center space-x-1.5 px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs rounded-xl border border-slate-200 transition"
+                className="inline-flex items-center space-x-1.5 px-3 py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition shadow-xs"
               >
-                <span>Masuk Kasir POS</span>
+                <span>Buka POS</span>
               </Link>
             ) : (
               <Link
                 href="/login"
-                className="hidden sm:inline-flex items-center space-x-1.5 px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs rounded-xl border border-slate-200 transition"
+                className="inline-flex items-center space-x-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold text-xs rounded-xl border border-slate-200 transition"
               >
                 <span>Login Staf</span>
               </Link>

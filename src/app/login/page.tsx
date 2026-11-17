@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Lock, User, AlertCircle, Zap } from "lucide-react";
+import Link from "next/link";
+import { Lock, User, AlertCircle, Zap, ArrowLeft } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -52,18 +53,29 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-[75vh] flex flex-col justify-center items-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#F8FAFC] flex flex-col justify-center items-center py-10 px-4 sm:px-6 lg:px-8">
+      {/* Back to Home Link */}
+      <div className="max-w-md w-full mb-3">
+        <Link
+          href="/"
+          className="inline-flex items-center space-x-1.5 text-xs font-semibold text-slate-500 hover:text-slate-900 transition"
+        >
+          <ArrowLeft className="w-3.5 h-3.5" />
+          <span>Kembali ke Beranda Bengkel</span>
+        </Link>
+      </div>
+
       <div className="max-w-md w-full space-y-6 bg-white border border-slate-200/90 p-8 sm:p-9 rounded-3xl shadow-xl">
         {/* Brand Header */}
         <div className="text-center">
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-amber-500 text-slate-950 font-black text-2xl shadow-xs mb-3">
-            OE
+            AM
           </div>
           <h2 className="text-2xl font-extrabold tracking-tight text-slate-900">
-            ONDERDIL<span className="text-amber-600">ENGINE</span>
+            PORTAL <span className="text-amber-600">STAF BENGKEL</span>
           </h2>
           <p className="mt-1 text-xs text-slate-500">
-            Sistem Point-of-Sale (POS) &amp; Manajemen Bengkel Mobil
+            PT Anugrah Motor &bull; Sistem POS &amp; Manajemen Servis
           </p>
         </div>
 

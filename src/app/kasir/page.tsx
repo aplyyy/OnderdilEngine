@@ -232,7 +232,7 @@ export default function KasirPOSPage() {
   const categories = ["SEMUA", "Oli & Pelumas", "Filter", "Pengereman", "Pengapian", "Kelistrikan", "Aksesoris"];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 pb-24 lg:pb-0">
       {/* Top Banner & Quick Actions */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white border border-slate-200/90 p-5 rounded-2xl shadow-xs">
         <div>
@@ -574,12 +574,12 @@ export default function KasirPOSPage() {
 
       {/* Mobile Sticky Floating Cart Bar (for Android/Smartphone) */}
       {(cart.length > 0 || serviceFee > 0) && (
-        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#101726]/95 border-t border-amber-500/30 p-3.5 backdrop-blur-md flex items-center justify-between shadow-2xl">
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 border-t border-slate-200 p-3.5 backdrop-blur-md flex items-center justify-between shadow-xl">
           <div>
-            <div className="text-[11px] text-slate-400 font-medium">
+            <div className="text-[11px] text-slate-500 font-medium">
               {cart.reduce((sum, item) => sum + item.quantity, 0)} Item di Keranjang
             </div>
-            <div className="text-base font-extrabold text-amber-400">
+            <div className="text-base font-extrabold text-slate-900">
               Rp {grandTotal.toLocaleString("id-ID")}
             </div>
           </div>
@@ -587,7 +587,7 @@ export default function KasirPOSPage() {
             onClick={() => {
               document.getElementById("pos-checkout-box")?.scrollIntoView({ behavior: "smooth" });
             }}
-            className="px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs flex items-center space-x-1.5 shadow-md shadow-amber-500/25 active:scale-95 transition-transform"
+            className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl text-xs flex items-center space-x-1.5 shadow-xs active:scale-95 transition-transform"
           >
             <span>Lihat Tagihan</span>
             <ArrowRight className="w-4 h-4" />
@@ -597,16 +597,16 @@ export default function KasirPOSPage() {
 
       {/* Printable Receipt Modal */}
       {completedTransaction && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-          <div className="bg-[#101726] border border-slate-700 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-              <h3 className="font-bold text-white text-base flex items-center space-x-2">
-                <CheckCircle className="w-5 h-5 text-emerald-400" />
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm">
+          <div className="bg-white border border-slate-200 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl animate-in fade-in zoom-in-95 duration-150">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <h3 className="font-bold text-slate-900 text-base flex items-center space-x-2">
+                <CheckCircle className="w-5 h-5 text-emerald-600" />
                 <span>Transaksi Berhasil Disimpan</span>
               </h3>
               <button
                 onClick={() => setCompletedTransaction(null)}
-                className="text-slate-400 hover:text-white p-1"
+                className="text-slate-400 hover:text-slate-700 p-1 rounded-lg hover:bg-slate-100 transition"
               >
                 <X className="w-5 h-5" />
               </button>
