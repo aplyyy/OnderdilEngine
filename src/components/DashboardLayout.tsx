@@ -63,7 +63,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     router.refresh();
   };
 
-  if (pathname === "/login" || pathname === "/laporan-print") {
+  if (pathname === "/" || pathname === "/login" || pathname === "/laporan-print") {
     return <>{children}</>;
   }
 
